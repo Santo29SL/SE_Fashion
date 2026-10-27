@@ -1,21 +1,24 @@
-import { products, addOns } from './data/products.js';
+import { products, addOns, getProductsByRealm, getProductById } from './data/products.js';
 import { realms, heritagePillars } from './data/realms.js';
 import { journalPosts } from './data/journal.js';
 import { mediaHTML, productMedia, realmMedia } from './lib/media.js';
 import { formatPrice, formatRating } from './lib/format.js';
 import { escapeHtml } from './lib/escape.js';
+import { createThrowDeck } from './lib/throwDeck.js';
+import { getArtifactArtwork } from './lib/artwork.js';
 
 const state = {
   catalogFilter: 'all',
   sortOrder: 'featured',
-  currency: 'INR',
+  currency: localStorage.getItem('southern_edit_currency') || 'INR',
   cart: JSON.parse(localStorage.getItem('southern_edit_cart') || '[]'),
   selectedProduct: null,
   modalWearIndex: 0,
   modalColorIndex: 0,
   audioActive: false,
   audioContext: null,
-  audioInterval: null
+  audioInterval: null,
+  decks: []
 };
 
 const el = (id) => document.getElementById(id);
@@ -43,7 +46,7 @@ function observeInView(root = document) {
         if (entry.isIntersecting) entry.target.classList.add('in-view');
       });
     },
-    { threshold: 0.18 }
+    { threshold: 0.15 }
   );
   nodes.forEach((node) => io.observe(node));
 }
@@ -57,8 +60,7 @@ function bindDelegatedClicks() {
     if (action === 'quick-view') openQuickView(id);
     if (action === 'add-bag') addToBag(id, false);
     if (action === 'filter-realm') {
-      setCatalogFilter(id);
-      el('catalog')?.scrollIntoView({ behavior: 'smooth' });
+      window.location.href = `shop.html?realm=${encodeURIComponent(id)}`;
     }
     if (action === 'lookbook') openLookbook(id);
     if (action === 'qty') changeCartQty(Number(target.dataset.index), Number(target.dataset.delta));
@@ -68,8 +70,13 @@ function bindDelegatedClicks() {
   });
 }
 
+// -------------------------------------------------------------
+// REALMS VIEW & MOODBOARD PLACEHOLDERS
+// -------------------------------------------------------------
 function renderRealms() {
   const stack = el('realmPinStack');
+  if (!stack) return;
+
   stack.innerHTML = realms
     .map(
       (realm) => `
@@ -87,7 +94,7 @@ function renderRealms() {
           </div>
           <p class="realm-quote">“${escapeHtml(realm.artisanNote)}”</p>
           <div class="intro-cta">
-            <button type="button" class="btn-primary" data-action="filter-realm" data-id="${escapeHtml(realm.id)}">Shop this realm</button>
+            <a href="shop.html?realm=${escapeHtml(realm.id)}" class="btn-primary">Shop this realm</a>
             <button type="button" class="btn-ghost" data-action="lookbook" data-id="${escapeHtml(realm.id)}">Lookbook slot</button>
           </div>
         </div>
@@ -97,78 +104,20 @@ function renderRealms() {
     )
     .join('');
 
-  el('footerRealmLinks').innerHTML = realms
-    .map(
-      (realm) =>
-        `<li><a href="#realm-${escapeHtml(realm.id)}">${escapeHtml(realm.name)}</a></li>`
-    )
-    .join('');
+  const footerRealms = el('footerRealmLinks');
+  if (footerRealms) {
+    footerRealms.innerHTML = realms
+      .map(
+        (realm) =>
+          `<li><a href="shop.html?realm=${escapeHtml(realm.id)}">${escapeHtml(realm.name)}</a></li>`
+      )
+      .join('');
+  }
 }
 
-function renderHeritage() {
-  el('heritageFrameCulture').innerHTML = mediaHTML({
-    slot: 'images/editorial/heritage_culture.webp',
-    label: 'Culture × contemporary'
-  });
-  el('heritageFrameModular').innerHTML = mediaHTML({
-    slot: 'images/editorial/heritage_modular.webp',
-    label: 'Modular architecture'
-  });
-  el('heritagePillars').innerHTML = heritagePillars
-    .map(
-      (pillar) => `
-      <article class="pillar-item">
-        <div class="pillar-header">
-          <span>${pillar.index} · ${escapeHtml(pillar.label)}</span>
-          <span class="pillar-badge">${escapeHtml(pillar.badge)}</span>
-        </div>
-        <div class="pillar-comparison-grid">
-          <div class="pillar-box">
-            <strong>${escapeHtml(pillar.traditional.title)}</strong>
-            ${escapeHtml(pillar.traditional.body)}
-          </div>
-          <div class="pillar-box">
-            <strong>${escapeHtml(pillar.contemporary.title)}</strong>
-            ${escapeHtml(pillar.contemporary.body)}
-          </div>
-        </div>
-      </article>
-    `
-    )
-    .join('');
-
-  document.querySelectorAll('[data-heritage]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const mode = btn.dataset.heritage;
-      document.querySelectorAll('[data-heritage]').forEach((b) => {
-        b.classList.toggle('active', b === btn);
-        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
-      });
-      el('heritageFrameCulture').classList.toggle('is-active', mode === 'culture');
-      el('heritageFrameModular').classList.toggle('is-active', mode === 'modular');
-    });
-  });
-}
-
-function renderJournal() {
-  el('journalGrid').innerHTML = journalPosts
-    .map((post) => {
-      const related = products.filter((p) => post.relatedProductIds.includes(p.id));
-      return `
-        <article class="journal-card">
-          <div class="journal-media">${mediaHTML({ path: post.image, slot: post.slot, label: post.title })}</div>
-          <div class="journal-body">
-            <span class="journal-kicker">${escapeHtml(post.kicker)}</span>
-            <h3>${escapeHtml(post.title)}</h3>
-            <p>${escapeHtml(post.excerpt)}</p>
-            <p class="journal-shop">Shop · ${related.map((p) => escapeHtml(p.name)).join(' · ')}</p>
-          </div>
-        </article>
-      `;
-    })
-    .join('');
-}
-
+// -------------------------------------------------------------
+// SHOP / CATALOG VIEW (All Artifacts with Sort & Filters)
+// -------------------------------------------------------------
 function realmCounts() {
   const counts = { all: products.length, bestseller: products.filter((p) => p.isBestseller).length };
   realms.forEach((realm) => {
@@ -178,19 +127,24 @@ function realmCounts() {
 }
 
 function renderFilters() {
+  const host = el('catalogFilters');
+  if (!host) return;
+
   const counts = realmCounts();
   const items = [
-    { id: 'all', label: `All (${counts.all})` },
+    { id: 'all', label: `All Realms (${counts.all})` },
     ...realms.map((r) => ({ id: r.id, label: `${r.name} (${counts[r.id]})` })),
     { id: 'bestseller', label: `Bestsellers (${counts.bestseller})` }
   ];
-  el('catalogFilters').innerHTML = items
+
+  host.innerHTML = items
     .map(
       (item) =>
         `<button type="button" class="catalog-filter-btn ${state.catalogFilter === item.id ? 'active' : ''}" data-filter="${item.id}">${escapeHtml(item.label)}</button>`
     )
     .join('');
-  el('catalogFilters').querySelectorAll('[data-filter]').forEach((btn) => {
+
+  host.querySelectorAll('[data-filter]').forEach((btn) => {
     btn.addEventListener('click', () => setCatalogFilter(btn.dataset.filter));
   });
 }
@@ -203,16 +157,29 @@ function filteredProducts() {
   if (state.sortOrder === 'price-asc') list.sort((a, b) => a.price - b.price);
   else if (state.sortOrder === 'price-desc') list.sort((a, b) => b.price - a.price);
   else if (state.sortOrder === 'rating') list.sort((a, b) => b.rating - a.rating);
+  else if (state.sortOrder === 'featured') {
+    // Relevance / Featured: bestsellers first, then rating
+    list.sort((a, b) => (b.isBestseller ? 1 : 0) - (a.isBestseller ? 1 : 0) || b.rating - a.rating);
+  }
   return list;
 }
 
 function renderCatalog() {
+  const grid = el('productsGrid');
+  if (!grid) return;
+
   const list = filteredProducts();
+  const countBar = el('shopCountBadge');
+  if (countBar) {
+    countBar.textContent = `Showing ${list.length} of ${products.length} artifacts`;
+  }
+
   if (!list.length) {
-    el('productsGrid').innerHTML = `<p class="empty-note">No pieces for this filter.</p>`;
+    grid.innerHTML = `<p class="empty-note">No pieces found for this selection.</p>`;
     return;
   }
-  el('productsGrid').innerHTML = list
+
+  grid.innerHTML = list
     .map((product) => {
       const modes = product.stylingModes?.length || 0;
       return `
@@ -244,7 +211,7 @@ function renderCatalog() {
       `;
     })
     .join('');
-  observeInView(el('productsGrid'));
+  observeInView(grid);
 }
 
 function setCatalogFilter(filterId) {
@@ -253,6 +220,110 @@ function setCatalogFilter(filterId) {
   renderCatalog();
 }
 
+// -------------------------------------------------------------
+// JOURNAL VIEW
+// -------------------------------------------------------------
+function renderJournal() {
+  const host = el('journalGrid');
+  if (!host) return;
+
+  host.innerHTML = journalPosts
+    .map((post) => {
+      const related = products.filter((p) => post.relatedProductIds.includes(p.id));
+      return `
+        <article class="journal-card">
+          <div class="journal-media">${mediaHTML({ path: post.image, slot: post.slot, label: post.title })}</div>
+          <div class="journal-body">
+            <span class="journal-kicker">${escapeHtml(post.kicker)}</span>
+            <h3>${escapeHtml(post.title)}</h3>
+            <p>${escapeHtml(post.excerpt)}</p>
+            <div class="journal-shop">
+              <span>Related artifacts:</span>
+              <div class="intro-realms" style="margin-top: 0.5rem;">
+                ${related
+                  .map(
+                    (p) => `<a href="shop.html?realm=${escapeHtml(p.stateId)}">${escapeHtml(p.name)} · ${price(p.price)}</a>`
+                  )
+                  .join('')}
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    })
+    .join('');
+  observeInView(host);
+}
+
+// -------------------------------------------------------------
+// HERITAGE VIEW
+// -------------------------------------------------------------
+function renderHeritage() {
+  const frameCulture = el('heritageFrameCulture');
+  const frameModular = el('heritageFrameModular');
+  const pillarsHost = el('heritagePillars');
+  if (!pillarsHost) return;
+
+  if (frameCulture) {
+    frameCulture.innerHTML = mediaHTML({
+      slot: 'images/editorial/heritage_culture.webp',
+      label: 'Culture × contemporary'
+    });
+  }
+  if (frameModular) {
+    frameModular.innerHTML = mediaHTML({
+      slot: 'images/editorial/heritage_modular.webp',
+      label: 'Modular architecture'
+    });
+  }
+
+  pillarsHost.innerHTML = heritagePillars
+    .map(
+      (pillar) => `
+      <article class="pillar-item">
+        <div class="pillar-header">
+          <span>${pillar.index} · ${escapeHtml(pillar.label)}</span>
+          <span class="pillar-badge">${escapeHtml(pillar.badge)}</span>
+        </div>
+        <div class="pillar-comparison-grid">
+          <div class="pillar-box">
+            <strong>${escapeHtml(pillar.traditional.title)}</strong>
+            ${escapeHtml(pillar.traditional.body)}
+          </div>
+          <div class="pillar-box">
+            <strong>${escapeHtml(pillar.contemporary.title)}</strong>
+            ${escapeHtml(pillar.contemporary.body)}
+          </div>
+        </div>
+      </article>
+    `
+    )
+    .join('');
+
+  document.querySelectorAll('[data-heritage]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const mode = btn.dataset.heritage;
+      document.querySelectorAll('[data-heritage]').forEach((b) => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+      });
+      frameCulture?.classList.toggle('is-active', mode === 'culture');
+      frameModular?.classList.toggle('is-active', mode === 'modular');
+    });
+  });
+
+  const provMedia = el('provenanceMedia');
+  if (provMedia) {
+    provMedia.innerHTML = mediaHTML({
+      slot: 'images/editorial/madras_loom.webp',
+      label: 'Weaver cooperative'
+    });
+  }
+}
+
+// -------------------------------------------------------------
+// PRODUCT QUICK VIEW DIALOG
+// -------------------------------------------------------------
 function setDialogView(kind) {
   const prod = state.selectedProduct;
   if (!prod) return;
@@ -263,7 +334,7 @@ function setDialogView(kind) {
 }
 
 function openQuickView(productId) {
-  const prod = products.find((p) => p.id === productId);
+  const prod = getProductById(productId);
   if (!prod) return;
   state.selectedProduct = prod;
   state.modalWearIndex = 0;
@@ -296,7 +367,7 @@ function openQuickView(productId) {
     el('dialogMultiwearBox').style.display = 'none';
   }
 
-  el('dialogSwatches').innerHTML = prod.colors
+  el('dialogSwatches').innerHTML = (prod.colors || [])
     .map(
       (c, idx) =>
         `<span class="swatch-circle" style="background:${c.hex};cursor:pointer;${idx === 0 ? 'outline:2px solid var(--brass);outline-offset:2px;' : ''}" title="${escapeHtml(c.name)}" data-action="color" data-index="${idx}"></span>`
@@ -328,25 +399,78 @@ function selectModalColor(index, node) {
 function openLookbook(realmId) {
   const realm = realms.find((r) => r.id === realmId);
   if (!realm) return;
-  el('slideViewerTitle').textContent = `${realm.name} lookbook`;
-  el('slideViewerStage').innerHTML = realmMedia(realm, 'lookbook');
-  el('slideViewerDialog').showModal();
+
+  const deckDialog = el('lookbookDeckDialog');
+  if (!deckDialog) return;
+
+  // Clean up any previously active deck instance
+  state.activeDeck?.destroy?.();
+  state.activeDeck = null;
+
+  const eyebrow = el('lookbookDeckEyebrow');
+  const title = el('lookbookDeckTitle');
+  if (eyebrow) eyebrow.textContent = `${realm.name} · Artifacts Flash Cards`;
+  if (title) title.textContent = realm.tagline;
+
+  const realmProducts = getProductsByRealm(realm.id);
+  const deckCards = realmProducts.map((p) => {
+    const artSvg = getArtifactArtwork(p.id, realm.accentColor);
+    return {
+      id: p.id,
+      title: p.name,
+      subtitle: p.subtitle,
+      price: price(p.price),
+      art: artSvg,
+      description: p.description,
+      specs: [
+        { label: 'Origin', value: p.specifications?.origin?.split(',')[0] || p.stateName },
+        { label: 'Material', value: p.specifications?.material?.split('&')[0] || 'Handloom' },
+        { label: 'Hardware', value: p.specifications?.hardware?.split(' ')[0] || 'Solid Brass' },
+        { label: 'GI Status', value: p.giTag ? 'GI Certified' : 'Heritage Craft' }
+      ],
+      product: p
+    };
+  });
+
+  const stage = el('lookbookDeckStage');
+  if (!stage) return;
+
+  state.activeDeck = createThrowDeck(stage, {
+    cards: deckCards,
+    accent: realm.accentColor,
+    actionLabel: 'Add to bag',
+    onAction: (card) => {
+      addToBag(card.id, false);
+      deckDialog.close();
+    },
+    formatPriceFn: price
+  });
+
+  deckDialog.showModal();
 }
 
+// -------------------------------------------------------------
+// CART & BAG DRAWER
+// -------------------------------------------------------------
 function saveCart() {
   localStorage.setItem('southern_edit_cart', JSON.stringify(state.cart));
-  el('cartCountBadge').textContent = String(state.cart.reduce((sum, item) => sum + item.quantity, 0));
+  const badge = el('cartCountBadge');
+  if (badge) {
+    badge.textContent = String(state.cart.reduce((sum, item) => sum + item.quantity, 0));
+  }
   renderCart();
 }
 
-function addToBag(productId, fromModal) {
-  const prod = products.find((p) => p.id === productId);
+function addToBag(productId, fromModal = false) {
+  const prod = getProductById(productId);
   if (!prod) return;
-  const selectedColor = prod.colors[fromModal ? state.modalColorIndex : 0]?.name || 'Standard';
+  const selectedColor = prod.colors?.[fromModal ? state.modalColorIndex : 0]?.name || 'Standard';
   const selectedMode = prod.stylingModes?.[fromModal ? state.modalWearIndex : 0]?.name || 'Default';
   const existing = state.cart.find((item) => item.id === productId && item.selectedColor === selectedColor);
-  if (existing) existing.quantity += 1;
-  else {
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
     state.cart.push({
       id: prod.id,
       name: prod.name,
@@ -359,17 +483,18 @@ function addToBag(productId, fromModal) {
     });
   }
   saveCart();
-  showToast(`Added ${prod.name}`);
-  if (fromModal) el('quickViewDialog').close();
-  el('cartDrawer').showModal();
+  showToast(`Added ${prod.name} to bag`);
+  if (fromModal) el('quickViewDialog')?.close();
+  el('cartDrawer')?.showModal();
 }
 
 function addAddon(addonId) {
   const addon = addOns.find((a) => a.id === addonId);
   if (!addon) return;
   const existing = state.cart.find((i) => i.id === addon.id);
-  if (existing) existing.quantity += 1;
-  else {
+  if (existing) {
+    existing.quantity += 1;
+  } else {
     state.cart.push({
       id: addon.id,
       name: addon.name,
@@ -394,16 +519,14 @@ function changeCartQty(index, delta) {
 
 function renderCart() {
   const list = el('cartItemsList');
+  if (!list) return;
+
   if (!state.cart.length) {
     list.innerHTML = `
       <div class="empty-note">
         <p>Your bag is empty.</p>
-        <button type="button" class="btn-primary" id="emptyDiscover">Discover artifacts</button>
+        <a href="shop.html" class="btn-primary" id="emptyDiscover" style="margin-top: 1rem; display: inline-flex;">Discover artifacts</a>
       </div>`;
-    el('emptyDiscover')?.addEventListener('click', () => {
-      el('cartDrawer').close();
-      el('catalog').scrollIntoView({ behavior: 'smooth' });
-    });
     el('cartSubtotal').textContent = price(0);
     el('freeShippingBar').style.width = '0%';
     el('freeShippingNotice').textContent = `Add ${price(3000)} more for complimentary pan-India delivery.`;
@@ -456,6 +579,9 @@ function renderCart() {
   list.innerHTML = items + (addons ? `<p class="multiwear-title">Complete the look</p>${addons}` : '');
 }
 
+// -------------------------------------------------------------
+// WEAVER LOOM AUDIO SYNTHESIS
+// -------------------------------------------------------------
 function initAudio() {
   if (!state.audioContext) {
     const Ctx = window.AudioContext || window.webkitAudioContext;
@@ -496,104 +622,142 @@ function toggleMenu(open) {
   const drawer = el('mobileDrawer');
   const backdrop = el('mobileBackdrop');
   const btn = el('navMenuBtn');
+  if (!drawer || !backdrop) return;
   const shouldOpen = open ?? drawer.hidden;
   drawer.hidden = !shouldOpen;
   backdrop.hidden = !shouldOpen;
-  btn.setAttribute('aria-expanded', String(shouldOpen));
+  btn?.setAttribute('aria-expanded', String(shouldOpen));
 }
 
 function onScroll() {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   const t = max > 0 ? window.scrollY / max : 0;
-  el('scrollProgress').style.transform = `scaleX(${t})`;
-  el('siteHeader').classList.toggle('is-scrolled', window.scrollY > 24);
-
-  const sections = ['realms', 'heritage', 'journal', 'catalog', 'provenance'];
-  let current = '';
-  sections.forEach((id) => {
-    const node = el(id);
-    if (node && node.getBoundingClientRect().top < 140) current = id;
-  });
-  document.querySelectorAll('.nav-link').forEach((link) => {
-    link.classList.toggle('is-active', link.getAttribute('href') === `#${current}`);
-  });
+  const prog = el('scrollProgress');
+  if (prog) prog.style.transform = `scaleX(${t})`;
+  el('siteHeader')?.classList.toggle('is-scrolled', window.scrollY > 24);
 }
 
 function closeOnBackdrop(dialog) {
+  if (!dialog) return;
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
   });
 }
 
+// -------------------------------------------------------------
+// APP INITIALIZATION
+// -------------------------------------------------------------
 function init() {
+  // Check URL parameters (e.g. ?realm=kerala for shop page)
+  const urlParams = new URLSearchParams(window.location.search);
+  const realmParam = urlParams.get('realm');
+  if (realmParam) {
+    state.catalogFilter = realmParam;
+  }
+
+  // Set currency selector value
+  const currencySelect = el('currencySelect');
+  if (currencySelect) {
+    currencySelect.value = state.currency;
+  }
+
+  // Initialize Page-Specific Components
   renderRealms();
-  renderHeritage();
-  renderJournal();
   renderFilters();
   renderCatalog();
-  el('provenanceMedia').innerHTML = mediaHTML({
-    slot: 'images/editorial/madras_loom.webp',
-    label: 'Weaver cooperative'
-  });
+  renderJournal();
+  renderHeritage();
+
   saveCart();
   bindDelegatedClicks();
   observeInView();
 
-  el('sortSelect').addEventListener('change', (e) => {
-    state.sortOrder = e.target.value;
-    renderCatalog();
-  });
-  el('currencySelect').addEventListener('change', (e) => {
-    state.currency = e.target.value;
-    renderCatalog();
-    renderCart();
-    if (state.selectedProduct) {
-      el('dialogProductPrice').textContent = price(state.selectedProduct.price);
-      el('dialogProductOriginalPrice').textContent = price(state.selectedProduct.originalPrice);
-      el('dialogAddPriceBtn').textContent = price(state.selectedProduct.price);
-    }
-    showToast(`Currency: ${state.currency} (indicative)`);
-  });
+  // Shop sort listener
+  const sortSelect = el('sortSelect');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', (e) => {
+      state.sortOrder = e.target.value;
+      renderCatalog();
+    });
+  }
 
-  el('navMenuBtn').addEventListener('click', () => toggleMenu());
-  el('mobileBackdrop').addEventListener('click', () => toggleMenu(false));
-  el('mobileDrawer').querySelectorAll('a').forEach((link) => {
+  // Currency select listener
+  if (currencySelect) {
+    currencySelect.addEventListener('change', (e) => {
+      state.currency = e.target.value;
+      localStorage.setItem('southern_edit_currency', state.currency);
+      renderRealms();
+      renderCatalog();
+      renderCart();
+      if (state.selectedProduct) {
+        el('dialogProductPrice').textContent = price(state.selectedProduct.price);
+        el('dialogProductOriginalPrice').textContent = price(state.selectedProduct.originalPrice);
+        el('dialogAddPriceBtn').textContent = price(state.selectedProduct.price);
+      }
+      showToast(`Currency: ${state.currency} (indicative)`);
+    });
+  }
+
+  // Mobile menu
+  el('navMenuBtn')?.addEventListener('click', () => toggleMenu());
+  el('mobileBackdrop')?.addEventListener('click', () => toggleMenu(false));
+  el('mobileDrawer')?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => toggleMenu(false));
   });
 
-  el('audioToggleBtn').addEventListener('click', () => {
-    state.audioActive = !state.audioActive;
-    el('audioToggleBtn').setAttribute('aria-pressed', String(state.audioActive));
-    el('audioIcon').textContent = state.audioActive ? '🔊' : '🔇';
-    el('audioLabel').textContent = state.audioActive ? 'Loom audio on' : 'Loom audio off';
-    if (state.audioActive) initAudio();
-    else if (state.audioInterval) clearInterval(state.audioInterval);
+  // Audio toggle
+  const audioBtn = el('audioToggleBtn');
+  if (audioBtn) {
+    audioBtn.addEventListener('click', () => {
+      state.audioActive = !state.audioActive;
+      audioBtn.setAttribute('aria-pressed', String(state.audioActive));
+      el('audioIcon').textContent = state.audioActive ? '🔊' : '🔇';
+      el('audioLabel').textContent = state.audioActive ? 'Loom audio on' : 'Loom audio off';
+      if (state.audioActive) initAudio();
+      else if (state.audioInterval) clearInterval(state.audioInterval);
+    });
+  }
+
+  // Cart drawer triggers
+  el('cartToggleBtn')?.addEventListener('click', () => {
+    renderCart();
+    el('cartDrawer')?.showModal();
+  });
+  el('cartCloseBtn')?.addEventListener('click', () => el('cartDrawer')?.close());
+  el('dialogCloseBtn')?.addEventListener('click', () => el('quickViewDialog')?.close());
+  el('slideViewerCloseBtn')?.addEventListener('click', () => el('slideViewerDialog')?.close());
+  el('lookbookDeckCloseBtn')?.addEventListener('click', () => {
+    state.activeDeck?.destroy?.();
+    state.activeDeck = null;
+    el('lookbookDeckDialog')?.close();
   });
 
-  el('cartToggleBtn').addEventListener('click', () => {
-    renderCart();
-    el('cartDrawer').showModal();
+  el('lookbookDeckDialog')?.addEventListener('close', () => {
+    state.activeDeck?.destroy?.();
+    state.activeDeck = null;
   });
-  el('cartCloseBtn').addEventListener('click', () => el('cartDrawer').close());
-  el('dialogCloseBtn').addEventListener('click', () => el('quickViewDialog').close());
-  el('slideViewerCloseBtn').addEventListener('click', () => el('slideViewerDialog').close());
+
   closeOnBackdrop(el('quickViewDialog'));
   closeOnBackdrop(el('cartDrawer'));
   closeOnBackdrop(el('slideViewerDialog'));
+  closeOnBackdrop(el('lookbookDeckDialog'));
 
   document.querySelectorAll('.quick-view-tab').forEach((tab) => {
     tab.addEventListener('click', () => setDialogView(tab.dataset.view));
   });
-  el('dialogAddToBagBtn').addEventListener('click', () => {
+
+  el('dialogAddToBagBtn')?.addEventListener('click', () => {
     if (state.selectedProduct) addToBag(state.selectedProduct.id, true);
   });
-  el('cartCheckoutBtn').addEventListener('click', () => {
+
+  el('cartCheckoutBtn')?.addEventListener('click', () => {
     if (!state.cart.length) return;
     const subtotal = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    el('cartDrawer').close();
-    showToast(`Checkout stub · ${price(subtotal)}. Payment is not wired yet.`);
+    el('cartDrawer')?.close();
+    showToast(`Checkout stub · ${price(subtotal)}. Payment gateway simulation.`);
   });
-  el('clearCartBtn').addEventListener('click', () => {
+
+  el('clearCartBtn')?.addEventListener('click', () => {
     state.cart = [];
     saveCart();
   });

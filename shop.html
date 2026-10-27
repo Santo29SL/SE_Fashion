@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Shop all Dravidian artifacts — 17 modular garments and accessories from Tamil Nadu, Kerala, Karnataka, and Andhra & Telangana. GI certified handloom."
+    />
+    <meta property="og:title" content="Shop The Collection — THE SOUTHERN EDIT" />
+    <meta
+      property="og:description"
+      content="All artifacts together from the 4 Dravidian realms. Filter by realm, sort by price and relevance."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>The Collection (Shop) — THE SOUTHERN EDIT</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-page="shop">
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <header class="site-header" id="siteHeader">
+      <div class="nav-container">
+        <a href="index.html" class="nav-brand">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="brand-title">The Southern Edit</span>
+        </a>
+
+        <nav class="nav-desktop" aria-label="Main">
+          <a href="index.html" class="nav-link">Realms</a>
+          <a href="shop.html" class="nav-link active">Shop</a>
+          <a href="journal.html" class="nav-link">Journal</a>
+          <a href="heritage.html" class="nav-link">Heritage</a>
+        </nav>
+
+        <div class="nav-actions">
+          <select class="nav-select" id="currencySelect" aria-label="Currency">
+            <option value="INR" selected>INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+          </select>
+          <button class="nav-btn cart-btn" id="cartToggleBtn" type="button" aria-label="Open bag">
+            Bag <span class="cart-badge" id="cartCountBadge">0</span>
+          </button>
+          <button class="nav-menu-btn" id="navMenuBtn" type="button" aria-expanded="false" aria-controls="mobileDrawer">
+            Menu
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-drawer" id="mobileDrawer" hidden>
+      <nav class="mobile-nav" aria-label="Mobile">
+        <a href="index.html">The 4 Realms</a>
+        <a href="shop.html" class="active">The Collection (Shop)</a>
+        <a href="journal.html">Journal</a>
+        <a href="heritage.html">Heritage &amp; Provenance</a>
+      </nav>
+      <button class="nav-btn" id="audioToggleBtn" type="button" aria-pressed="false">
+        <span id="audioIcon">🔇</span>
+        <span id="audioLabel">Loom audio off</span>
+      </button>
+    </div>
+    <div class="mobile-backdrop" id="mobileBackdrop" hidden></div>
+
+    <main id="mainContent">
+      <section class="catalog-section" id="catalog" style="padding-top: calc(var(--header-h) + 2.5rem);">
+        <header class="chapter-head">
+          <p class="section-eyebrow">Act IV · The Dravidian Collection</p>
+          <h1 class="section-title">All Artifacts</h1>
+          <p class="section-subtitle">
+            Every piece from the 4 Southern realms gathered in one catalog — sorted by relevance, price, and realm collection.
+          </p>
+        </header>
+
+        <div class="catalog-controls">
+          <div class="catalog-filter-tags" id="catalogFilters">
+            <!-- Filter buttons: All, Tamil Nadu, Kerala, Karnataka, Andhra & Telangana, Bestsellers -->
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <select class="nav-select" id="sortSelect" aria-label="Sort products">
+              <option value="featured">Sort: Featured &amp; Relevance</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="max-width: 1440px; margin-inline: auto; padding-inline: clamp(1rem, 3vw, 2.5rem); margin-bottom: 1rem;">
+          <div class="shop-meta-bar">
+            <span class="shop-count-badge" id="shopCountBadge">Showing all artifacts</span>
+            <span>Direct loom pricing · Free pan-India delivery over ₹3,000</span>
+          </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid" role="region" aria-label="Product catalog"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div>
+          <p class="brand-title footer-brand">The Southern Edit</p>
+          <p class="footer-manifesto">Southern culture is not behind velvet rope. It is modular, street-ready, and alive.</p>
+        </div>
+        <div>
+          <p class="footer-col-title">Realms</p>
+          <ul class="footer-link-list">
+            <li><a href="shop.html?realm=tamilnadu">Tamil Nadu</a></li>
+            <li><a href="shop.html?realm=kerala">Kerala</a></li>
+            <li><a href="shop.html?realm=karnataka">Karnataka</a></li>
+            <li><a href="shop.html?realm=telangana">Andhra &amp; Telangana</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Visit</p>
+          <ul class="footer-link-list">
+            <li><a href="index.html">The 4 Realms</a></li>
+            <li><a href="shop.html">The Collection</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="heritage.html">Design philosophy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The Southern Edit</p>
+        <p>Handloom GI · Ethical luxury · Pan-India delivery</p>
+      </div>
+    </footer>
+
+    <!-- Quick View Dialog -->
+    <dialog id="quickViewDialog" class="quick-view-dialog" aria-labelledby="dialogProductName">
+      <div class="quick-view-inner">
+        <div class="quick-view-media">
+          <div class="quick-view-stage" id="dialogProductStage"></div>
+          <div class="quick-view-slide-toggle-bar">
+            <button type="button" class="quick-view-tab active" data-view="main" id="dialogTabCutout">Product</button>
+            <button type="button" class="quick-view-tab" data-view="lookbook" id="dialogTabSlide">Lookbook</button>
+            <button type="button" class="quick-view-tab" data-view="detail" id="dialogTabDetail">Craft</button>
+          </div>
+        </div>
+        <div class="quick-view-details">
+          <button type="button" class="dialog-close-btn" id="dialogCloseBtn" aria-label="Close">✕</button>
+          <span class="product-gi-tag" id="dialogProductGI"></span>
+          <h3 class="product-name" id="dialogProductName"></h3>
+          <p class="product-subtitle" id="dialogProductSubtitle"></p>
+          <p class="dialog-rating" id="dialogProductRating"></p>
+          <div class="dialog-price-row">
+            <span class="product-price-current" id="dialogProductPrice"></span>
+            <span class="product-price-original" id="dialogProductOriginalPrice"></span>
+          </div>
+          <p id="dialogProductDesc" class="dialog-copy"></p>
+          <blockquote class="craft-story" id="dialogCraftStory"></blockquote>
+          <div class="multiwear-tabs-box" id="dialogMultiwearBox">
+            <p class="multiwear-title">Multi-wear modes</p>
+            <div class="multiwear-buttons" id="dialogMultiwearButtons"></div>
+            <p class="multiwear-note" id="dialogMultiwearNote"></p>
+          </div>
+          <div>
+            <p class="palette-label">Colourway</p>
+            <div class="palette-swatches" id="dialogSwatches"></div>
+          </div>
+          <dl class="spec-grid">
+            <div><dt>Materials</dt><dd id="dialogSpecMaterial"></dd></div>
+            <div><dt>Hardware</dt><dd id="dialogSpecHardware"></dd></div>
+            <div><dt>Origin</dt><dd id="dialogSpecOrigin"></dd></div>
+          </dl>
+          <button type="button" class="btn-primary full" id="dialogAddToBagBtn">
+            Add to bag · <span id="dialogAddPriceBtn"></span>
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Cart Drawer -->
+    <dialog id="cartDrawer" class="cart-drawer" aria-labelledby="cartDrawerTitle">
+      <div class="cart-header">
+        <span class="cart-title" id="cartDrawerTitle">Your bag</span>
+        <button type="button" class="dialog-close-btn" id="cartCloseBtn" aria-label="Close bag">✕</button>
+      </div>
+      <div class="cart-items-list" id="cartItemsList"></div>
+      <div class="cart-footer">
+        <div class="shipping-track"><div id="freeShippingBar"></div></div>
+        <p id="freeShippingNotice"></p>
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+        <button type="button" class="cart-checkout-btn" id="cartCheckoutBtn">Proceed to checkout</button>
+        <button type="button" class="text-btn" id="clearCartBtn">Clear bag</button>
+      </div>
+    </dialog>
+
+    <!-- Lookbook Deck Dialog (Flash Cards focused popup) -->
+    <dialog id="lookbookDeckDialog" class="lookbook-deck-dialog" aria-labelledby="lookbookDeckTitle">
+      <div class="lookbook-deck-header">
+        <div>
+          <span class="lookbook-deck-eyebrow" id="lookbookDeckEyebrow">Realm Artifacts</span>
+          <h3 class="lookbook-deck-title" id="lookbookDeckTitle">Flash Card Deck</h3>
+        </div>
+        <button type="button" class="dialog-close-btn" id="lookbookDeckCloseBtn" aria-label="Close lookbook">✕</button>
+      </div>
+      <div class="lookbook-deck-body" id="lookbookDeckStage"></div>
+    </dialog>
+
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

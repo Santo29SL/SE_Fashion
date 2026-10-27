@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Southern Edit Journal — Essays in craft, language, and cluster. Stories the cloth still tells."
+    />
+    <meta property="og:title" content="Craft Journal — THE SOUTHERN EDIT" />
+    <meta
+      property="og:description"
+      content="Essays in craft, language, and artisan clusters — each one shops back into the collection."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Journal — THE SOUTHERN EDIT</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-page="journal">
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <header class="site-header" id="siteHeader">
+      <div class="nav-container">
+        <a href="index.html" class="nav-brand">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="brand-title">The Southern Edit</span>
+        </a>
+
+        <nav class="nav-desktop" aria-label="Main">
+          <a href="index.html" class="nav-link">Realms</a>
+          <a href="shop.html" class="nav-link">Shop</a>
+          <a href="journal.html" class="nav-link active">Journal</a>
+          <a href="heritage.html" class="nav-link">Heritage</a>
+        </nav>
+
+        <div class="nav-actions">
+          <select class="nav-select" id="currencySelect" aria-label="Currency">
+            <option value="INR" selected>INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+          </select>
+          <button class="nav-btn cart-btn" id="cartToggleBtn" type="button" aria-label="Open bag">
+            Bag <span class="cart-badge" id="cartCountBadge">0</span>
+          </button>
+          <button class="nav-menu-btn" id="navMenuBtn" type="button" aria-expanded="false" aria-controls="mobileDrawer">
+            Menu
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-drawer" id="mobileDrawer" hidden>
+      <nav class="mobile-nav" aria-label="Mobile">
+        <a href="index.html">The 4 Realms</a>
+        <a href="shop.html">The Collection (Shop)</a>
+        <a href="journal.html" class="active">Journal</a>
+        <a href="heritage.html">Heritage &amp; Provenance</a>
+      </nav>
+      <button class="nav-btn" id="audioToggleBtn" type="button" aria-pressed="false">
+        <span id="audioIcon">🔇</span>
+        <span id="audioLabel">Loom audio off</span>
+      </button>
+    </div>
+    <div class="mobile-backdrop" id="mobileBackdrop" hidden></div>
+
+    <main id="mainContent">
+      <section class="journal-section" id="journal" style="padding-top: calc(var(--header-h) + 2.5rem);">
+        <header class="chapter-head">
+          <p class="section-eyebrow">Act III · The Journal</p>
+          <h1 class="section-title">Stories the cloth still tells</h1>
+          <p class="section-subtitle">
+            Essays in craft, language, and cluster — each piece shops directly back into the collection.
+          </p>
+        </header>
+        <div class="journal-grid" id="journalGrid"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div>
+          <p class="brand-title footer-brand">The Southern Edit</p>
+          <p class="footer-manifesto">Southern culture is not behind velvet rope. It is modular, street-ready, and alive.</p>
+        </div>
+        <div>
+          <p class="footer-col-title">Realms</p>
+          <ul class="footer-link-list">
+            <li><a href="shop.html?realm=tamilnadu">Tamil Nadu</a></li>
+            <li><a href="shop.html?realm=kerala">Kerala</a></li>
+            <li><a href="shop.html?realm=karnataka">Karnataka</a></li>
+            <li><a href="shop.html?realm=telangana">Andhra &amp; Telangana</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Visit</p>
+          <ul class="footer-link-list">
+            <li><a href="index.html">The 4 Realms</a></li>
+            <li><a href="shop.html">The Collection</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="heritage.html">Design philosophy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The Southern Edit</p>
+        <p>Handloom GI · Ethical luxury · Pan-India delivery</p>
+      </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <dialog id="cartDrawer" class="cart-drawer" aria-labelledby="cartDrawerTitle">
+      <div class="cart-header">
+        <span class="cart-title" id="cartDrawerTitle">Your bag</span>
+        <button type="button" class="dialog-close-btn" id="cartCloseBtn" aria-label="Close bag">✕</button>
+      </div>
+      <div class="cart-items-list" id="cartItemsList"></div>
+      <div class="cart-footer">
+        <div class="shipping-track"><div id="freeShippingBar"></div></div>
+        <p id="freeShippingNotice"></p>
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+        <button type="button" class="cart-checkout-btn" id="cartCheckoutBtn">Proceed to checkout</button>
+        <button type="button" class="text-btn" id="clearCartBtn">Clear bag</button>
+      </div>
+    </dialog>
+
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -16,23 +16,22 @@
     <title>THE SOUTHERN EDIT — Modern Dravidian Luxury</title>
     <link rel="stylesheet" href="/src/style.css" />
   </head>
-  <body>
+  <body data-page="realms">
     <a class="skip-link" href="#mainContent">Skip to content</a>
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
     <header class="site-header" id="siteHeader">
       <div class="nav-container">
-        <a href="#intro" class="nav-brand">
+        <a href="index.html" class="nav-brand">
           <span class="logo-mark" aria-hidden="true"></span>
           <span class="brand-title">The Southern Edit</span>
         </a>
 
         <nav class="nav-desktop" aria-label="Main">
-          <a href="#realms" class="nav-link">Realms</a>
-          <a href="#heritage" class="nav-link">Heritage</a>
-          <a href="#journal" class="nav-link">Journal</a>
-          <a href="#catalog" class="nav-link">Shop</a>
-          <a href="#provenance" class="nav-link">Provenance</a>
+          <a href="index.html" class="nav-link active">Realms</a>
+          <a href="shop.html" class="nav-link">Shop</a>
+          <a href="journal.html" class="nav-link">Journal</a>
+          <a href="heritage.html" class="nav-link">Heritage</a>
         </nav>
 
         <div class="nav-actions">
@@ -54,11 +53,10 @@
 
     <div class="mobile-drawer" id="mobileDrawer" hidden>
       <nav class="mobile-nav" aria-label="Mobile">
-        <a href="#realms">The 4 Realms</a>
-        <a href="#heritage">Heritage Reimagined</a>
-        <a href="#journal">Journal</a>
-        <a href="#catalog">The Collection</a>
-        <a href="#provenance">Artisan Clusters</a>
+        <a href="index.html" class="active">The 4 Realms</a>
+        <a href="shop.html">The Collection (Shop)</a>
+        <a href="journal.html">Journal</a>
+        <a href="heritage.html">Heritage &amp; Provenance</a>
       </nav>
       <button class="nav-btn" id="audioToggleBtn" type="button" aria-pressed="false">
         <span id="audioIcon">🔇</span>
@@ -86,8 +84,8 @@
             <a href="#realm-telangana">తెలంగాణ · Andhra &amp; Telangana</a>
           </div>
           <div class="intro-cta reveal d5">
-            <a class="btn-primary" href="#catalog">Enter the collection</a>
-            <a class="btn-ghost" href="#journal">Read the journal</a>
+            <a class="btn-primary" href="shop.html">Explore all artifacts in Shop</a>
+            <a class="btn-ghost" href="journal.html">Read the journal</a>
           </div>
         </div>
         <a class="scroll-cue" href="#realms" aria-label="Scroll to realms">
@@ -101,90 +99,11 @@
           <p class="section-eyebrow">Act I · The cultural compass</p>
           <h2 class="section-title">Four realms, one continuous South</h2>
           <p class="section-subtitle">
-            Scroll through each state as a chapter. Photographs go in the blank frames later — the structure is ready.
+            Scroll through each state as a chapter. Drag or flick the cards to explore each realm's artifacts.
           </p>
         </header>
-        <div class="pin-stack" id="realmPinStack"></div>
-      </section>
-
-      <section class="heritage-section" id="heritage">
-        <div class="heritage-sticky">
-          <header class="chapter-head light">
-            <p class="section-eyebrow">Act II · Design philosophy</p>
-            <h2 class="section-title">Heritage, not costume</h2>
-          </header>
-          <div class="heritage-layout">
-            <div class="heritage-visual">
-              <div class="heritage-frame is-active" data-heritage-frame="culture" id="heritageFrameCulture"></div>
-              <div class="heritage-frame" data-heritage-frame="modular" id="heritageFrameModular"></div>
-              <div class="heritage-toggles" role="tablist" aria-label="Heritage views">
-                <button type="button" class="heritage-mode-btn active" data-heritage="culture" role="tab" aria-selected="true">
-                  Culture × contemporary
-                </button>
-                <button type="button" class="heritage-mode-btn" data-heritage="modular" role="tab" aria-selected="false">
-                  Modular architecture
-                </button>
-              </div>
-            </div>
-            <div class="heritage-pillars" id="heritagePillars"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="journal-section" id="journal">
-        <header class="chapter-head">
-          <p class="section-eyebrow">Act III · The journal</p>
-          <h2 class="section-title">Stories the cloth still tells</h2>
-          <p class="section-subtitle">
-            Essays in craft, language, and cluster — each one shops back into the collection.
-          </p>
-        </header>
-        <div class="journal-grid" id="journalGrid"></div>
-      </section>
-
-      <section class="catalog-section" id="catalog">
-        <header class="chapter-head">
-          <p class="section-eyebrow">Act IV · The collection</p>
-          <h2 class="section-title">Eight artifacts</h2>
-          <p class="section-subtitle">
-            GI origins, multi-wear engineering, direct cluster pricing.
-          </p>
-        </header>
-        <div class="catalog-controls">
-          <div class="catalog-filter-tags" id="catalogFilters"></div>
-          <select class="nav-select" id="sortSelect" aria-label="Sort products">
-            <option value="featured">Featured</option>
-            <option value="price-asc">Price: low to high</option>
-            <option value="price-desc">Price: high to low</option>
-            <option value="rating">Highest rated</option>
-          </select>
-        </div>
-        <div class="products-grid" id="productsGrid" role="region" aria-label="Product catalog"></div>
-      </section>
-
-      <section class="provenance-section" id="provenance">
-        <div class="provenance-grid">
-          <div>
-            <p class="section-eyebrow">Act V · Supply chain</p>
-            <h2 class="section-title">Direct looms, living wages</h2>
-            <p class="section-subtitle">
-              No multi-tier wholesalers. Museum-grade handloom in daily wear, with generational weavers paid as authors of the cloth.
-            </p>
-            <ul class="cluster-list">
-              <li><strong>Bhavani master weavers</strong> — chevron pit-loom rug yardage</li>
-              <li><strong>Kanchipuram sericulture guild</strong> — mulberry silk, gold zari paisley</li>
-              <li><strong>Balaramapuram Kasavu society</strong> — fine-count kora cotton</li>
-              <li><strong>Pochampally double-ikat</strong> — resist-dye mathematics</li>
-            </ul>
-            <div class="pricing-breakdown-box" id="pricing">
-              <div class="breakdown-title">Cost architecture</div>
-              <div class="breakdown-row highlight"><span>Artisan cooperatives &amp; loom fund</span><span>65%</span></div>
-              <div class="breakdown-row"><span>Raw materials</span><span>15%</span></div>
-              <div class="breakdown-row"><span>Brass &amp; leather hardware</span><span>12%</span></div>
-              <div class="breakdown-row"><span>Packaging &amp; logistics</span><span>8%</span></div>
-            </div>
-          </div>
-          <div class="provenance-media" id="provenanceMedia"></div>
+        <div class="pin-stack" id="realmPinStack">
+          <!-- Populated with each realm's panel & KokonutUI Throw Deck -->
         </div>
       </section>
     </main>
@@ -200,12 +119,12 @@
           <ul class="footer-link-list" id="footerRealmLinks"></ul>
         </div>
         <div>
-          <p class="footer-col-title">Visit</p>
+          <p class="footer-col-title">Pages</p>
           <ul class="footer-link-list">
-            <li><a href="#catalog">The collection</a></li>
-            <li><a href="#journal">Journal</a></li>
-            <li><a href="#heritage">Multi-wear guide</a></li>
-            <li><a href="#pricing">Transparent pricing</a></li>
+            <li><a href="shop.html">Shop all artifacts</a></li>
+            <li><a href="journal.html">Craft journal</a></li>
+            <li><a href="heritage.html">Design philosophy</a></li>
+            <li><a href="heritage.html#pricing">Transparent pricing</a></li>
           </ul>
         </div>
       </div>
@@ -215,6 +134,7 @@
       </div>
     </footer>
 
+    <!-- Quick View Dialog -->
     <dialog id="quickViewDialog" class="quick-view-dialog" aria-labelledby="dialogProductName">
       <div class="quick-view-inner">
         <div class="quick-view-media">
@@ -258,6 +178,7 @@
       </div>
     </dialog>
 
+    <!-- Cart Drawer -->
     <dialog id="cartDrawer" class="cart-drawer" aria-labelledby="cartDrawerTitle">
       <div class="cart-header">
         <span class="cart-title" id="cartDrawerTitle">Your bag</span>
@@ -276,12 +197,16 @@
       </div>
     </dialog>
 
-    <dialog id="slideViewerDialog" class="lookbook-dialog">
-      <div class="lookbook-bar">
-        <span id="slideViewerTitle">Lookbook</span>
-        <button type="button" class="dialog-close-btn" id="slideViewerCloseBtn" aria-label="Close">✕</button>
+    <!-- Lookbook Deck Dialog (Flash Cards focused popup) -->
+    <dialog id="lookbookDeckDialog" class="lookbook-deck-dialog" aria-labelledby="lookbookDeckTitle">
+      <div class="lookbook-deck-header">
+        <div>
+          <span class="lookbook-deck-eyebrow" id="lookbookDeckEyebrow">Realm Artifacts</span>
+          <h3 class="lookbook-deck-title" id="lookbookDeckTitle">Flash Card Deck</h3>
+        </div>
+        <button type="button" class="dialog-close-btn" id="lookbookDeckCloseBtn" aria-label="Close lookbook">✕</button>
       </div>
-      <div class="lookbook-stage" id="slideViewerStage"></div>
+      <div class="lookbook-deck-body" id="lookbookDeckStage"></div>
     </dialog>
 
     <div class="toast-container" id="toastContainer" aria-live="polite"></div>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Southern Edit — Design philosophy and supply chain provenance. Heritage, not costume. Direct looms, living wages."
+    />
+    <meta property="og:title" content="Heritage & Provenance — THE SOUTHERN EDIT" />
+    <meta
+      property="og:description"
+      content="Museum-grade Dravidian handloom deconstructed for daily modular wear. 65% net margin funds master weavers."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Heritage &amp; Provenance — THE SOUTHERN EDIT</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-page="heritage">
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    <header class="site-header" id="siteHeader">
+      <div class="nav-container">
+        <a href="index.html" class="nav-brand">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="brand-title">The Southern Edit</span>
+        </a>
+
+        <nav class="nav-desktop" aria-label="Main">
+          <a href="index.html" class="nav-link">Realms</a>
+          <a href="shop.html" class="nav-link">Shop</a>
+          <a href="journal.html" class="nav-link">Journal</a>
+          <a href="heritage.html" class="nav-link active">Heritage</a>
+        </nav>
+
+        <div class="nav-actions">
+          <select class="nav-select" id="currencySelect" aria-label="Currency">
+            <option value="INR" selected>INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+          </select>
+          <button class="nav-btn cart-btn" id="cartToggleBtn" type="button" aria-label="Open bag">
+            Bag <span class="cart-badge" id="cartCountBadge">0</span>
+          </button>
+          <button class="nav-menu-btn" id="navMenuBtn" type="button" aria-expanded="false" aria-controls="mobileDrawer">
+            Menu
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-drawer" id="mobileDrawer" hidden>
+      <nav class="mobile-nav" aria-label="Mobile">
+        <a href="index.html">The 4 Realms</a>
+        <a href="shop.html">The Collection (Shop)</a>
+        <a href="journal.html">Journal</a>
+        <a href="heritage.html" class="active">Heritage &amp; Provenance</a>
+      </nav>
+      <button class="nav-btn" id="audioToggleBtn" type="button" aria-pressed="false">
+        <span id="audioIcon">🔇</span>
+        <span id="audioLabel">Loom audio off</span>
+      </button>
+    </div>
+    <div class="mobile-backdrop" id="mobileBackdrop" hidden></div>
+
+    <main id="mainContent">
+      <!-- Act II: Heritage Reimagined -->
+      <section class="heritage-section" id="heritage" style="padding-top: calc(var(--header-h) + 2.5rem);">
+        <div class="heritage-sticky">
+          <header class="chapter-head light">
+            <p class="section-eyebrow">Act II · Design philosophy</p>
+            <h1 class="section-title">Heritage, not costume</h1>
+            <p class="section-subtitle" style="color: var(--line);">
+              Unstitched ritual garments re-engineered into modular streetwear and timeless tailoring.
+            </p>
+          </header>
+          <div class="heritage-layout">
+            <div class="heritage-visual">
+              <div class="heritage-frame is-active" data-heritage-frame="culture" id="heritageFrameCulture"></div>
+              <div class="heritage-frame" data-heritage-frame="modular" id="heritageFrameModular"></div>
+              <div class="heritage-toggles" role="tablist" aria-label="Heritage views">
+                <button type="button" class="heritage-mode-btn active" data-heritage="culture" role="tab" aria-selected="true">
+                  Culture × contemporary
+                </button>
+                <button type="button" class="heritage-mode-btn" data-heritage="modular" role="tab" aria-selected="false">
+                  Modular architecture
+                </button>
+              </div>
+            </div>
+            <div class="heritage-pillars" id="heritagePillars"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Act V: Provenance & Direct Looms -->
+      <section class="provenance-section" id="provenance">
+        <div class="provenance-grid">
+          <div>
+            <p class="section-eyebrow">Act V · Supply chain transparency</p>
+            <h2 class="section-title">Direct looms, living wages</h2>
+            <p class="section-subtitle">
+              No multi-tier wholesalers. Museum-grade handloom in daily wear, with generational weavers paid as authors of the cloth.
+            </p>
+            <ul class="cluster-list">
+              <li><strong>Bhavani master weavers</strong> — chevron pit-loom rug yardage</li>
+              <li><strong>Kanchipuram sericulture guild</strong> — mulberry silk, gold zari paisley</li>
+              <li><strong>Balaramapuram Kasavu society</strong> — fine-count kora cotton</li>
+              <li><strong>Pochampally double-ikat</strong> — resist-dye mathematics</li>
+            </ul>
+            <div class="pricing-breakdown-box" id="pricing">
+              <div class="breakdown-title">Cost architecture</div>
+              <div class="breakdown-row highlight"><span>Artisan cooperatives &amp; loom fund</span><span>65%</span></div>
+              <div class="breakdown-row"><span>Raw materials &amp; mulberry silk</span><span>15%</span></div>
+              <div class="breakdown-row"><span>Brass &amp; leather hardware</span><span>12%</span></div>
+              <div class="breakdown-row"><span>Packaging &amp; logistics</span><span>8%</span></div>
+            </div>
+            <div style="margin-top: 2rem;">
+              <a href="shop.html" class="btn-primary">Shop the artisan collection</a>
+            </div>
+          </div>
+          <div class="provenance-media" id="provenanceMedia"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div>
+          <p class="brand-title footer-brand">The Southern Edit</p>
+          <p class="footer-manifesto">Southern culture is not behind velvet rope. It is modular, street-ready, and alive.</p>
+        </div>
+        <div>
+          <p class="footer-col-title">Realms</p>
+          <ul class="footer-link-list">
+            <li><a href="shop.html?realm=tamilnadu">Tamil Nadu</a></li>
+            <li><a href="shop.html?realm=kerala">Kerala</a></li>
+            <li><a href="shop.html?realm=karnataka">Karnataka</a></li>
+            <li><a href="shop.html?realm=telangana">Andhra &amp; Telangana</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Visit</p>
+          <ul class="footer-link-list">
+            <li><a href="index.html">The 4 Realms</a></li>
+            <li><a href="shop.html">The Collection</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="heritage.html">Design philosophy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The Southern Edit</p>
+        <p>Handloom GI · Ethical luxury · Pan-India delivery</p>
+      </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <dialog id="cartDrawer" class="cart-drawer" aria-labelledby="cartDrawerTitle">
+      <div class="cart-header">
+        <span class="cart-title" id="cartDrawerTitle">Your bag</span>
+        <button type="button" class="dialog-close-btn" id="cartCloseBtn" aria-label="Close bag">✕</button>
+      </div>
+      <div class="cart-items-list" id="cartItemsList"></div>
+      <div class="cart-footer">
+        <div class="shipping-track"><div id="freeShippingBar"></div></div>
+        <p id="freeShippingNotice"></p>
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">₹0</span>
+        </div>
+        <button type="button" class="cart-checkout-btn" id="cartCheckoutBtn">Proceed to checkout</button>
+        <button type="button" class="text-btn" id="clearCartBtn">Clear bag</button>
+      </div>
+    </dialog>
+
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
