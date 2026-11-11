@@ -72,20 +72,28 @@ interface TypePlateProps {
   caption: string;
   accent?: string | undefined;
   className?: string;
+  /** Optional photograph; the numeral and word then sit over it as a caption plate. */
+  image?: string | undefined;
+  alt?: string | undefined;
 }
 
-/** Image-free editorial plate: oversized numeral and word on a woven-paper ground, with a Fig. caption. */
-export function TypePlate({ numeral, word, caption, accent, className = "" }: TypePlateProps) {
+/** Editorial plate: oversized numeral and word on a woven-paper ground (or over a photo), with a Fig. caption. */
+export function TypePlate({ numeral, word, caption, accent, className = "", image, alt = "" }: TypePlateProps) {
   return (
     <figure
-      className={`type-plate ${className}`}
+      className={`type-plate ${image ? "has-photo" : ""} ${className}`}
       style={accent ? ({ "--plate-accent": accent } as CSSProperties) : undefined}
     >
-      <div className="type-plate-face" aria-hidden="true">
-        <span className="type-plate-numeral">{numeral}</span>
-        <span className="type-plate-word">{word}</span>
-        <span className="type-plate-corner tl" />
-        <span className="type-plate-corner br" />
+      <div className="type-plate-face">
+        {image && <img className="type-plate-photo" src={image} alt={alt} width={1024} height={1280} loading="lazy" />}
+        <span className="type-plate-numeral" aria-hidden="true">
+          {numeral}
+        </span>
+        <span className="type-plate-word" aria-hidden="true">
+          {word}
+        </span>
+        <span className="type-plate-corner tl" aria-hidden="true" />
+        <span className="type-plate-corner br" aria-hidden="true" />
       </div>
       <figcaption className="realm-caption">
         <span>Fig. {numeral}</span>
