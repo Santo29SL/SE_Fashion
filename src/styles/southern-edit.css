@@ -2855,6 +2855,7 @@ dialog::backdrop {
 
 .type-plate-numeral {
   font-family: var(--font-serif);
+  font-variant-numeric: lining-nums;
   font-size: clamp(6rem, 16vw, 12rem);
   line-height: 0.8;
   letter-spacing: -0.05em;
@@ -3027,6 +3028,7 @@ dialog::backdrop {
 
 .catalog-audience-btn:not(:last-child)::after {
   content: '✦';
+  display: inline-block;
   margin-inline: 0.85rem;
   font-size: 0.5rem;
   color: var(--brass);
@@ -3139,20 +3141,13 @@ dialog::backdrop {
 
 .product-card-tags {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.2rem 0;
+  flex-direction: column;
+  gap: 0.25rem;
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--brass);
-}
-
-.product-card-tags span:not(:last-child)::after {
-  content: '✦';
-  margin-inline: 0.5rem;
-  font-size: 0.45rem;
-  vertical-align: middle;
 }
 
 .product-card-tags span:last-child:not(:first-child) {
@@ -3344,13 +3339,11 @@ dialog::backdrop {
 }
 
 .glossary-native {
-  position: absolute;
-  right: 0.5rem;
-  top: 0.6rem;
   font-family: var(--font-serif);
-  font-size: 2.6rem;
-  line-height: 1;
-  color: rgba(184, 145, 63, 0.28);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--brass);
 }
 
 .glossary-item dt {
@@ -3385,8 +3378,17 @@ dialog::backdrop {
 }
 
 @media (min-width: 900px) {
-  .manifesto {
-    grid-template-columns: 1fr 1.1fr;
+  .manifesto-copy {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    column-gap: clamp(2rem, 5vw, 4rem);
+    align-items: end;
+  }
+  .manifesto-copy .section-eyebrow {
+    grid-column: 1 / -1;
+  }
+  .manifesto-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
@@ -3397,8 +3399,12 @@ dialog::backdrop {
 }
 
 .manifesto-figure .realm-photo {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1600 / 904;
   flex: none;
+}
+
+.manifesto-figure .realm-photo img {
+  object-position: center;
 }
 
 .manifesto-figure.in-view .realm-photo img {

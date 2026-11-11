@@ -113,7 +113,7 @@ function HeritagePage() {
                   <span>
                     Pillar {pillar.index} <span className="realm-meta-of">/ 0{heritagePillars.length}</span>
                   </span>
-                  <span>{pillar.badge}</span>
+                  <span>Then × Now</span>
                 </div>
                 <div className="realm-heading">
                   <p className="realm-native">{pillar.badge}</p>
