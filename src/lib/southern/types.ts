@@ -89,6 +89,12 @@ export interface HeritagePillar {
 
 export interface JournalPost {
   id: string;
+  /** Realm the essay belongs to — drives its accent colour. */
+  realmId: string;
+  /** The craft word in its native script, set large on the typographic plate. */
+  native: string;
+  readTime: string;
+  pullQuote: string;
   kicker: string;
   title: string;
   excerpt: string;
