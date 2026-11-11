@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type CSSProperties } from "react";
 
+import { PageCover } from "@/components/southern/Editorial";
 import { ProductMedia } from "@/components/southern/Media";
 import { useShop } from "@/components/southern/ShopProvider";
 import { useRevealOnView } from "@/components/southern/useRevealOnView";
@@ -37,6 +38,25 @@ export const Route = createFileRoute("/shop")({
   component: ShopPage,
 });
 
+const GI_RIBBON = [
+  "Kanchipuram silk GI",
+  "Balaramapuram kasavu",
+  "Mysore crepe silk",
+  "Pochampally ikat GI",
+  "Srikalahasti kalamkari",
+  "Bhavani jamakkalam",
+  "Athangudi tile",
+];
+
+const AUDIENCES: { id: ProductAudience | "all"; label: string }[] = [
+  { id: "all", label: "All styles" },
+  { id: "men", label: "Men" },
+  { id: "women", label: "Women" },
+  { id: "unisex", label: "Unisex" },
+];
+
+const catalogNumber = (id: string) => String(products.findIndex((p) => p.id === id) + 1).padStart(2, "0");
+
 function ShopPage() {
   const { realm } = Route.useSearch();
   const navigate = useNavigate({ from: "/shop" });
@@ -44,6 +64,7 @@ function ShopPage() {
   const [sortOrder, setSortOrder] = useState<SortOrder>("featured");
   const [audienceFilter, setAudienceFilter] = useState<ProductAudience | "all">("all");
   const gridRef = useRef<HTMLDivElement>(null);
+  const pageRef = useRef<HTMLElement>(null);
   const filter = realm ?? "all";
 
   const list = useMemo(
@@ -51,61 +72,74 @@ function ShopPage() {
     [filter, sortOrder, audienceFilter],
   );
   useRevealOnView(gridRef, [list]);
+  useRevealOnView(pageRef);
 
-  const filters = useMemo(() => {
-    const bestsellers = products.filter((p) => p.isBestseller).length;
-    return [
-      { id: "all", label: `All Realms (${products.length})` },
-      ...realms.map((r) => ({ id: r.id, label: `${r.name} (${products.filter((p) => p.stateId === r.id).length})` })),
-      { id: "bestseller", label: `Bestsellers (${bestsellers})` },
-    ];
-  }, []);
-
-  const audienceFilters = useMemo(
+  const realmIndex = useMemo(
     () => [
-      { id: "all" as const, label: `All styles (${products.length})` },
-      { id: "men" as const, label: `Men (${products.filter((p) => p.audience === "men").length})` },
-      { id: "women" as const, label: `Women (${products.filter((p) => p.audience === "women").length})` },
-      { id: "unisex" as const, label: `Unisex (${products.filter((p) => p.audience === "unisex").length})` },
+      { id: "all", no: "00", name: "All realms", native: "நான்கு · four", count: products.length, accent: undefined },
+      ...realms.map((r, i) => ({
+        id: r.id,
+        no: String(i + 1).padStart(2, "0"),
+        name: r.name,
+        native: r.native,
+        count: products.filter((p) => p.stateId === r.id).length,
+        accent: r.accentColor,
+      })),
+      {
+        id: "bestseller",
+        no: "✦",
+        name: "Bestsellers",
+        native: "Most loved",
+        count: products.filter((p) => p.isBestseller).length,
+        accent: undefined,
+      },
     ],
     [],
   );
+
+  const accentFor = (stateId: string) => realms.find((r) => r.id === stateId)?.accentColor;
 
   const setFilter = (id: string) =>
     navigate({ search: id === "all" ? {} : { realm: id }, replace: true, resetScroll: false });
 
   return (
-    <section className="catalog-section" id="catalog" style={{ paddingTop: "calc(var(--header-h) + 2.5rem)" }}>
-      <header className="chapter-head">
-        <p className="section-eyebrow">Act IV · The Dravidian Collection</p>
-        <h1 className="section-title">All Artifacts</h1>
-        <p className="section-subtitle">
-          Every piece from the 4 Southern realms gathered in one catalog — sorted by relevance, price, and realm
-          collection.
-        </p>
-      </header>
+    <>
+      <PageCover
+        act="Act IV · The Collection"
+        meta={`${products.length} artifacts · ${realms.length} realms`}
+        lines={["The", "Collection."]}
+        tag="Loom to wardrobe."
+        sub="Every piece from the four Southern realms in one catalog — GI-certified handloom, cut into modular clothing you can wear more than one way."
+        ribbon={GI_RIBBON}
+      />
 
-      <div className="catalog-controls">
-        <div className="catalog-filter-groups">
-          <div className="catalog-filter-tags" aria-label="Filter by realm">
-            {filters.map((item) => (
+      <section className="catalog-section" id="catalog" ref={pageRef}>
+        <nav className="realm-index reveal-on-view" aria-label="Filter by realm">
+          {realmIndex.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`realm-index-item ${filter === item.id ? "active" : ""}`}
+              aria-pressed={filter === item.id}
+              onClick={() => setFilter(item.id)}
+              style={item.accent ? ({ "--realm-accent": item.accent } as CSSProperties) : undefined}
+            >
+              <span className="realm-index-no">{item.no}</span>
+              <span className="realm-index-name">{item.name}</span>
+              <span className="realm-index-native">
+                {item.native} <sup>{item.count}</sup>
+              </span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="catalog-toolbar reveal-on-view">
+          <div className="catalog-audience" role="group" aria-label="Filter by audience">
+            {AUDIENCES.map((item) => (
               <button
                 key={item.id}
                 type="button"
-                className={`catalog-filter-btn ${filter === item.id ? "active" : ""}`}
-                aria-pressed={filter === item.id}
-                onClick={() => setFilter(item.id)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-          <div className="catalog-filter-tags" aria-label="Filter by audience">
-            {audienceFilters.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`catalog-filter-btn ${audienceFilter === item.id ? "active" : ""}`}
+                className={`catalog-audience-btn ${audienceFilter === item.id ? "active" : ""}`}
                 aria-pressed={audienceFilter === item.id}
                 onClick={() => setAudienceFilter(item.id)}
               >
@@ -113,87 +147,117 @@ function ShopPage() {
               </button>
             ))}
           </div>
+          <div className="catalog-toolbar-end">
+            <span className="catalog-count">
+              Showing <strong>{list.length}</strong> of {products.length}
+            </span>
+            <select
+              className="nav-select"
+              aria-label="Sort products"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value as SortOrder)}
+            >
+              <option value="featured">Sort: Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <select
-            className="nav-select"
-            aria-label="Sort products"
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-          >
-            <option value="featured">Sort: Featured &amp; Relevance</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-            <option value="rating">Highest Rated</option>
-          </select>
-        </div>
-      </div>
 
-      <div style={{ maxWidth: 1440, marginInline: "auto", paddingInline: "clamp(1rem, 3vw, 2.5rem)", marginBottom: "1rem" }}>
-        <div className="shop-meta-bar">
-          <span className="shop-count-badge">
-            Showing {list.length} of {products.length} artifacts
-          </span>
-          <span>Direct loom pricing · Free pan-India delivery over ₹3,000</span>
-        </div>
-      </div>
-
-      <div className="products-grid" ref={gridRef} role="region" aria-label="Product catalog">
-        {list.length === 0 ? (
-          <p className="empty-note">No pieces found for this selection.</p>
-        ) : (
-          list.map((product) => {
-            const modes = product.stylingModes.length;
-            return (
-              <article className="product-card" key={product.id}>
-                <div className="product-media-wrap" onClick={() => openQuickView(product.id)}>
-                  <div className="product-media-layer is-main">
-                    <ProductMedia product={product} kind="main" />
-                  </div>
-                  <div className="product-media-layer is-lookbook">
-                    <ProductMedia product={product} kind="lookbook" />
-                  </div>
-                  <div className="product-badge-float">
-                    <span className="badge-state">{product.stateName}</span>
-                    {product.isBestseller && <span className="badge-bestseller">Bestseller</span>}
-                  </div>
-                  <button
-                    type="button"
-                    className="product-quick-view-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openQuickView(product.id);
-                    }}
-                  >
-                    Quick view
-                  </button>
-                </div>
-                <div className="product-info-wrap">
-                  <span className="product-gi-tag">{product.giTag}</span>
-                  <h3 className="product-name">{product.name}</h3>
-                  <p className="product-subtitle">{product.subtitle}</p>
-                  <p className="product-rating">{formatRating(product.rating, product.reviewsCount)}</p>
-                  {modes > 1 && <p className="product-multiwear-pill">{modes}-way modular</p>}
-                  <div className="product-bottom-row">
-                    <div>
-                      <span className="product-price-current">{price(product.price)}</span>
-                      <span className="product-price-original">{price(product.originalPrice)}</span>
+        <div className="products-grid" ref={gridRef} role="region" aria-label="Product catalog">
+          {list.length === 0 ? (
+            <p className="empty-note">No pieces found for this selection.</p>
+          ) : (
+            list.map((product, i) => {
+              const modes = product.stylingModes.length;
+              const views = product.imageViews ?? [];
+              const altView = views[1]?.src;
+              return (
+                <article
+                  className="product-card"
+                  key={product.id}
+                  style={{ "--d": i % 4, "--realm-accent": accentFor(product.stateId) } as CSSProperties}
+                >
+                  <div className="product-media-wrap" onClick={() => openQuickView(product.id)}>
+                    <div className="product-media-layer is-main">
+                      <ProductMedia product={product} kind="main" />
                     </div>
+                    <div className="product-media-layer is-lookbook">
+                      {altView ? (
+                        <img className="media-fill" src={altView} alt="" loading="lazy" aria-hidden="true" />
+                      ) : (
+                        <ProductMedia product={product} kind="lookbook" />
+                      )}
+                    </div>
+                    {product.isBestseller && (
+                      <div className="product-badge-float">
+                        <span className="badge-bestseller">Bestseller</span>
+                      </div>
+                    )}
+                    {views.length > 1 && <span className="product-views-badge">↻ {views.length} views</span>}
                     <button
                       type="button"
-                      className="product-add-btn"
-                      aria-label={`Add ${product.name} to bag`}
-                      onClick={() => addToBag(product.id)}
+                      className="product-quick-view-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openQuickView(product.id);
+                      }}
                     >
-                      Add
+                      Quick view
                     </button>
                   </div>
-                </div>
-              </article>
-            );
-          })
-        )}
-      </div>
-    </section>
+                  <div className="product-info-wrap">
+                    <div className="product-card-meta">
+                      <span>No. {catalogNumber(product.id)}</span>
+                      <span>{product.stateName}</span>
+                    </div>
+                    <h3 className="product-name">{product.name}</h3>
+                    <p className="product-subtitle">{product.subtitle}</p>
+                    <p className="product-card-tags">
+                      <span>{product.giTag}</span>
+                      {modes > 1 && <span>{modes}-way modular</span>}
+                    </p>
+                    <p className="product-rating">{formatRating(product.rating, product.reviewsCount)}</p>
+                    <div className="product-bottom-row">
+                      <div>
+                        <span className="product-price-current">{price(product.price)}</span>
+                        <span className="product-price-original">{price(product.originalPrice)}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="product-add-btn"
+                        aria-label={`Add ${product.name} to bag`}
+                        onClick={() => addToBag(product.id)}
+                      >
+                        Add +
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })
+          )}
+        </div>
+
+        <ul className="catalog-promise">
+          <li className="reveal-on-view" style={{ "--d": 0 } as CSSProperties}>
+            <span className="catalog-promise-no">01</span>
+            <strong>Direct loom pricing</strong>
+            <span>No wholesalers between the weaver and you.</span>
+          </li>
+          <li className="reveal-on-view" style={{ "--d": 1 } as CSSProperties}>
+            <span className="catalog-promise-no">02</span>
+            <strong>Free pan-India delivery</strong>
+            <span>On every bag over ₹3,000.</span>
+          </li>
+          <li className="reveal-on-view" style={{ "--d": 2 } as CSSProperties}>
+            <span className="catalog-promise-no">03</span>
+            <strong>GI-certified handloom</strong>
+            <span>Traceable to the cluster that wove it.</span>
+          </li>
+        </ul>
+      </section>
+    </>
   );
 }
