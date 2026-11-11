@@ -11,53 +11,86 @@ const TABS: { view: ProductMediaKind; label: string; id: string }[] = [
   { view: "lookbook", label: "Lookbook", id: "dialogTabSlide" },
 ];
 
+const DRAG_STEP_PX = 56;
+
+/** Drag (or arrow-key) through a product's photographed angles; all frames are stacked so switching crossfades. */
 function ProductTurntable({ name, views }: { name: string; views: ProductImageView[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const dragStartX = useRef<number | null>(null);
+  const [dragging, setDragging] = useState(false);
+  const dragOrigin = useRef<{ x: number; index: number } | null>(null);
   const activeView = views[activeIndex];
 
-  const cycle = (step: number) => {
-    setActiveIndex((index) => (index + step + views.length) % views.length);
-  };
+  const wrap = (index: number) => ((index % views.length) + views.length) % views.length;
+  const cycle = (step: number) => setActiveIndex((index) => wrap(index + step));
 
   if (!activeView) return null;
 
   return (
     <div className="product-turntable">
       <div
-        className="product-turntable-stage"
+        className={`product-turntable-stage ${dragging ? "is-dragging" : ""}`}
         role="group"
-        aria-label={`${name} rotatable product views`}
+        aria-roledescription="rotatable product viewer"
+        aria-label={`${name} — drag or use arrow keys to change the view`}
         tabIndex={0}
         onPointerDown={(event) => {
-          dragStartX.current = event.clientX;
+          dragOrigin.current = { x: event.clientX, index: activeIndex };
+          setDragging(true);
           event.currentTarget.setPointerCapture(event.pointerId);
         }}
-        onPointerUp={(event) => {
-          if (dragStartX.current === null) return;
-          const delta = event.clientX - dragStartX.current;
-          const steps = Math.max(1, Math.floor(Math.abs(delta) / 48));
-          if (Math.abs(delta) > 20) cycle(delta < 0 ? steps : -steps);
-          dragStartX.current = null;
+        onPointerMove={(event) => {
+          const origin = dragOrigin.current;
+          if (!origin) return;
+          const steps = Math.trunc((origin.x - event.clientX) / DRAG_STEP_PX);
+          const next = wrap(origin.index + steps);
+          if (next !== activeIndex) setActiveIndex(next);
+        }}
+        onPointerUp={() => {
+          dragOrigin.current = null;
+          setDragging(false);
         }}
         onPointerCancel={() => {
-          dragStartX.current = null;
+          dragOrigin.current = null;
+          setDragging(false);
         }}
         onKeyDown={(event) => {
           if (event.key === "ArrowRight") cycle(1);
           if (event.key === "ArrowLeft") cycle(-1);
         }}
       >
-        <img className="product-turntable-image" src={activeView.src} alt={`${name} — ${activeView.label} view`} draggable={false} />
-        <span className="product-turntable-hint">Drag to rotate</span>
+        {views.map((view, i) => (
+          <img
+            key={view.src}
+            className={`product-turntable-image ${i === activeIndex ? "is-active" : ""}`}
+            src={view.src}
+            alt={i === activeIndex ? `${name} — ${view.label} view` : ""}
+            aria-hidden={i !== activeIndex}
+            draggable={false}
+          />
+        ))}
+        <span className="product-turntable-hint" aria-hidden="true">
+          ⟵ Drag to turn ⟶
+        </span>
       </div>
       <div className="product-turntable-controls">
         <button type="button" aria-label="Previous product view" onClick={() => cycle(-1)}>
           ←
         </button>
-        <span aria-live="polite">
-          {activeView.label} · {String(activeIndex + 1).padStart(2, "0")} / {String(views.length).padStart(2, "0")}
-        </span>
+        <div className="product-turntable-thumbs" role="tablist" aria-label="Product views">
+          {views.map((view, i) => (
+            <button
+              key={view.src}
+              type="button"
+              role="tab"
+              aria-selected={i === activeIndex}
+              className={`product-turntable-thumb ${i === activeIndex ? "is-active" : ""}`}
+              onClick={() => setActiveIndex(i)}
+            >
+              <img src={view.src} alt="" loading="lazy" />
+              <span>{view.label}</span>
+            </button>
+          ))}
+        </div>
         <button type="button" aria-label="Next product view" onClick={() => cycle(1)}>
           →
         </button>
@@ -103,6 +136,9 @@ export function QuickViewDialog() {
                   onClick={() => setView(tab.view)}
                 >
                   {tab.label}
+                  {tab.view === "lookbook" && prod.imageViews && prod.imageViews.length > 1 && (
+                    <span className="quick-view-tab-count"> · {prod.imageViews.length} views</span>
+                  )}
                 </button>
               ))}
             </div>
