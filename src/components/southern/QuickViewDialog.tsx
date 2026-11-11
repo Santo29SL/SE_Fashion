@@ -20,6 +20,8 @@ function ProductTurntable({ name, views }: { name: string; views: ProductImageVi
     setActiveIndex((index) => (index + step + views.length) % views.length);
   };
 
+  if (!activeView) return null;
+
   return (
     <div className="product-turntable">
       <div
