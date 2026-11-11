@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HeritageRouteImport } from './routes/heritage'
+import { Route as HeritageDothtmlRouteImport } from './routes/heritage[.]html'
+import { Route as IndexDothtmlRouteImport } from './routes/index[.]html'
+import { Route as JournalRouteImport } from './routes/journal'
+import { Route as JournalDothtmlRouteImport } from './routes/journal[.]html'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ShopDothtmlRouteImport } from './routes/shop[.]html'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HeritageRoute = HeritageRouteImport.update({
+  id: '/heritage',
+  path: '/heritage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeritageDothtmlRoute = HeritageDothtmlRouteImport.update({
+  id: '/heritage.html',
+  path: '/heritage.html',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexDothtmlRoute = IndexDothtmlRouteImport.update({
+  id: '/index.html',
+  path: '/index.html',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalDothtmlRoute = JournalDothtmlRouteImport.update({
+  id: '/journal.html',
+  path: '/journal.html',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopDothtmlRoute = ShopDothtmlRouteImport.update({
+  id: '/shop.html',
+  path: '/shop.html',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/heritage': typeof HeritageRoute
+  '/heritage.html': typeof HeritageDothtmlRoute
+  '/index.html': typeof IndexDothtmlRoute
+  '/journal': typeof JournalRoute
+  '/journal.html': typeof JournalDothtmlRoute
+  '/shop': typeof ShopRoute
+  '/shop.html': typeof ShopDothtmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/heritage': typeof HeritageRoute
+  '/heritage.html': typeof HeritageDothtmlRoute
+  '/index.html': typeof IndexDothtmlRoute
+  '/journal': typeof JournalRoute
+  '/journal.html': typeof JournalDothtmlRoute
+  '/shop': typeof ShopRoute
+  '/shop.html': typeof ShopDothtmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/heritage': typeof HeritageRoute
+  '/heritage.html': typeof HeritageDothtmlRoute
+  '/index.html': typeof IndexDothtmlRoute
+  '/journal': typeof JournalRoute
+  '/journal.html': typeof JournalDothtmlRoute
+  '/shop': typeof ShopRoute
+  '/shop.html': typeof ShopDothtmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/heritage'
+    | '/heritage.html'
+    | '/index.html'
+    | '/journal'
+    | '/journal.html'
+    | '/shop'
+    | '/shop.html'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/heritage'
+    | '/heritage.html'
+    | '/index.html'
+    | '/journal'
+    | '/journal.html'
+    | '/shop'
+    | '/shop.html'
+  id:
+    | '__root__'
+    | '/'
+    | '/heritage'
+    | '/heritage.html'
+    | '/index.html'
+    | '/journal'
+    | '/journal.html'
+    | '/shop'
+    | '/shop.html'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HeritageRoute: typeof HeritageRoute
+  HeritageDothtmlRoute: typeof HeritageDothtmlRoute
+  IndexDothtmlRoute: typeof IndexDothtmlRoute
+  JournalRoute: typeof JournalRoute
+  JournalDothtmlRoute: typeof JournalDothtmlRoute
+  ShopRoute: typeof ShopRoute
+  ShopDothtmlRoute: typeof ShopDothtmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/heritage': {
+      id: '/heritage'
+      path: '/heritage'
+      fullPath: '/heritage'
+      preLoaderRoute: typeof HeritageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/heritage.html': {
+      id: '/heritage.html'
+      path: '/heritage.html'
+      fullPath: '/heritage.html'
+      preLoaderRoute: typeof HeritageDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/index.html': {
+      id: '/index.html'
+      path: '/index.html'
+      fullPath: '/index.html'
+      preLoaderRoute: typeof IndexDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal.html': {
+      id: '/journal.html'
+      path: '/journal.html'
+      fullPath: '/journal.html'
+      preLoaderRoute: typeof JournalDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop.html': {
+      id: '/shop.html'
+      path: '/shop.html'
+      fullPath: '/shop.html'
+      preLoaderRoute: typeof ShopDothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HeritageRoute: HeritageRoute,
+  HeritageDothtmlRoute: HeritageDothtmlRoute,
+  IndexDothtmlRoute: IndexDothtmlRoute,
+  JournalRoute: JournalRoute,
+  JournalDothtmlRoute: JournalDothtmlRoute,
+  ShopRoute: ShopRoute,
+  ShopDothtmlRoute: ShopDothtmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

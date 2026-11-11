@@ -5,9 +5,16 @@
  *   build resolves @import from the filesystem. Load those with a <link> in the head() of
  *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
  */
-@import "tailwindcss" source(none);
+/*
+ * Tailwind's preflight reset is intentionally left out: the migrated Southern Edit
+ * stylesheet ships its own reset, and preflight would change its typography and dialogs.
+ */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./styles/southern-edit.css" layer(base);
 
 @custom-variant dark (&:is(.dark *));
 
@@ -73,26 +80,26 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --radius: 0rem;
+  --background: oklch(0.951 0.016 81.8);
+  --foreground: oklch(0.213 0.009 78.3);
+  --card: oklch(0.981 0.008 84.6);
+  --card-foreground: oklch(0.213 0.009 78.3);
+  --popover: oklch(0.981 0.008 84.6);
+  --popover-foreground: oklch(0.213 0.009 78.3);
+  --primary: oklch(0.213 0.009 78.3);
+  --primary-foreground: oklch(0.973 0.006 91.5);
+  --secondary: oklch(0.925 0.02 83.6);
+  --secondary-foreground: oklch(0.213 0.009 78.3);
+  --muted: oklch(0.925 0.02 83.6);
+  --muted-foreground: oklch(0.448 0.014 75.5);
+  --accent: oklch(0.925 0.02 83.6);
+  --accent-foreground: oklch(0.213 0.009 78.3);
+  --destructive: oklch(0.433 0.125 31.9);
+  --destructive-foreground: oklch(0.973 0.006 91.5);
+  --border: oklch(0.86 0.02 82);
+  --input: oklch(0.86 0.02 82);
+  --ring: oklch(0.678 0.105 80.9);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -148,8 +155,5 @@
     border-color: var(--color-border);
   }
 
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-  }
+
 }

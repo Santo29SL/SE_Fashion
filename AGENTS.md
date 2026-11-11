@@ -28,3 +28,12 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Site styling lives in `src/styles/southern-edit.css`, imported into `src/styles.css` as `layer(base)` with Tailwind's preflight omitted — it is the original site's stylesheet and its own reset keeps the migrated look intact.
+- Bag, currency, toasts and the quick-view / bag / lookbook dialogs live in `src/components/southern/ShopProvider.tsx` and are rendered once by `SiteChrome` in the root route — one shared store across all pages, persisted under the original `southern_edit_*` localStorage keys so returning visitors keep their bag.
+- Pure shop rules (bag math, free-shipping threshold, catalog filter/sort, price formatting) live in `src/lib/southern/` with tests beside them — keep logic out of components so it stays testable.
+- `src/lib/southern/throwDeck.ts` is the original imperative throw-deck physics engine, mounted into a container by `LookbookDialog` — keep it framework-free; only its options/handle types are typed.
+- Legacy `*.html` URLs from the original multi-page site redirect to the new paths via `src/routes/*[.]html.tsx` — keep them so old links keep working.
+- Hosted photos are Lovable asset pointers (`src/assets/*.asset.json`) owned by this project; re-upload with lovable-assets rather than copying pointers from another project.
