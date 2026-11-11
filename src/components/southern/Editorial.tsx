@@ -70,7 +70,7 @@ interface TypePlateProps {
   numeral: string;
   word: string;
   caption: string;
-  accent?: string;
+  accent?: string | undefined;
   className?: string;
 }
 
