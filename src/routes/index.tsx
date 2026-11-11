@@ -3,6 +3,7 @@ import { useRef, type CSSProperties } from "react";
 
 import heroPhoto from "@/assets/hero-loom-rack.webp";
 import moodboardAsset from "@/assets/moodboard-heritage.webp.asset.json";
+import { Ribbon, Spark } from "@/components/southern/Editorial";
 import { useShop } from "@/components/southern/ShopProvider";
 import { useRevealOnView } from "@/components/southern/useRevealOnView";
 import { getProductsByRealm } from "@/lib/southern/products";
@@ -45,26 +46,6 @@ const CRAFT_RIBBON = [
   "Madras checks",
 ];
 
-/** One straight marquee line; content is doubled so the loop is seamless. */
-function Ribbon({ items }: { items: string[] }) {
-  const loop = [...items, ...items, ...items, ...items];
-  return (
-    <div className="hero-ribbon" aria-hidden="true">
-      <div className="hero-ribbon-track">
-        {[0, 1].map((half) => (
-          <span key={half} style={{ display: "inline-flex" }}>
-            {loop.map((text, i) => (
-              <span key={`${half}-${i}`} className="hero-ribbon-item">
-                {text}
-              </span>
-            ))}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function RealmsPage() {
   const { openLookbook } = useShop();
   const stackRef = useRef<HTMLDivElement>(null);
@@ -79,12 +60,7 @@ function RealmsPage() {
             <span className="hero-cover-line reveal d1">Rooted in</span>
             <span className="hero-cover-line reveal d2">
               the South.
-              <svg className="hero-spark" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M12 0c.6 6.2 5.8 11.4 12 12-6.2.6-11.4 5.8-12 12-.6-6.2-5.8-11.4-12-12C6.2 11.4 11.4 6.2 12 0Z"
-                />
-              </svg>
+              <Spark />
             </span>
           </h1>
         </div>
