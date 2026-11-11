@@ -1699,7 +1699,7 @@ dialog::backdrop {
   background: var(--paper);
 }
 
-.product-turntable-controls button {
+.product-turntable-controls > button {
   align-self: stretch;
   width: 3rem;
   border-inline: 1px solid var(--line);
@@ -1707,7 +1707,7 @@ dialog::backdrop {
   font-size: 1.1rem;
 }
 
-.product-turntable-controls button:hover {
+.product-turntable-controls > button:hover {
   background: var(--ink);
   color: var(--light);
 }
