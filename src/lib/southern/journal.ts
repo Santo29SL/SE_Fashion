@@ -11,7 +11,8 @@ export const journalPosts: JournalPost[] = [
     title: 'Korvai and the temple border',
     excerpt: 'How Kanchipuram weavers lock contrasting silks at the pallu — and why that join still shapes a necktie and a bandana.',
     slot: 'images/journal/korvai-temple-border.webp',
-    image: '',
+    image: '/images/journal/korvai-temple-border.jpg',
+    imageAlt: 'Maroon Kanchipuram silk locked to a gold temple border on a wooden handloom',
     relatedProductIds: ['kanchivaram-tie', 'kanchi-bandana']
   },
   {
@@ -24,7 +25,8 @@ export const journalPosts: JournalPost[] = [
     title: 'Kasavu, kora, and Onam white-gold',
     excerpt: 'Unbleached cotton, liquid zari, and the Travancore pit-loom — worn now as a halter rather than a nine-yard drape.',
     slot: 'images/journal/kasavu-onam-gold.webp',
-    image: '',
+    image: '/images/journal/kasavu-onam-gold.jpg',
+    imageAlt: 'Folded kora cotton with a broad gold kasavu border beside an Onam flower bowl',
     relatedProductIds: ['kasavu-halter']
   },
   {
@@ -37,7 +39,8 @@ export const journalPosts: JournalPost[] = [
     title: 'The mathematics of double ikat',
     excerpt: 'Warp and weft tied before they meet the loom. Blurred geometry from Bhoodan Pochampally, set into denim pockets.',
     slot: 'images/journal/pochampally-double-ikat.webp',
-    image: '',
+    image: '/images/journal/pochampally-double-ikat.jpg',
+    imageAlt: 'Resist-dyed ikat yarn hanks beside a draped Pochampally double-ikat cloth',
     relatedProductIds: ['pochampally-skirt']
   }
 ];

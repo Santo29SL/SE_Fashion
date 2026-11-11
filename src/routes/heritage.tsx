@@ -29,6 +29,21 @@ export const Route = createFileRoute("/heritage")({
 
 const PILLAR_ACCENTS = ["var(--terracotta)", "var(--brass)", "var(--olive)"];
 
+const PILLAR_PHOTOS: Record<string, { src: string; alt: string }> = {
+  origin: {
+    src: "/images/heritage/pillar-origin.jpg",
+    alt: "Antique maroon temple silk unfolded beside tailor's shears and a collar cut from its border",
+  },
+  modular: {
+    src: "/images/heritage/pillar-modular.jpg",
+    alt: "Flat-lay of modular kasavu pieces — sleeves, panels, sash and brass fastenings that convert four ways",
+  },
+  value: {
+    src: "/images/heritage/pillar-value.jpg",
+    alt: "A master weaver's hands throwing the shuttle across striped pit-loom yardage",
+  },
+};
+
 const CLUSTERS = [
   { name: "Bhavani master weavers", craft: "Chevron pit-loom rug yardage", realm: "Tamil Nadu" },
   { name: "Kanchipuram sericulture guild", craft: "Mulberry silk, gold zari paisley", realm: "Tamil Nadu" },
@@ -145,6 +160,8 @@ function HeritagePage() {
                 word={pillar.badge}
                 caption={pillar.label}
                 accent={PILLAR_ACCENTS[i % PILLAR_ACCENTS.length]}
+                image={PILLAR_PHOTOS[pillar.id]?.src}
+                alt={PILLAR_PHOTOS[pillar.id]?.alt}
               />
             </article>
           ))}

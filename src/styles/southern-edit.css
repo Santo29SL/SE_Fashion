@@ -3656,3 +3656,78 @@ dialog::backdrop {
     transition: none;
   }
 }
+
+/* Type plate with a photograph — numeral + native word sit over the image as a caption plate */
+.type-plate.has-photo .type-plate-face {
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  background: var(--bg-deep);
+}
+
+.type-plate-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  transform: scale(1.08);
+  transition: transform 1.8s var(--ease);
+}
+
+.in-view .type-plate-photo,
+.type-plate.in-view .type-plate-photo {
+  transform: none;
+}
+
+.type-plate.has-photo .type-plate-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(28, 25, 20, 0.72) 0%, rgba(28, 25, 20, 0.18) 38%, transparent 60%);
+  pointer-events: none;
+}
+
+.type-plate.has-photo .type-plate-face::before {
+  z-index: 2;
+  border-color: color-mix(in srgb, var(--paper) 55%, transparent);
+}
+
+.type-plate.has-photo .type-plate-numeral,
+.type-plate.has-photo .type-plate-word,
+.type-plate.has-photo .type-plate-corner {
+  position: relative;
+  z-index: 3;
+}
+
+.type-plate.has-photo .type-plate-corner {
+  position: absolute;
+  color: var(--paper);
+}
+
+.type-plate.has-photo .type-plate-numeral {
+  font-size: clamp(3.4rem, 7vw, 5.6rem);
+  color: var(--paper);
+  opacity: 1;
+  transform-origin: left bottom;
+}
+
+.type-plate.has-photo .type-plate-word {
+  font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+  color: color-mix(in srgb, var(--paper) 88%, var(--plate-accent));
+}
+
+.journal-entry .type-plate.has-photo .type-plate-face {
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+  max-height: 82svh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .type-plate-photo {
+    transform: none;
+    transition: none;
+  }
+}

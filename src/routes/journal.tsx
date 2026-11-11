@@ -57,7 +57,14 @@ function JournalPage() {
                 id={post.id}
                 style={{ "--realm-accent": realm?.accentColor } as CSSProperties}
               >
-                <TypePlate numeral={no} word={post.native} caption={post.kicker} accent={realm?.accentColor} />
+                <TypePlate
+                  numeral={no}
+                  word={post.native}
+                  caption={post.kicker}
+                  accent={realm?.accentColor}
+                  image={post.image || undefined}
+                  alt={post.imageAlt}
+                />
                 <div className="journal-entry-copy">
                   <div className="realm-meta">
                     <span>

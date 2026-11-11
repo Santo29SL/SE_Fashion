@@ -100,6 +100,7 @@ export interface JournalPost {
   excerpt: string;
   slot: string;
   image: string;
+  imageAlt?: string;
   relatedProductIds: string[];
 }
 
