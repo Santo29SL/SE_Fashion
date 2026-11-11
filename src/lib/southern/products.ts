@@ -274,6 +274,11 @@ export const products: Product[] = [
     imageMain: "/images/products/06-kasavu-halter.jpg",
     imageLookbook: "/images/products/06-kasavu-halter.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/06-kasavu-halter.jpg" },
+      { label: "Side", src: "/images/products/06-kasavu-halter-side.jpg" },
+      { label: "Back", src: "/images/products/06-kasavu-halter-back.jpg" },
+    ],
     slots: {
       main: "images/products/06-kasavu-halter.jpg",
       lookbook: "images/products/06-kasavu-halter.jpg",
@@ -317,6 +322,11 @@ export const products: Product[] = [
     imageMain: "/images/products/07-balaramapuram-cape.jpg",
     imageLookbook: "/images/products/07-balaramapuram-cape.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/07-balaramapuram-cape.jpg" },
+      { label: "Side", src: "/images/products/07-balaramapuram-cape-side.jpg" },
+      { label: "Back", src: "/images/products/07-balaramapuram-cape-back.jpg" },
+    ],
     slots: {
       main: "images/products/07-balaramapuram-cape.jpg",
       lookbook: "images/products/07-balaramapuram-cape.jpg",
@@ -359,6 +369,11 @@ export const products: Product[] = [
     imageMain: "/images/products/08-chendamangalam-stole.jpg",
     imageLookbook: "/images/products/08-chendamangalam-stole.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/08-chendamangalam-stole.jpg" },
+      { label: "Side", src: "/images/products/08-chendamangalam-stole-side.jpg" },
+      { label: "Back", src: "/images/products/08-chendamangalam-stole-back.jpg" },
+    ],
     slots: {
       main: "images/products/08-chendamangalam-stole.jpg",
       lookbook: "images/products/08-chendamangalam-stole.jpg",
@@ -401,6 +416,11 @@ export const products: Product[] = [
     imageMain: "/images/products/09-travancore-lotus-ring.jpg",
     imageLookbook: "/images/products/09-travancore-lotus-ring.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/09-travancore-lotus-ring.jpg" },
+      { label: "Side", src: "/images/products/09-travancore-lotus-ring-side.jpg" },
+      { label: "Back", src: "/images/products/09-travancore-lotus-ring-back.jpg" },
+    ],
     slots: {
       main: "images/products/09-travancore-lotus-ring.jpg",
       lookbook: "images/products/09-travancore-lotus-ring.jpg",
@@ -447,6 +467,11 @@ export const products: Product[] = [
     imageMain: "/images/products/10-mysore-silk-jean.jpg",
     imageLookbook: "/images/products/10-mysore-silk-jean.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/10-mysore-silk-jean.jpg" },
+      { label: "Side", src: "/images/products/10-mysore-silk-jean-side.jpg" },
+      { label: "Back", src: "/images/products/10-mysore-silk-jean-back.jpg" },
+    ],
     slots: {
       main: "images/products/10-mysore-silk-jean.jpg",
       lookbook: "images/products/10-mysore-silk-jean.jpg",
@@ -491,6 +516,11 @@ export const products: Product[] = [
     imageMain: "/images/products/11-chalukyan-belt.jpg",
     imageLookbook: "/images/products/11-chalukyan-belt.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/11-chalukyan-belt.jpg" },
+      { label: "Side", src: "/images/products/11-chalukyan-belt-side.jpg" },
+      { label: "Back", src: "/images/products/11-chalukyan-belt-back.jpg" },
+    ],
     slots: {
       main: "images/products/11-chalukyan-belt.jpg",
       lookbook: "/images/products/11-chalukyan-belt.jpg",
@@ -533,6 +563,11 @@ export const products: Product[] = [
     imageMain: "/images/products/12-badami-overshirt.jpg",
     imageLookbook: "/images/products/12-badami-overshirt.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/12-badami-overshirt.jpg" },
+      { label: "Side", src: "/images/products/12-badami-overshirt-side.jpg" },
+      { label: "Back", src: "/images/products/12-badami-overshirt-back.jpg" },
+    ],
     slots: {
       main: "images/products/12-badami-overshirt.jpg",
       lookbook: "images/products/12-badami-overshirt.jpg",
@@ -575,6 +610,11 @@ export const products: Product[] = [
     imageMain: "/images/products/13-hampi-scarf.jpg",
     imageLookbook: "/images/products/13-hampi-scarf.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/13-hampi-scarf.jpg" },
+      { label: "Side", src: "/images/products/13-hampi-scarf-side.jpg" },
+      { label: "Back", src: "/images/products/13-hampi-scarf-back.jpg" },
+    ],
     slots: {
       main: "images/products/13-hampi-scarf.jpg",
       lookbook: "images/products/13-hampi-scarf.jpg",
@@ -621,6 +661,11 @@ export const products: Product[] = [
     imageMain: "/images/products/14-pochampally-skirt.jpg",
     imageLookbook: "/images/products/14-pochampally-skirt.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/14-pochampally-skirt.jpg" },
+      { label: "Side", src: "/images/products/14-pochampally-skirt-side.jpg" },
+      { label: "Back", src: "/images/products/14-pochampally-skirt-back.jpg" },
+    ],
     slots: {
       main: "images/products/14-pochampally-skirt.jpg",
       lookbook: "images/products/14-pochampally-skirt.jpg",
@@ -663,6 +708,11 @@ export const products: Product[] = [
     imageMain: "/images/products/15-kalamkari-kimono.jpg",
     imageLookbook: "/images/products/15-kalamkari-kimono.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/15-kalamkari-kimono-front.jpg" },
+      { label: "Side", src: "/images/products/15-kalamkari-kimono-side.jpg" },
+      { label: "Back", src: "/images/products/15-kalamkari-kimono.jpg" },
+    ],
     slots: {
       main: "images/products/15-kalamkari-kimono.jpg",
       lookbook: "images/products/15-kalamkari-kimono.jpg",
@@ -705,6 +755,11 @@ export const products: Product[] = [
     imageMain: "/images/products/16-pedana-overshirt.jpg",
     imageLookbook: "/images/products/16-pedana-overshirt.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/16-pedana-overshirt.jpg" },
+      { label: "Side", src: "/images/products/16-pedana-overshirt-side.jpg" },
+      { label: "Back", src: "/images/products/16-pedana-overshirt-back.jpg" },
+    ],
     slots: {
       main: "images/products/16-pedana-overshirt.jpg",
       lookbook: "images/products/16-pedana-overshirt.jpg",
@@ -747,6 +802,11 @@ export const products: Product[] = [
     imageMain: "/images/products/17-gadwal-sash.jpg",
     imageLookbook: "/images/products/17-gadwal-sash.jpg",
     imageDetail: "",
+    imageViews: [
+      { label: "Front", src: "/images/products/17-gadwal-sash.jpg" },
+      { label: "Side", src: "/images/products/17-gadwal-sash-side.jpg" },
+      { label: "Back", src: "/images/products/17-gadwal-sash-back.jpg" },
+    ],
     slots: {
       main: "images/products/17-gadwal-sash.jpg",
       lookbook: "images/products/17-gadwal-sash.jpg",
