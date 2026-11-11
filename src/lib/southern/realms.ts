@@ -3,6 +3,7 @@ import tamilnaduMoodboard from "@/assets/realm-tamilnadu.webp.asset.json";
 import keralaMoodboard from "@/assets/realm-kerala.webp.asset.json";
 import karnatakaMoodboard from "@/assets/realm-karnataka.webp.asset.json";
 import telanganaMoodboard from "@/assets/realm-telangana.webp.asset.json";
+import { localAssetUrl } from "@/lib/localAssetUrl";
 import tamilnaduPhoto from "@/assets/realm-tamilnadu-edit.webp";
 import keralaPhoto from "@/assets/realm-kerala-edit.webp";
 import karnatakaPhoto from "@/assets/realm-karnataka-edit.webp";
@@ -17,7 +18,7 @@ export const realms: Realm[] = [
     subtitle: 'Kanchipuram, Athangudi, Bhavani, Madras',
     description:
       'Granite gopurams, Chettinad floor geometry, and pit-looms weaving three-ply mulberry silk with Korvai temple borders.',
-    moodboard: tamilnaduMoodboard.url,
+    moodboard: localAssetUrl(tamilnaduMoodboard.url, tamilnaduPhoto),
     photo: tamilnaduPhoto,
     photoAlt: 'Madder-red Kanchipuram silk overshirt with a gold temple border, hung above an Athangudi tile floor with a brass lamp and jasmine',
     lookbookBg: '',
@@ -38,7 +39,7 @@ export const realms: Realm[] = [
     subtitle: 'Balaramapuram, Chendamangalam',
     description:
       'Monsoon-washed kora cotton and liquid gold kasavu — temple white worn as everyday structure rather than festival drape.',
-    moodboard: keralaMoodboard.url,
+    moodboard: localAssetUrl(keralaMoodboard.url, keralaPhoto),
     photo: keralaPhoto,
     photoAlt: 'Off-white kasavu kora shirt-dress with a gold zari hem on a driftwood hanger, palm shadows and a brass uruli of flowers',
     lookbookBg: '',
@@ -59,7 +60,7 @@ export const realms: Realm[] = [
     subtitle: 'Badami, Mysore, Hampi',
     description:
       'Red sandstone of Badami against royal Mysore crepe — court silk opened into workwear denim and brass hardware.',
-    moodboard: karnatakaMoodboard.url,
+    moodboard: localAssetUrl(karnatakaMoodboard.url, karnatakaPhoto),
     photo: karnatakaPhoto,
     photoAlt: 'Indigo selvedge denim jacket with a green and wine Mysore crepe silk scarf, beside a carved Badami sandstone block',
     lookbookBg: '',
@@ -80,7 +81,7 @@ export const realms: Realm[] = [
     subtitle: 'Pochampally, Srikalahasti, Pedana',
     description:
       'Double ikat resist dyeing meeting freehand Kalamkari — madder, indigo, and sap mordants written into cloth.',
-    moodboard: telanganaMoodboard.url,
+    moodboard: localAssetUrl(telanganaMoodboard.url, telanganaPhoto),
     photo: telanganaPhoto,
     photoAlt: 'Pochampally double ikat shirt in indigo and madder beside a Kalamkari cloth draped on a stool and pots of natural dye',
     lookbookBg: '',

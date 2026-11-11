@@ -8,12 +8,9 @@ import { useShop } from "@/components/southern/ShopProvider";
 import { useRevealOnView } from "@/components/southern/useRevealOnView";
 import { getProductsByRealm } from "@/lib/southern/products";
 import { realms } from "@/lib/southern/realms";
+import { localAssetUrl } from "@/lib/localAssetUrl";
 
-// Lovable CDN URLs (/__l5e/…) only resolve on Lovable's servers.
-// Fall back to the real file in public/ for local dev and self-hosted builds.
-const moodboardUrl = moodboardAsset.url.startsWith("/__l5e/")
-  ? "/images/editorial/moodboard-heritage.png"
-  : moodboardAsset.url;
+const moodboardUrl = localAssetUrl(moodboardAsset.url, "/images/editorial/moodboard-heritage.png");
 
 export const Route = createFileRoute("/")({
   head: () => ({
