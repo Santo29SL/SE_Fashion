@@ -3457,10 +3457,6 @@ dialog::backdrop {
   color: var(--ink-soft);
 }
 
-.pillars-section .realm-panel .realm-media {
-  min-height: 0;
-}
-
 .pillars-section .type-plate-face {
   min-height: 44vh;
 }
