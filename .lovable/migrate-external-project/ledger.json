@@ -1,17 +1,89 @@
 {
   "source": "code-archive: SE_FashionWeb.zip (TanStack Start storefront 'The Southern Edit', previously built on Lovable)",
   "capabilities": [
-    {"capability": "code: pages Realms (/), Shop, Journal, Heritage + legacy .html redirects", "source": "src/routes/*", "outcome": "migrate", "status": "pending", "next_action": "copy source and verify routes"},
-    {"capability": "styles & fonts", "source": "src/styles.css, src/styles/southern-edit.css", "outcome": "migrate", "status": "pending", "next_action": "copy and verify visually"},
-    {"capability": "static catalog/realm/journal content", "source": "src/lib/southern/*.ts", "outcome": "migrate", "status": "pending", "next_action": "copy"},
-    {"capability": "bag + currency (localStorage southern_edit_*)", "source": "ShopProvider.tsx, cart.ts", "outcome": "migrate", "status": "pending", "next_action": "run cart tests, exercise add-to-bag"},
-    {"capability": "checkout", "source": "toast stub, no payment provider", "outcome": "migrate as stub", "status": "pending", "next_action": "none beyond copy"},
-    {"capability": "image files in public/images", "source": "public/images/products, editorial", "outcome": "migrate", "status": "pending", "next_action": "copy"},
-    {"capability": "CDN image pointers (6 images in other project's asset store)", "source": "src/assets/*.asset.json", "outcome": "re-upload to this project's assets", "status": "pending", "next_action": "download from original preview and recreate pointers"},
-    {"capability": "database / records", "source": "none detected", "outcome": "not applicable", "status": "verified", "next_action": "none"},
-    {"capability": "auth / users", "source": "none detected", "outcome": "not applicable", "status": "verified", "next_action": "none"},
-    {"capability": "storage, schedules, webhooks, public endpoints, AI, email, payments", "source": "none detected", "outcome": "not applicable", "status": "verified", "next_action": "none"},
-    {"capability": "secrets", "source": "no environment variables referenced", "outcome": "not applicable", "status": "verified", "next_action": "none"},
-    {"capability": "verification", "source": "-", "outcome": "verify", "status": "pending", "next_action": "build, tests, browser check"}
+    {
+      "capability": "code: pages Realms (/), Shop, Journal, Heritage + legacy .html redirects",
+      "source": "src/routes/*",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "styles & fonts",
+      "source": "src/styles.css, src/styles/southern-edit.css",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "static catalog/realm/journal content",
+      "source": "src/lib/southern/*.ts",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "bag + currency (localStorage southern_edit_*)",
+      "source": "ShopProvider.tsx, cart.ts",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "checkout",
+      "source": "toast stub, no payment provider",
+      "outcome": "migrate as stub",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "image files in public/images",
+      "source": "public/images/products, editorial",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "CDN image pointers (6 images in other project's asset store)",
+      "source": "src/assets/*.asset.json",
+      "outcome": "re-upload to this project's assets",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "database / records",
+      "source": "none detected",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "auth / users",
+      "source": "none detected",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "storage, schedules, webhooks, public endpoints, AI, email, payments",
+      "source": "none detected",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "secrets",
+      "source": "no environment variables referenced",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "verification",
+      "source": "-",
+      "outcome": "verify",
+      "status": "verified",
+      "next_action": "none"
+    }
   ]
 }
