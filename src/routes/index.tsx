@@ -2,19 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, type CSSProperties } from "react";
 
 import revivalPhoto from "@/assets/revival-reworn.jpg";
-import moodboardAsset from "@/assets/moodboard-heritage.webp.asset.json";
 import { Ribbon, Spark } from "@/components/southern/Editorial";
 import { useShop } from "@/components/southern/ShopProvider";
 import { useRevealOnView } from "@/components/southern/useRevealOnView";
 import { getProductsByRealm } from "@/lib/southern/products";
 import { realms } from "@/lib/southern/realms";
 import { ANATOMY, ANATOMY_SIZE } from "@/lib/southern/anatomy";
-
-// Lovable CDN URLs (/__l5e/…) only resolve on Lovable's servers.
-// Fall back to the real file in public/ for local dev and self-hosted builds.
-const moodboardUrl = moodboardAsset.url.startsWith("/__l5e/")
-  ? "/images/editorial/moodboard-heritage.png"
-  : moodboardAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -90,41 +83,31 @@ function RealmsPage() {
   return (
     <>
       <section className="hero-cover hero-anatomy" id="intro">
-        <div className="hero-cover-stage">
-          <img
-            className="hero-cover-underlay"
-            src={moodboardUrl}
-            alt=""
-            aria-hidden="true"
-            width={1600}
-            height={1309}
-          />
-          <div className="hero-anatomy-head">
+        <div className="hero-split">
+          <div className="hero-split-copy">
             <h1 className="hero-cover-title">
-              <span className="hero-cover-line reveal d1">Rooted in the South.</span>
+              <span className="hero-cover-line reveal d1">Rooted in</span>
+              <span className="hero-cover-line reveal d1">the South.</span>
               <span className="hero-cover-line hero-anatomy-accent reveal d2">
                 Worn in the Now.
                 <Spark />
               </span>
             </h1>
+            <p className="hero-cover-sub reveal d3">
+              Every piece is stitched from cloth the South left behind — and remade by the last
+              master hands who still know the craft.
+            </p>
+            <div className="hero-cover-cta reveal d4">
+              <Link className="btn-primary" to="/shop">
+                Shop the five seasons
+              </Link>
+              <a className="btn-ghost" href="#revival">
+                How the revival works
+              </a>
+            </div>
           </div>
-        </div>
 
-        <HeroAnatomy />
-
-        <div className="hero-cover-deck hero-anatomy-deck reveal d4">
-          <p className="hero-cover-sub">
-            Every piece is stitched from cloth the South left behind — and remade by the last master
-            hands who still know the craft.
-          </p>
-          <div className="hero-cover-cta">
-            <Link className="btn-primary" to="/shop">
-              Shop the five seasons
-            </Link>
-            <a className="btn-ghost" href="#revival">
-              How the revival works
-            </a>
-          </div>
+          <HeroAnatomy />
         </div>
 
         <Ribbon items={CRAFT_RIBBON} />
@@ -333,6 +316,7 @@ function HeroAnatomy() {
             <li
               key={c.no}
               className="swing-tag"
+              tabIndex={0}
               style={
                 {
                   "--accent": realmAccent(c.realm),
@@ -344,11 +328,12 @@ function HeroAnatomy() {
               }
             >
               <div className="swing-tag-card">
-                <p className="swing-tag-stamp">
-                  <span>No. {c.no}</span>
-                  {c.state}
-                </p>
                 <h2 className="swing-tag-part">{c.part}</h2>
+                <p className="swing-tag-state">
+                  {c.state}
+                  <span>No. {c.no}</span>
+                </p>
+                <div className="swing-tag-story">
                 <p className="swing-tag-row">
                   <span>was</span>
                   {c.salvaged}
@@ -357,6 +342,7 @@ function HeroAnatomy() {
                   <span>now</span>
                   {c.remade}
                 </p>
+                </div>
               </div>
             </li>
           ))}

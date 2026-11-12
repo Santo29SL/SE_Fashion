@@ -4284,29 +4284,40 @@ dialog::backdrop {
    -------------------------------------------------------------------------- */
 .hero-cover.hero-anatomy {
   height: 100svh;
-  min-height: 38rem;
+  min-height: 36rem;
+  align-items: stretch;
+  text-align: left;
 }
 
-.hero-anatomy .hero-cover-stage {
-  flex: none;
-  padding-block: clamp(0.25rem, 1vh, 0.75rem);
+/* Split cover: words on the left, the one photo on the right, ribbon underneath */
+.hero-split {
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.72fr) 1.6fr;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-block: clamp(0.75rem, 2.5vh, 2rem);
 }
 
-.hero-anatomy .hero-cover-underlay {
-  opacity: 0.3;
-}
-
-.hero-anatomy-head {
+.hero-split-copy {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .hero-anatomy .hero-cover-title {
-  font-size: clamp(2.2rem, min(5.4vw, 7.2vh), 5.75rem);
+  align-items: flex-start;
+  font-size: clamp(2.2rem, min(4vw, 8vh), 5rem);
 }
 
 .hero-anatomy-accent {
+  margin-top: 0.15em;
+  font-size: 0.82em;
+  white-space: nowrap;
   font-style: italic;
   color: var(--terracotta);
   text-transform: none;
@@ -4319,42 +4330,30 @@ dialog::backdrop {
   top: 0.05em;
 }
 
-/* Sub-line and buttons share one row so the hero + ribbon fit a single screen */
-.hero-anatomy-deck {
-  flex: none;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  max-width: 62rem;
-  margin-top: clamp(0.5rem, 1.4vh, 1rem);
-  margin-bottom: clamp(0.6rem, 1.6vh, 1.1rem);
-  text-align: left;
+.hero-anatomy .hero-cover-sub {
+  max-width: 25rem;
+  margin-top: clamp(1rem, 3vh, 2rem);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-.hero-anatomy-deck .hero-cover-sub {
-  margin-top: 0;
-  max-width: 30rem;
-  font-size: 0.9rem;
-  line-height: 1.5;
+.hero-anatomy .hero-cover-cta {
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  margin-top: clamp(1rem, 3vh, 2rem);
 }
 
-.hero-anatomy-deck .hero-cover-cta {
-  flex: none;
-  margin-top: 0;
-}
-
-/* The figure fills the height left over; the photo keeps its exact 4:3 so dots
-   and strings stay pinned, and the tags hang in the margins either side of it.
-   --pw = photo width: as tall as the space allows, but never so wide that the
-   side tags (~1.7x the photo width in total) run off screen. */
+/* The figure fills its column; the photo keeps its exact 4:3 so dots and strings
+   stay pinned. --pw = photo width: as large as the column's height and width allow. */
 .anatomy {
-  flex: 1 1 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-height: 0;
-  width: 100%;
-  margin-top: clamp(0.4rem, 1.2vh, 1rem);
   container-type: size;
-  --pw: min(calc((100cqh - 2.4rem) * 4 / 3), calc(100cqw / 1.7), 1100px);
+  --pw: min(calc((100cqh - 2.8rem) * 4 / 3), 100cqw, 1000px);
 }
 
 .anatomy-frame {
@@ -4362,6 +4361,7 @@ dialog::backdrop {
   width: var(--pw);
   aspect-ratio: 4 / 3;
   margin-inline: auto;
+  overflow: hidden;
   container-type: inline-size;
 }
 
@@ -4423,12 +4423,12 @@ dialog::backdrop {
 
 .anatomy-string {
   fill: none;
-  stroke: var(--kraft-ink);
-  stroke-width: 1.6;
+  stroke: var(--thread);
+  stroke-width: 1.8;
   stroke-linecap: round;
   stroke-dasharray: 1400;
   stroke-dashoffset: 1400;
-  filter: drop-shadow(0 0 1.5px rgba(250, 247, 241, 0.9));
+  filter: drop-shadow(0 1px 1.5px rgba(28, 25, 20, 0.6));
   animation: anatomyDraw 1.3s var(--ease) forwards;
   animation-delay: calc(1s + var(--i) * 0.2s);
 }
@@ -4450,8 +4450,11 @@ dialog::backdrop {
   z-index: 3;
   left: var(--x);
   top: var(--y);
-  width: clamp(9.5rem, 30cqi, 14rem);
+  width: clamp(7.5rem, 18cqi, 10rem);
   translate: -50% calc(var(--hole) * -1);
+  cursor: pointer;
+  outline: none;
+  transition: width 0.45s var(--ease);
   transform-origin: 50% var(--hole);
   rotate: var(--tilt);
   /* Shadow lives here: the card's clip-path and mask would cut it off */
@@ -4468,7 +4471,7 @@ dialog::backdrop {
 .swing-tag-card {
   position: relative;
   height: 100%;
-  padding: calc(var(--hole) + 11px) 0.8rem 0.75rem;
+  padding: calc(var(--hole) + 13px) 0.75rem 0.7rem;
   background:
     repeating-linear-gradient(
       93deg,
@@ -4527,26 +4530,24 @@ dialog::backdrop {
   }
 }
 
-.swing-tag-stamp {
+.swing-tag-state {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 0.4rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px dashed rgba(58, 42, 26, 0.35);
-  font-size: 0.56rem;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+  font-size: 0.54rem;
   letter-spacing: 0.16em;
-  text-align: right;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--accent);
   filter: brightness(0.75);
 }
 
-.swing-tag-stamp span {
+.swing-tag-state span {
   flex: none;
   font-family: var(--font-hand);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
@@ -4554,11 +4555,34 @@ dialog::backdrop {
 }
 
 .swing-tag-part {
-  margin-top: 0.3rem;
+  margin-top: 0;
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: clamp(0.95rem, 1.6cqi, 1.1rem);
   line-height: 1.1;
+}
+
+/* Tags stay short (number, state, part); hover, tap or focus opens the was / now story */
+.swing-tag-story {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.45s var(--ease),
+    opacity 0.3s ease;
+}
+
+.swing-tag:hover,
+.swing-tag:focus-visible,
+.swing-tag:focus-within {
+  z-index: 6;
+  width: clamp(9rem, 20cqi, 10.5rem);
+}
+
+.swing-tag:hover .swing-tag-story,
+.swing-tag:focus-within .swing-tag-story {
+  max-height: 9rem;
+  opacity: 1;
 }
 
 /* Handwritten "was" / "now" sits in a narrow column beside its line to keep tags short */
@@ -4584,13 +4608,14 @@ dialog::backdrop {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 1rem;
-  width: min(100%, calc(var(--pw) * 1.7));
-  margin: 0.55rem auto 0;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  width: var(--pw);
+  margin: 0.6rem auto 0;
   padding-top: 0.5rem;
   border-top: 1px solid var(--line);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
@@ -4603,16 +4628,19 @@ dialog::backdrop {
 .anatomy-caption-line {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
   letter-spacing: 0;
   text-transform: none;
   color: var(--ink);
 }
 
-/* Short desktop screens: the photo shrinks to fit, so tags keep just the state and part */
-@media (min-width: 861px) and (max-height: 780px) {
-  .swing-tag-row {
-    display: none;
+/* Short laptop screens: the photo shrinks, so the tags tighten up to keep their spacing */
+@media (min-width: 861px) and (max-height: 760px) {
+  .swing-tag-card {
+    padding: calc(var(--hole) + 10px) 0.6rem 0.5rem;
+  }
+  .swing-tag-part {
+    font-size: 0.82rem;
   }
 }
 
@@ -4622,18 +4650,29 @@ dialog::backdrop {
     height: auto;
     min-height: 100svh;
   }
-  .anatomy {
+  .hero-split {
     flex: none;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .anatomy {
     width: 100%;
     container-type: normal;
   }
   .anatomy-frame {
     width: 100%;
     aspect-ratio: auto;
+    overflow: visible;
   }
-  .hero-anatomy-deck {
-    flex-direction: column;
-    text-align: center;
+  .swing-tag,
+  .swing-tag:hover,
+  .swing-tag:focus-within {
+    width: auto;
+    cursor: default;
+  }
+  .swing-tag-story {
+    max-height: none;
+    opacity: 1;
   }
   .anatomy-canvas {
     position: relative;
