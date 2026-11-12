@@ -69,9 +69,9 @@ function SiteHeader({ menuOpen, onToggleMenu }: { menuOpen: boolean; onToggleMen
 }
 
 /* Masthead — the big two-line signature sits under the nav bar and scrolls with the page */
-function Masthead() {
+function Masthead({ ruled }: { ruled: boolean }) {
   return (
-    <div className="masthead">
+    <div className={ruled ? "masthead is-ruled" : "masthead"}>
       <div className="masthead-inner">
         <Link to="/" className="masthead-brand" aria-label="The Southern Edit — home">
           <span className="brand-title">
@@ -226,7 +226,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       <div className="scroll-progress" ref={progressRef} aria-hidden="true" />
       <SiteHeader menuOpen={menuOpen} onToggleMenu={() => setMenuOpen((o) => !o)} />
       <MobileDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <Masthead />
+      <Masthead ruled={pathname === "/"} />
       <main id="mainContent">{children}</main>
       <SiteFooter variant={pathname === "/" ? "home" : "default"} />
       <QuickViewDialog />

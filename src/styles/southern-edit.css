@@ -129,9 +129,9 @@ select:focus-visible {
 
 .nav-container {
   height: 100%;
-  max-width: 1440px;
+  max-width: calc(1400px + 2 * clamp(1.25rem, 4vw, 3.5rem));
   margin-inline: auto;
-  padding-inline: clamp(1rem, 3vw, 2.5rem);
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -184,7 +184,6 @@ select:focus-visible {
 /* Masthead under the fixed nav: big signature aligned with the page grid */
 .masthead {
   padding: var(--header-h) clamp(1.25rem, 4vw, 3.5rem) 0;
-  background: var(--bg);
 }
 
 .masthead-inner {
@@ -193,6 +192,10 @@ select:focus-visible {
   margin-inline: auto;
   display: flex;
   align-items: center;
+}
+
+/* Home only: a hairline under the signature; inner pages open with their own ruled kicker */
+.masthead.is-ruled .masthead-inner {
   border-bottom: 1px solid var(--line);
 }
 
