@@ -4440,6 +4440,20 @@ dialog::backdrop {
   translate: -50% calc(var(--hole) * -1);
   transform-origin: 50% var(--hole);
   rotate: var(--tilt);
+  /* Shadow lives here: the card's clip-path and mask would cut it off */
+  filter: drop-shadow(0 8px 14px rgba(28, 25, 20, 0.35));
+  opacity: 0;
+  animation:
+    tagDrop 0.9s var(--ease) forwards,
+    tagSway 5s ease-in-out infinite alternate;
+  animation-delay:
+    calc(1.5s + var(--i) * 0.2s),
+    calc(2.4s + var(--i) * 0.45s);
+}
+
+.swing-tag-card {
+  position: relative;
+  height: 100%;
   padding: calc(var(--hole) + 16px) 0.95rem 0.95rem;
   background:
     repeating-linear-gradient(
@@ -4452,18 +4466,10 @@ dialog::backdrop {
   clip-path: polygon(22px 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%, 0 22px);
   -webkit-mask: radial-gradient(circle at 50% var(--hole), transparent 5px, #000 5.5px);
   mask: radial-gradient(circle at 50% var(--hole), transparent 5px, #000 5.5px);
-  filter: drop-shadow(0 8px 14px rgba(28, 25, 20, 0.35));
-  opacity: 0;
-  animation:
-    tagDrop 0.9s var(--ease) forwards,
-    tagSway 5s ease-in-out infinite alternate;
-  animation-delay:
-    calc(1.5s + var(--i) * 0.2s),
-    calc(2.4s + var(--i) * 0.45s);
 }
 
 /* Brass eyelet around the hole */
-.swing-tag::before {
+.swing-tag-card::before {
   content: '';
   position: absolute;
   left: 50%;
@@ -4476,7 +4482,7 @@ dialog::backdrop {
 }
 
 /* Realm colour band along the bottom edge */
-.swing-tag::after {
+.swing-tag-card::after {
   content: '';
   position: absolute;
   left: 0;

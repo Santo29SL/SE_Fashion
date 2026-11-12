@@ -349,19 +349,21 @@ function HeroAnatomy() {
                 } as CSSProperties
               }
             >
-              <p className="swing-tag-stamp">
-                <span>No. {c.no}</span>
-                {c.state}
-              </p>
-              <h2 className="swing-tag-part">{c.part}</h2>
-              <p className="swing-tag-row">
-                <span>was</span>
-                {c.salvaged}
-              </p>
-              <p className="swing-tag-row">
-                <span>now</span>
-                {c.remade}
-              </p>
+              <div className="swing-tag-card">
+                <p className="swing-tag-stamp">
+                  <span>No. {c.no}</span>
+                  {c.state}
+                </p>
+                <h2 className="swing-tag-part">{c.part}</h2>
+                <p className="swing-tag-row">
+                  <span>was</span>
+                  {c.salvaged}
+                </p>
+                <p className="swing-tag-row">
+                  <span>now</span>
+                  {c.remade}
+                </p>
+              </div>
             </li>
           ))}
         </ol>
