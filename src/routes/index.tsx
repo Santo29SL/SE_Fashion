@@ -100,19 +100,13 @@ function RealmsPage() {
             height={1309}
           />
           <div className="hero-anatomy-head">
-            <p className="hero-anatomy-kicker reveal d1">
-              Tamil Nadu · Kerala · Karnataka · Andhra &amp; Telangana
-            </p>
             <h1 className="hero-cover-title">
-              <span className="hero-cover-line reveal d1">Rooted in</span>
+              <span className="hero-cover-line reveal d1">Rooted in the South.</span>
               <span className="hero-cover-line hero-anatomy-accent reveal d2">
-                the South.
+                Worn in the Now.
                 <Spark />
               </span>
             </h1>
-            <p className="hero-cover-tag reveal d3">
-              One overshirt. Four Dravidian states. Zero metres of new cloth.
-            </p>
           </div>
         </div>
 
@@ -388,7 +382,9 @@ function HeroAnatomy() {
       </div>
       <figcaption className="anatomy-caption">
         <span>Fig. 00 — The Revival Overshirt</span>
-        <span>5 salvaged cloths · 4 states · 0 m new fabric</span>
+        <span className="anatomy-caption-line">
+          One overshirt. Four Dravidian states. Zero metres of new cloth.
+        </span>
       </figcaption>
     </figure>
   );
