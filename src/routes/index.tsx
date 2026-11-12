@@ -299,7 +299,7 @@ function RealmsPage() {
 const realmAccent = (id: string) =>
   realms.find((r) => r.id === id)?.accentColor ?? "var(--terracotta)";
 
-/** The hero photo with arrows pinned to each salvaged part of the garment. */
+/** The hero photo with a paper swing tag strung from each salvaged part of the garment. */
 function HeroAnatomy() {
   const { width: W, height: H } = ANATOMY_SIZE;
   return (
@@ -314,40 +314,6 @@ function HeroAnatomy() {
             height={H}
             fetchPriority="high"
           />
-
-          <svg className="anatomy-lines" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
-            <defs>
-              <marker
-                id="anatomy-arrow"
-                viewBox="0 0 10 10"
-                refX="9"
-                refY="5"
-                markerWidth="7"
-                markerHeight="7"
-                orient="auto-start-reverse"
-              >
-                <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
-              </marker>
-            </defs>
-            {ANATOMY.map((c, i) => {
-              const bend = c.label.side === "left" ? c.label.x + 40 : c.label.x - 40;
-              // Stop the arrow just short of the dot so its head stays visible.
-              const dx = c.dot.x - bend;
-              const dy = c.dot.y - c.label.y;
-              const len = Math.hypot(dx, dy) || 1;
-              const tipX = c.dot.x - (dx / len) * 26;
-              const tipY = c.dot.y - (dy / len) * 26;
-              return (
-                <polyline
-                  key={c.no}
-                  className="anatomy-line"
-                  style={{ "--i": i } as CSSProperties}
-                  points={`${c.label.x},${c.label.y} ${bend},${c.label.y} ${tipX},${tipY}`}
-                  markerEnd="url(#anatomy-arrow)"
-                />
-              );
-            })}
-          </svg>
 
           {ANATOMY.map((c, i) => (
             <span
@@ -368,39 +334,57 @@ function HeroAnatomy() {
           ))}
         </div>
 
-        <ol className="anatomy-callouts">
+        <ol className="swing-tags">
           {ANATOMY.map((c, i) => (
             <li
               key={c.no}
-              className={`anatomy-callout is-${c.label.side}`}
+              className="swing-tag"
               style={
                 {
                   "--accent": realmAccent(c.realm),
                   "--i": i,
-                  "--y": `${(c.label.y / H) * 100}%`,
-                  "--x":
-                    c.label.side === "left"
-                      ? `${100 - (c.label.x / W) * 100}%`
-                      : `${(c.label.x / W) * 100}%`,
+                  "--tilt": `${c.tag.tilt}deg`,
+                  "--x": `${(c.tag.x / W) * 100}%`,
+                  "--y": `${(c.tag.y / H) * 100}%`,
                 } as CSSProperties
               }
             >
-              <p className="anatomy-callout-meta">
-                <span className="anatomy-callout-no">{Number(c.no)}</span>
-                {c.state}
-              </p>
-              <h2 className="anatomy-callout-part">{c.part}</h2>
-              <p className="anatomy-callout-row">
-                <span>Salvaged</span>
-                {c.salvaged}
-              </p>
-              <p className="anatomy-callout-row">
-                <span>Remade</span>
-                {c.remade}
-              </p>
+              <div className="swing-tag-card">
+                <p className="swing-tag-stamp">
+                  <span>No. {c.no}</span>
+                  {c.state}
+                </p>
+                <h2 className="swing-tag-part">{c.part}</h2>
+                <p className="swing-tag-row">
+                  <span>was</span>
+                  {c.salvaged}
+                </p>
+                <p className="swing-tag-row">
+                  <span>now</span>
+                  {c.remade}
+                </p>
+              </div>
             </li>
           ))}
         </ol>
+
+        {/* Strings sit above the tags so each one visibly threads into its hole */}
+        <svg className="anatomy-strings" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
+          {ANATOMY.map((c, i) => {
+            // Leave the hole sideways so the thread only crosses the tag's top band.
+            const dir = Math.sign(c.dot.x - c.tag.x);
+            const c1 = `${c.dot.x + (c.tag.x - c.dot.x) * 0.35},${c.dot.y + 70}`;
+            const c2 = `${c.tag.x + dir * 170},${c.tag.y}`;
+            return (
+              <path
+                key={c.no}
+                className="anatomy-string"
+                style={{ "--i": i } as CSSProperties}
+                d={`M${c.dot.x},${c.dot.y} C${c1} ${c2} ${c.tag.x},${c.tag.y}`}
+              />
+            );
+          })}
+        </svg>
       </div>
       <figcaption className="anatomy-caption">
         <span>Fig. 00 — The Revival Overshirt</span>

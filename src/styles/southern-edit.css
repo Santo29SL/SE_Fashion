@@ -18,6 +18,11 @@
   --sun: #c8502e;
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Work Sans', system-ui, sans-serif;
+  --font-hand: 'Caveat', 'Segoe Print', cursive;
+  --kraft: #dcc49c;
+  --kraft-deep: #cdb185;
+  --kraft-ink: #3a2a1a;
+  --thread: #f3ead8;
   --header-h: 4.25rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -4360,63 +4365,24 @@ dialog::backdrop {
   animation: heroSettle 2.4s var(--ease) both;
 }
 
-.anatomy-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--paper);
-  pointer-events: none;
-  overflow: visible;
-}
-
-.anatomy-line {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.5;
-  stroke-linejoin: round;
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  filter: drop-shadow(0 1px 2px rgba(28, 25, 20, 0.55));
-  animation: anatomyDraw 1.4s var(--ease) forwards;
-  animation-delay: calc(1s + var(--i) * 0.22s);
-}
-
-@keyframes anatomyDraw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
 .anatomy-dot {
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   display: grid;
   place-items: center;
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 1.45rem;
+  height: 1.45rem;
   translate: -50% -50%;
   border-radius: 50%;
   background: var(--accent);
   color: var(--light);
-  border: 2px solid var(--paper);
-  font-size: 0.7rem;
+  border: 2px solid var(--thread);
+  font-size: 0.62rem;
   font-weight: 700;
-  box-shadow: 0 2px 10px rgba(28, 25, 20, 0.4);
+  box-shadow: 0 2px 8px rgba(28, 25, 20, 0.45);
   opacity: 0;
   animation: anatomyPop 0.6s var(--ease) forwards;
-  animation-delay: calc(0.8s + var(--i) * 0.22s);
-}
-
-.anatomy-dot::after {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 1.5px solid var(--paper);
-  animation: anatomyPulse 2.6s ease-out infinite;
-  animation-delay: calc(2.4s + var(--i) * 0.3s);
-  opacity: 0;
+  animation-delay: calc(0.8s + var(--i) * 0.2s);
 }
 
 @keyframes anatomyPop {
@@ -4430,50 +4396,107 @@ dialog::backdrop {
   }
 }
 
-@keyframes anatomyPulse {
-  0% {
-    opacity: 0.9;
-    scale: 0.8;
-  }
-  100% {
-    opacity: 0;
-    scale: 1.8;
+/* Thread from the garment to each tag's hole */
+.anatomy-strings {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.anatomy-string {
+  fill: none;
+  stroke: var(--thread);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  filter: drop-shadow(0 1px 1.5px rgba(28, 25, 20, 0.6));
+  animation: anatomyDraw 1.3s var(--ease) forwards;
+  animation-delay: calc(1s + var(--i) * 0.2s);
+}
+
+@keyframes anatomyDraw {
+  to {
+    stroke-dashoffset: 0;
   }
 }
 
-.anatomy-callouts {
+/* Paper swing tags: chamfered kraft card, punched hole, gentle sway on the string */
+.swing-tags {
   list-style: none;
 }
 
-.anatomy-callout {
+.swing-tag {
+  --hole: 15px;
   position: absolute;
   z-index: 3;
-  top: var(--y);
-  width: clamp(12rem, 25cqi, 17.5rem);
-  translate: 0 -50%;
-  padding: 0.7rem 0.85rem 0.75rem;
-  background: rgba(250, 247, 241, 0.93);
-  backdrop-filter: blur(6px);
-  border-top: 3px solid var(--accent);
-  text-align: left;
-  box-shadow: 0 10px 30px -12px rgba(28, 25, 20, 0.45);
-  opacity: 0;
-  animation: anatomyCallout 0.8s var(--ease) forwards;
-  animation-delay: calc(1.5s + var(--i) * 0.22s);
-}
-
-.anatomy-callout.is-left {
-  right: var(--x);
-}
-
-.anatomy-callout.is-right {
   left: var(--x);
+  top: var(--y);
+  width: clamp(10rem, 18.5cqi, 13rem);
+  translate: -50% calc(var(--hole) * -1);
+  transform-origin: 50% var(--hole);
+  rotate: var(--tilt);
+  /* Shadow lives here: the card's clip-path and mask would cut it off */
+  filter: drop-shadow(0 8px 14px rgba(28, 25, 20, 0.35));
+  opacity: 0;
+  animation:
+    tagDrop 0.9s var(--ease) forwards,
+    tagSway 5s ease-in-out infinite alternate;
+  animation-delay:
+    calc(1.5s + var(--i) * 0.2s),
+    calc(2.4s + var(--i) * 0.45s);
 }
 
-@keyframes anatomyCallout {
+.swing-tag-card {
+  position: relative;
+  height: 100%;
+  padding: calc(var(--hole) + 16px) 0.95rem 0.95rem;
+  background:
+    repeating-linear-gradient(
+      93deg,
+      rgba(255, 255, 255, 0.05) 0 2px,
+      transparent 2px 7px
+    ),
+    linear-gradient(170deg, var(--kraft) 0%, var(--kraft-deep) 100%);
+  color: var(--kraft-ink);
+  text-align: left;
+  clip-path: polygon(22px 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%, 0 22px);
+  -webkit-mask: radial-gradient(circle at 50% var(--hole), transparent 5px, #000 5.5px);
+  mask: radial-gradient(circle at 50% var(--hole), transparent 5px, #000 5.5px);
+}
+
+/* Brass eyelet around the hole */
+.swing-tag-card::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: var(--hole);
+  width: 17px;
+  height: 17px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  border: 3px solid var(--brass);
+}
+
+/* Realm colour band along the bottom edge */
+.swing-tag-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  background: var(--accent);
+}
+
+@keyframes tagDrop {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(-14px);
   }
   to {
     opacity: 1;
@@ -4481,53 +4504,63 @@ dialog::backdrop {
   }
 }
 
-.anatomy-callout-meta {
+@keyframes tagSway {
+  from {
+    rotate: calc(var(--tilt) - 1.5deg);
+  }
+  to {
+    rotate: calc(var(--tilt) + 1.5deg);
+  }
+}
+
+.swing-tag-stamp {
   display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.22em;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed rgba(58, 42, 26, 0.35);
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-align: right;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--accent);
-  filter: brightness(0.8);
+  filter: brightness(0.75);
 }
 
-.anatomy-callout-no {
-  display: grid;
-  place-items: center;
-  width: 1.15rem;
-  height: 1.15rem;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--light);
-  font-size: 0.6rem;
+.swing-tag-stamp span {
+  flex: none;
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  font-weight: 600;
   letter-spacing: 0;
+  text-transform: none;
+  color: var(--kraft-ink);
 }
 
-.anatomy-callout-part {
-  margin-top: 0.3rem;
+.swing-tag-part {
+  margin-top: 0.45rem;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(1rem, 1.6cqi, 1.25rem);
+  font-size: clamp(1rem, 1.6cqi, 1.2rem);
   line-height: 1.1;
-  color: var(--ink);
 }
 
-.anatomy-callout-row {
+.swing-tag-row {
   margin-top: 0.35rem;
-  font-size: clamp(0.68rem, 1.05cqi, 0.78rem);
-  line-height: 1.4;
-  color: var(--ink-soft);
+  font-size: clamp(0.68rem, 1cqi, 0.76rem);
+  line-height: 1.35;
 }
 
-.anatomy-callout-row span {
+.swing-tag-row span {
   display: block;
-  font-size: 0.56rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
   font-weight: 600;
-  color: var(--ink-faint);
+  line-height: 1;
+  color: var(--accent);
+  filter: brightness(0.8);
 }
 
 .anatomy-caption {
@@ -4548,7 +4581,7 @@ dialog::backdrop {
   font-weight: 600;
 }
 
-/* Small screens: keep the numbered dots on the photo, list the stories below */
+/* Small screens: numbered dots stay on the photo, tags hang in a row below it */
 @media (max-width: 860px) {
   .anatomy {
     width: 100%;
@@ -4562,26 +4595,24 @@ dialog::backdrop {
     aspect-ratio: 4 / 3;
     overflow: hidden;
   }
-  .anatomy-lines {
+  .anatomy-strings {
     display: none;
   }
-  .anatomy-dot {
-    width: 1.4rem;
-    height: 1.4rem;
-  }
-  .anatomy-callouts {
+  .swing-tags {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    gap: 0.6rem;
-    margin-top: 0.9rem;
+    grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+    gap: 1.1rem 0.8rem;
+    margin-top: 1.2rem;
   }
-  .anatomy-callout {
-    position: static;
+  .swing-tag {
+    position: relative;
+    left: auto;
+    top: auto;
     width: auto;
     translate: none;
-    box-shadow: none;
-    border: 1px solid var(--line);
-    border-top: 3px solid var(--accent);
+    rotate: calc(var(--tilt) * 0.5);
+    animation: tagDrop 0.9s var(--ease) forwards;
+    animation-delay: calc(0.6s + var(--i) * 0.12s);
   }
   .anatomy-caption {
     flex-direction: column;
@@ -4591,15 +4622,11 @@ dialog::backdrop {
 
 @media (prefers-reduced-motion: reduce) {
   .anatomy-photo,
-  .anatomy-line,
+  .anatomy-string,
   .anatomy-dot,
-  .anatomy-dot::after,
-  .anatomy-callout {
+  .swing-tag {
     animation: none;
     opacity: 1;
     stroke-dashoffset: 0;
-  }
-  .anatomy-dot::after {
-    opacity: 0;
   }
 }

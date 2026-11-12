@@ -1,9 +1,9 @@
 import type { Realm } from "./types";
 
 /**
- * The home-hero "anatomy" of the Revival Overshirt: each part of the garment,
+ * The home-hero swing tags on the Revival Overshirt: each part of the garment,
  * where its cloth was salvaged and who remade it. Coordinates are in the
- * hero photo's own pixel space (1280 × 960) so dots and arrows stay pinned.
+ * hero photo's own pixel space (1280 × 960) so pins and strings stay put.
  */
 export interface AnatomyCallout {
   no: string;
@@ -12,10 +12,10 @@ export interface AnatomyCallout {
   state: string;
   salvaged: string;
   remade: string;
-  /** Point on the garment the arrow lands on. */
+  /** Point on the garment where the string is pinned. */
   dot: { x: number; y: number };
-  /** Where the label's edge sits; side decides which way the label grows. */
-  label: { x: number; y: number; side: "left" | "right" };
+  /** Centre of the tag's punched hole; the tag hangs below it, tilted by `tilt` degrees. */
+  tag: { x: number; y: number; tilt: number };
 }
 
 export const ANATOMY_SIZE = { width: 1280, height: 960 } as const;
@@ -26,49 +26,49 @@ export const ANATOMY: AnatomyCallout[] = [
     part: "Collar & pocket",
     realm: "kerala",
     state: "Kerala",
-    salvaged: "A Balaramapuram kasavu mundu, worn once at Onam",
-    remade: "Re-starched and hand-felled by kora weavers in Balaramapuram",
+    salvaged: "A kasavu mundu worn once at Onam",
+    remade: "Hand-felled by kora weavers, Balaramapuram",
     dot: { x: 618, y: 205 },
-    label: { x: 905, y: 175, side: "right" },
+    tag: { x: 1075, y: 60, tilt: 4 },
   },
   {
     no: "02",
     part: "Body panels",
     realm: "telangana",
     state: "Andhra Pradesh",
-    salvaged: "A torn Dharmavaram wedding silk from a family trunk",
-    remade: "Darned, steamed and re-cut into panels in Dharmavaram",
+    salvaged: "A torn Dharmavaram wedding silk",
+    remade: "Darned and re-cut in Dharmavaram",
     dot: { x: 560, y: 380 },
-    label: { x: 360, y: 300, side: "left" },
+    tag: { x: 205, y: 120, tilt: -5 },
   },
   {
     no: "03",
     part: "Temple border",
     realm: "tamilnadu",
     state: "Tamil Nadu",
-    salvaged: "The frayed korvai pallu of a Kanchipuram sari",
-    remade: "Zari re-couched by hand by a third-generation Kanchipuram weaver",
+    salvaged: "A frayed Kanchipuram sari pallu",
+    remade: "Zari re-couched by a Kanchipuram weaver",
     dot: { x: 770, y: 545 },
-    label: { x: 905, y: 500, side: "right" },
+    tag: { x: 1075, y: 375, tilt: -3 },
   },
   {
     no: "04",
     part: "Sleeves",
     realm: "telangana",
     state: "Telangana",
-    salvaged: "Pochampally double-ikat cut-pieces swept off loom floors",
-    remade: "Pieced and hand-stitched by the Pochampally cooperative",
+    salvaged: "Pochampally ikat swept off loom floors",
+    remade: "Pieced by the Pochampally cooperative",
     dot: { x: 462, y: 420 },
-    label: { x: 360, y: 610, side: "left" },
+    tag: { x: 205, y: 470, tilt: 3 },
   },
   {
     no: "05",
     part: "Trousers",
     realm: "karnataka",
     state: "Karnataka",
-    salvaged: "Undyed Ilkal sari seconds that failed the loom check",
-    remade: "Washed, pressed and tailored by artisans in Gadag",
+    salvaged: "Ilkal sari seconds that failed the loom check",
+    remade: "Washed and tailored in Gadag",
     dot: { x: 712, y: 790 },
-    label: { x: 905, y: 815, side: "right" },
+    tag: { x: 1075, y: 690, tilt: 5 },
   },
 ];
