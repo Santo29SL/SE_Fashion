@@ -23,7 +23,10 @@ function SiteHeader({ menuOpen, onToggleMenu }: { menuOpen: boolean; onToggleMen
       <div className="nav-container">
         <Link to="/" className="nav-brand">
           <span className="logo-mark" aria-hidden="true" />
-          <span className="brand-title">The Southern Edit</span>
+          <span className="brand-title">
+            <span className="brand-line">The</span>
+            <span className="brand-line">Southern Edit.</span>
+          </span>
         </Link>
 
         <nav className="nav-desktop" aria-label="Main">
@@ -105,7 +108,10 @@ function SiteFooter({ variant }: { variant: "home" | "default" }) {
     <footer className="site-footer">
       <div className="footer-top">
         <div>
-          <p className="brand-title footer-brand">The Southern Edit</p>
+          <p className="brand-title footer-brand">
+            <span className="brand-line">The</span>
+            <span className="brand-line">Southern Edit.</span>
+          </p>
           <p className="footer-manifesto">
             Lost Dravidian craft, revived on salvaged cloth. Every piece begins as cloth that already exists — rescued,
             reworked and worn again.
