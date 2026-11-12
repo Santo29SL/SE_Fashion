@@ -14,7 +14,7 @@ export const Route = createFileRoute("/journal")({
       { title: "Journal — The Southern Edit" },
       {
         name: "description",
-        content: "The Southern Edit Journal — Essays in craft, language, and cluster. Stories the cloth still tells.",
+        content: "The Southern Edit Journal — essays on the fading crafts of the four Dravidian realms and the salvaged cloth that keeps them alive.",
       },
       { property: "og:title", content: "Craft Journal — The Southern Edit" },
       {
@@ -39,8 +39,8 @@ function JournalPage() {
         act="Act III · The Journal"
         meta={`${journalPosts.length} essays · ${journalPosts.length} languages`}
         lines={["Stories the cloth", "still tells."]}
-        tag="Read the weave."
-        sub="Essays in craft, language and cluster — each one shops straight back into the collection."
+        tag="Read the weave before it's gone."
+        sub="Essays on the fading crafts of the four realms — who still makes them, what we salvage, and the pieces that keep them alive."
         ribbon={craftGlossary.map((g) => `${g.term} · ${g.native}`)}
       />
 

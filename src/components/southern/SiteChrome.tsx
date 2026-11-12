@@ -11,7 +11,7 @@ import { useShop } from "./ShopProvider";
 
 const NAV = [
   { to: "/", label: "Realms", mobile: "The 4 Realms" },
-  { to: "/shop", label: "Shop", mobile: "The Collection (Shop)" },
+  { to: "/shop", label: "Shop", mobile: "Shop the Seasons" },
   { to: "/journal", label: "Journal", mobile: "Journal" },
   { to: "/heritage", label: "Heritage", mobile: "Heritage & Provenance" },
 ] as const;
@@ -107,7 +107,8 @@ function SiteFooter({ variant }: { variant: "home" | "default" }) {
         <div>
           <p className="brand-title footer-brand">The Southern Edit</p>
           <p className="footer-manifesto">
-            Southern culture is not behind velvet rope. It is modular, street-ready, and alive.
+            Lost Dravidian craft, revived on salvaged cloth. Nothing newly spun for us — only rescued, reworked and worn
+            again.
           </p>
         </div>
         <div>
@@ -127,7 +128,7 @@ function SiteFooter({ variant }: { variant: "home" | "default" }) {
             <p className="footer-col-title">Pages</p>
             <ul className="footer-link-list">
               <li>
-                <Link to="/shop">Shop all artifacts</Link>
+                <Link to="/shop">Shop the seasons</Link>
               </li>
               <li>
                 <Link to="/journal">Craft journal</Link>
@@ -150,7 +151,7 @@ function SiteFooter({ variant }: { variant: "home" | "default" }) {
                 <Link to="/">The 4 Realms</Link>
               </li>
               <li>
-                <Link to="/shop">The Collection</Link>
+                <Link to="/shop">Shop the seasons</Link>
               </li>
               <li>
                 <Link to="/journal">Journal</Link>
@@ -164,7 +165,7 @@ function SiteFooter({ variant }: { variant: "home" | "default" }) {
       </div>
       <div className="footer-bottom">
         <p>© 2026 The Southern Edit</p>
-        <p>Handloom GI · Ethical luxury · Pan-India delivery</p>
+        <p>Salvaged cloth · Revived craft · Pan-India delivery</p>
       </div>
     </footer>
   );
