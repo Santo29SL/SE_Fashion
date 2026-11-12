@@ -19,6 +19,7 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Work Sans', system-ui, sans-serif;
   --font-hand: 'Caveat', 'Segoe Print', cursive;
+  --font-script: 'Parisienne', 'Segoe Script', cursive;
   --kraft: #dcc49c;
   --kraft-deep: #cdb185;
   --kraft-ink: #3a2a1a;
@@ -139,6 +140,7 @@ select:focus-visible {
 .nav-brand {
   display: flex;
   align-items: center;
+  flex: none;
   gap: 0.7rem;
 }
 
@@ -162,12 +164,14 @@ select:focus-visible {
     inset 0 0 6px 0 color-mix(in srgb, var(--brass) 40%, transparent);
 }
 
-/* ── Brand wordmark – polished serif with illuminated shimmer ────────────── */
+/* ── Brand wordmark – cursive signature, brass-lit ───────────────────────── */
 .brand-title {
-  font-family: var(--font-serif);
-  font-size: 1.0rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-family: var(--font-script);
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
+  line-height: 1.18;
+  white-space: nowrap;
+  letter-spacing: 0.015em;
+  text-transform: none;
   color: var(--ink);
   background: linear-gradient(
     105deg,
@@ -183,7 +187,7 @@ select:focus-visible {
 }
 
 .nav-brand:hover .brand-title {
-  letter-spacing: 0.26em;
+  letter-spacing: 0.03em;
   background: linear-gradient(
     105deg,
     var(--ink) 0%,
@@ -192,6 +196,17 @@ select:focus-visible {
   );
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+/* Phones: the script wordmark keeps clear of the brass mark and the header edge */
+@media (max-width: 860px) {
+  .nav-brand {
+    gap: 0.5rem;
+  }
+  .brand-title {
+    font-size: 1.45rem;
+    padding-left: 0.12em;
+  }
 }
 
 .nav-desktop {
@@ -3749,6 +3764,68 @@ dialog::backdrop {
   text-transform: none;
   color: var(--terracotta);
   letter-spacing: -0.02em;
+}
+
+/* The mission heading sits on a kraft plate: hairline brass frame, chamfered
+   corners and a ghosted script word behind the type */
+.revival-section .chapter-head {
+  position: relative;
+  isolation: isolate;
+  max-width: 60rem;
+  padding-block: clamp(2rem, 4vw, 3.25rem);
+  padding-inline: clamp(1.75rem, 5vw, 3.5rem);
+}
+
+.revival-section .chapter-head > * {
+  position: relative;
+  z-index: 1;
+}
+
+.revival-section .chapter-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(
+      93deg,
+      rgba(255, 255, 255, 0.05) 0 2px,
+      transparent 2px 7px
+    ),
+    radial-gradient(120% 140% at 50% 0%, rgba(184, 145, 63, 0.1), transparent 62%),
+    linear-gradient(
+      170deg,
+      var(--paper) 0%,
+      color-mix(in srgb, var(--paper) 82%, var(--kraft)) 100%
+    );
+  border: 1px solid color-mix(in srgb, var(--brass) 45%, transparent);
+  clip-path: polygon(
+    26px 0,
+    calc(100% - 26px) 0,
+    100% 26px,
+    100% calc(100% - 26px),
+    calc(100% - 26px) 100%,
+    26px 100%,
+    0 calc(100% - 26px),
+    0 26px
+  );
+  box-shadow: 0 24px 60px -32px rgba(28, 25, 20, 0.45);
+}
+
+.revival-section .chapter-head::after {
+  content: "revive";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  font-family: var(--font-script);
+  font-size: clamp(6rem, 20vw, 15rem);
+  line-height: 1;
+  color: color-mix(in srgb, var(--terracotta) 8%, transparent);
+  pointer-events: none;
+  user-select: none;
 }
 
 .revival-steps {
