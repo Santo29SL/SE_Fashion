@@ -2,11 +2,12 @@ import { createContext, type Context, useCallback, useContext, useEffect, useMem
 
 import { addAddonToCart, addProductToCart, changeCartQty, parseStoredCart } from "@/lib/southern/cart";
 import { formatPrice, isCurrency, type Currency } from "@/lib/southern/format";
-import { addOns, getProductById } from "@/lib/southern/products";
+import { addOns, getProductById, products } from "@/lib/southern/products";
 import type { CartItem, Product } from "@/lib/southern/types";
 
 const CART_KEY = "southern_edit_cart";
 const CURRENCY_KEY = "southern_edit_currency";
+const ACTIVE_CART_ITEM_IDS = new Set([...products.map((product) => product.id), ...addOns.map((addon) => addon.id)]);
 
 interface Toast {
   id: number;
@@ -68,7 +69,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
 
   // Restore saved bag and currency after hydration.
   useEffect(() => {
-    setCart(parseStoredCart(localStorage.getItem(CART_KEY)));
+    setCart(parseStoredCart(localStorage.getItem(CART_KEY)).filter((item) => ACTIVE_CART_ITEM_IDS.has(item.id)));
     const savedCurrency = localStorage.getItem(CURRENCY_KEY);
     if (isCurrency(savedCurrency)) setCurrencyState(savedCurrency);
     setLoaded(true);

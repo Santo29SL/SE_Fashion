@@ -14,9 +14,9 @@ describe("season collections", () => {
     for (const product of products) expect(ids, product.id).toContain(product.season);
   });
 
-  it("fills every collection with at least five pieces", () => {
+  it("keeps every collection stocked with at least four pieces", () => {
     for (const season of seasons) {
-      expect(products.filter((p) => p.season === season.id).length, season.id).toBeGreaterThanOrEqual(5);
+      expect(products.filter((p) => p.season === season.id).length, season.id).toBeGreaterThanOrEqual(4);
     }
   });
 
@@ -32,7 +32,7 @@ describe("season collections", () => {
 
   it("combines season and realm filters", () => {
     const list = filterCatalog(products, { season: "international", realm: "kerala" });
-    expect(list.map((p) => p.id)).toEqual(["kuthampully-bomber"]);
+    expect(list.map((p) => p.id)).toEqual(["charcoal-woven-jacket"]);
   });
 
   it("groups the full catalog into all five collections in order", () => {

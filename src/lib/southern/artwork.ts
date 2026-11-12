@@ -178,21 +178,6 @@ export function getArtifactArtwork(productId: string, accentColor = '#9e3d2a'): 
       </svg>
     `,
 
-    'balaramapuram-cape': `
-      <svg viewBox="0 0 320 320" class="throw-deck-svg" xmlns="http://www.w3.org/2000/svg" aria-label="Balaramapuram Kora Cape Art">
-        <rect width="320" height="320" fill="#f4efe6" />
-        <!-- Sweeping cape drapes with metallic gold borders -->
-        <path d="M 40,40 Q 160,110 280,40 L 290,280 Q 160,250 30,280 Z" fill="#ebe4d6" stroke="#d4af37" stroke-width="2.5" />
-        <path d="M 70,80 Q 160,140 250,80 L 260,260 Q 160,230 60,260 Z" fill="#faf7f1" />
-        <!-- Gold Kasavu Temple Diamond Chevron -->
-        <g stroke="#d4af37" stroke-width="2" fill="none">
-          <polyline points="90,180 110,165 130,180 150,165 170,180 190,165 210,180 230,165" />
-          <polyline points="90,195 110,180 130,195 150,180 170,195 190,180 210,195 230,180" />
-        </g>
-        <circle cx="160" cy="115" r="8" fill="#d4af37" />
-      </svg>
-    `,
-
     'chendamangalam-stole': `
       <svg viewBox="0 0 320 320" class="throw-deck-svg" xmlns="http://www.w3.org/2000/svg" aria-label="Chendamangalam Stole Art">
         <rect width="320" height="320" fill="#faf7f1" />
