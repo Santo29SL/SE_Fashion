@@ -186,6 +186,7 @@ select:focus-visible {
 
 .nav-brand:hover .brand-title {
   letter-spacing: 0.03em;
+  background: linear-gradient(
     105deg,
     var(--ink) 0%,
     color-mix(in srgb, var(--brass) 85%, var(--ink)) 50%,
