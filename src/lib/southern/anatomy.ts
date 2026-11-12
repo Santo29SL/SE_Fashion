@@ -43,16 +43,6 @@ export const ANATOMY: AnatomyCallout[] = [
     tag: { x: 1135, y: 220, tilt: -2 },
   },
   {
-    no: "04",
-    part: "Temple border",
-    realm: "tamilnadu",
-    state: "Tamil Nadu",
-    salvaged: "A frayed Kanchipuram sari pallu",
-    remade: "Zari re-couched by a Kanchipuram weaver",
-    dot: { x: 770, y: 545 },
-    tag: { x: 1135, y: 580, tilt: -3 },
-  },
-  {
     no: "03",
     part: "Sleeves",
     realm: "telangana",
@@ -61,6 +51,16 @@ export const ANATOMY: AnatomyCallout[] = [
     remade: "Pieced by the Pochampally cooperative",
     dot: { x: 462, y: 420 },
     tag: { x: 1135, y: 400, tilt: 2 },
+  },
+  {
+    no: "04",
+    part: "Temple border",
+    realm: "tamilnadu",
+    state: "Tamil Nadu",
+    salvaged: "A frayed Kanchipuram sari pallu",
+    remade: "Zari re-couched by a Kanchipuram weaver",
+    dot: { x: 770, y: 545 },
+    tag: { x: 1135, y: 580, tilt: -3 },
   },
   {
     no: "05",
