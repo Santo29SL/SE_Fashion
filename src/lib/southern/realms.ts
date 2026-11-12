@@ -114,7 +114,7 @@ export const heritagePillars: HeritagePillar[] = [
       body: 'Heirloom saris folded away for good, loom-ends swept off shed floors, festival cloth worn once and torn into rags.'
     },
     contemporary: {
-      title: 'Nothing newly spun',
+      title: 'Rescued, then re-cut',
       body: 'Every piece starts as cloth that already exists — bought back, sorted, washed and re-cut by hand.'
     }
   },
