@@ -2796,9 +2796,9 @@ dialog::backdrop {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* tuck under the masthead so the cover's wash runs up behind the signature */
-  margin-top: calc(-1 * var(--masthead-h));
-  padding: calc(var(--masthead-h) + clamp(1rem, 3vh, 2rem)) clamp(1.25rem, 4vw, 3.5rem) 0;
+  /* tuck under the nav + masthead so the cover's wash runs up behind the signature */
+  margin-top: calc(-1 * (var(--header-h) + var(--masthead-h)));
+  padding: calc(var(--header-h) + var(--masthead-h) + clamp(1rem, 3vh, 2rem)) clamp(1.25rem, 4vw, 3.5rem) 0;
   text-align: center;
   background:
     radial-gradient(900px 420px at 15% 10%, rgba(140, 51, 34, 0.06), transparent 60%),
