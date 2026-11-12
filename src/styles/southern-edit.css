@@ -4634,6 +4634,16 @@ dialog::backdrop {
   color: var(--ink);
 }
 
+/* Short laptop screens: the photo shrinks, so the tags tighten up to keep their spacing */
+@media (min-width: 861px) and (max-height: 760px) {
+  .swing-tag-card {
+    padding: calc(var(--hole) + 10px) 0.6rem 0.5rem;
+  }
+  .swing-tag-part {
+    font-size: 0.82rem;
+  }
+}
+
 /* Small screens: numbered dots stay on the photo, tags hang in a row below it */
 @media (max-width: 860px) {
   .hero-cover.hero-anatomy {
