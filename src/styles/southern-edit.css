@@ -4574,7 +4574,7 @@ dialog::backdrop {
 .swing-tag:focus-visible,
 .swing-tag:focus-within {
   z-index: 6;
-  width: clamp(11rem, 24cqi, 13rem);
+  width: clamp(8.5rem, 20cqi, 10rem);
 }
 
 .swing-tag:hover .swing-tag-story,
