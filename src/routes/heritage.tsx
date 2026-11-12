@@ -9,16 +9,16 @@ import { heritagePillars } from "@/lib/southern/realms";
 export const Route = createFileRoute("/heritage")({
   head: () => ({
     meta: [
-      { title: "Heritage & Provenance — The Southern Edit" },
+      { title: "Heritage & Provenance — Salvaged Cloth, Revived Craft | The Southern Edit" },
       {
         name: "description",
         content:
-          "The Southern Edit — Design philosophy and supply chain provenance. Heritage, not costume. Direct looms, living wages.",
+          "How The Southern Edit salvages heirloom saris, loom-ends and shepherd wool and pays the last Dravidian master artisans to revive their craft.",
       },
       { property: "og:title", content: "Heritage & Provenance — The Southern Edit" },
       {
         property: "og:description",
-        content: "Museum-grade Dravidian handloom deconstructed for daily modular wear. 65% net margin funds master weavers.",
+        content: "Lost Dravidian craft revived on salvaged cloth. 65% of net margin funds master weavers.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -27,9 +27,13 @@ export const Route = createFileRoute("/heritage")({
   component: HeritagePage,
 });
 
-const PILLAR_ACCENTS = ["var(--terracotta)", "var(--brass)", "var(--olive)"];
+const PILLAR_ACCENTS = ["var(--indigo)", "var(--terracotta)", "var(--brass)", "var(--olive)"];
 
 const PILLAR_PHOTOS: Record<string, { src: string; alt: string }> = {
+  salvage: {
+    src: "/images/heritage/pillar-salvage.jpg",
+    alt: "Salvaged saris and handloom offcuts folded into bundles, tied with jute and paper tags on a workshop table",
+  },
   origin: {
     src: "/images/heritage/pillar-origin.jpg",
     alt: "Antique maroon temple silk unfolded beside tailor's shears and a collar cut from its border",
@@ -61,9 +65,9 @@ const COSTS = [
 ];
 
 const STATS = [
+  { value: "100%", label: "of our cloth salvaged or surplus" },
   { value: "65%", label: "of net margin to the loom" },
   { value: "0", label: "wholesalers in between" },
-  { value: "6", label: "artisan clusters" },
   { value: "4", label: "Dravidian realms" },
 ];
 
@@ -76,12 +80,12 @@ function HeritagePage() {
   return (
     <div ref={pageRef}>
       <PageCover
-        act="Act II · Design philosophy"
+        act="Act II · The revival"
         meta={`${heritagePillars.length} pillars · ${CLUSTERS.length} clusters`}
-        lines={["Heritage,", "not costume."]}
-        tag="Worn, not displayed."
-        sub="Unstitched ritual garments re-engineered into modular streetwear and timeless tailoring — made with the clusters that kept the craft alive."
-        ribbon={["Deconstruction", "Adaptability", "Fair trade", "Direct looms", "Living wages", "Modular wear"]}
+        lines={["Lost,", "then found."]}
+        tag="Salvaged cloth. Revived hands."
+        sub="The crafts of the four Dravidian states are disappearing one loom at a time. We buy back the cloth they left behind and pay the last masters to make it live again."
+        ribbon={["Salvage", "Revival", "Adaptability", "Fair trade", "Direct looms", "Living wages", "Nothing wasted"]}
       />
 
       <section className="manifesto" id="heritage">
@@ -101,8 +105,9 @@ function HeritagePage() {
         <div className="manifesto-copy">
           <p className="section-eyebrow reveal-on-view">The manifesto</p>
           <p className="manifesto-statement reveal-on-view">
-            Southern culture is not behind velvet rope. We take cloth that was kept for temples and weddings and cut it
-            for <em>everyday life</em> — without losing a single thread of where it came from.
+            A craft dies when no one wears it. We rescue cloth that was kept for temples and weddings — or thrown away —
+            and give it back to the artisans who can revive it for <em>everyday life</em>, without losing a single thread
+            of where it came from.
           </p>
           <dl className="manifesto-stats">
             {STATS.map((stat, i) => (

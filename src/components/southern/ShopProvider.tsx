@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { createContext, type Context, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 import { addAddonToCart, addProductToCart, changeCartQty, parseStoredCart } from "@/lib/southern/cart";
 import { formatPrice, isCurrency, type Currency } from "@/lib/southern/format";
@@ -36,7 +36,15 @@ interface ShopContextValue {
   toggleAudio: () => void;
 }
 
-const ShopContext = createContext<ShopContextValue | null>(null);
+// Keep one context object across hot reloads: when this module (or a data file it imports) is
+// re-evaluated in dev, a fresh createContext() would no longer match the provider already mounted
+// in the root route, and every useShop() call would throw.
+const CONTEXT_KEY = "__southernEditShopContext";
+type ShopContextGlobal = typeof globalThis & {
+  [CONTEXT_KEY]?: Context<ShopContextValue | null>;
+};
+const contextHost = globalThis as ShopContextGlobal;
+const ShopContext = (contextHost[CONTEXT_KEY] ??= createContext<ShopContextValue | null>(null));
 
 export function useShop(): ShopContextValue {
   const ctx = useContext(ShopContext);

@@ -28,7 +28,9 @@ export const realms: Realm[] = [
     accentColor: '#9e3d2a',
     colors: ['#9e3d2a', '#c5a059', '#1b2838', '#d9822b'],
     crafts: ['Kanchipuram Silk GI', 'Bhavani Jamakkalam GI', 'Madras Checks GI', 'Athangudi Tile Art'],
-    artisanNote: 'Partnered with weaver cooperatives across Kanchipuram and Bhavani.'
+    artisanNote: 'Partnered with weaver cooperatives across Kanchipuram and Bhavani.',
+    revivedCraft: 'Toda embroidery, Kandangi checks and Bhavani pit-loom jamakkalam',
+    salvaged: 'Worn Kanchipuram pallus, Chettiar trunk saris and loom-end yardage'
   },
   {
     id: 'kerala',
@@ -49,7 +51,9 @@ export const realms: Realm[] = [
     accentColor: '#d4af37',
     colors: ['#f6f2eb', '#d4af37', '#4f563b'],
     crafts: ['Balaramapuram Handloom GI', 'Kasavu Gold Zari', 'Panchavarna Pigments'],
-    artisanNote: 'Handspun on pit-looms by Travancore handloom societies.'
+    artisanNote: 'Handspun on pit-looms by Travancore handloom societies.',
+    revivedCraft: 'Kuthampully zari and Chendamangalam karai borders',
+    salvaged: 'Festival mundus worn once and flood-washed loom stock'
   },
   {
     id: 'karnataka',
@@ -70,7 +74,9 @@ export const realms: Realm[] = [
     accentColor: '#4a5335',
     colors: ['#4a5335', '#611c28', '#8c6d3b'],
     crafts: ['Mysore Crepe Silk GI', 'Chalukyan Brass Casting', 'Selvedge Denim'],
-    artisanNote: 'Silk from certified filatures in Mysore and Ramanagara.'
+    artisanNote: 'Silk from certified filatures in Mysore and Ramanagara.',
+    revivedCraft: 'Deccani Kambli wool and Kasuti hand embroidery',
+    salvaged: 'Retired shepherd blankets, Ilkal saris and crepe silk seconds'
   },
   {
     id: 'telangana',
@@ -91,28 +97,44 @@ export const realms: Realm[] = [
     accentColor: '#7d251a',
     colors: ['#1b2838', '#7d251a', '#e8dcc4'],
     crafts: ['Pochampally Double Ikat GI', 'Srikalahasti Pen Kalamkari GI', 'Pedana Block Print'],
-    artisanNote: 'Vegetable dyes and river-wash drying with certified clusters.'
+    artisanNote: 'Vegetable dyes and river-wash drying with certified clusters.',
+    revivedCraft: 'Pen-drawn kalamkari and Narayanpet small-check weaving',
+    salvaged: 'Retired temple hangings, ikat cut-pieces and torn wedding silks'
   }
 ];
 
 export const heritagePillars: HeritagePillar[] = [
   {
-    id: 'origin',
+    id: 'salvage',
     index: '01',
-    label: 'Archival origin',
-    badge: 'Deconstruction',
+    label: 'Salvaged material',
+    badge: 'Salvage',
     traditional: {
-      title: 'Ritual past',
-      body: 'Temple rugs and ceremonial wedding silks reserved for sacred halls.'
+      title: 'Cloth left behind',
+      body: 'Heirloom saris folded away for good, loom-ends swept off shed floors, festival cloth worn once and torn into rags.'
     },
     contemporary: {
-      title: 'Everyday form',
-      body: 'Rebuilt as totes, selvedge denim with silk gussets, and modular neckwear.'
+      title: 'Cloth rescued and re-cut',
+      body: 'Every piece starts as cloth that already exists — bought back, sorted, washed and re-cut by hand.'
+    }
+  },
+  {
+    id: 'origin',
+    index: '02',
+    label: 'Revived craft',
+    badge: 'Revival',
+    traditional: {
+      title: 'Fading hands',
+      body: 'Crafts kept for temples and weddings, with fewer young weavers taking them up every year.'
+    },
+    contemporary: {
+      title: 'Commissioned masters',
+      body: 'Master weavers, embroiderers and metalsmiths commissioned to repair, rework and teach — rebuilt as everyday clothing.'
     }
   },
   {
     id: 'modular',
-    index: '02',
+    index: '03',
     label: 'Modular versatility',
     badge: 'Adaptability',
     traditional: {
@@ -126,7 +148,7 @@ export const heritagePillars: HeritagePillar[] = [
   },
   {
     id: 'value',
-    index: '03',
+    index: '04',
     label: 'Direct artisan value',
     badge: 'Fair trade',
     traditional: {

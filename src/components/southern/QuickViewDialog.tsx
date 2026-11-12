@@ -157,6 +157,10 @@ export function QuickViewDialog() {
               <span className="product-price-current">{price(prod.price)}</span>
               <span className="product-price-original">{price(prod.originalPrice)}</span>
             </div>
+            <p className="dialog-salvage">
+              <span>Remade from salvaged cloth</span>
+              {prod.salvagedFrom}
+            </p>
             <p className="dialog-copy">{prod.description}</p>
             <blockquote className="craft-story">{prod.craftStory}</blockquote>
             {prod.stylingModes.length > 0 && (
