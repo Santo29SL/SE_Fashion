@@ -25,6 +25,7 @@
   --kraft-ink: #3a2a1a;
   --thread: #f3ead8;
   --header-h: 4.25rem;
+  --masthead-h: clamp(6.25rem, 14vh, 8.5rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -128,40 +129,13 @@ select:focus-visible {
 
 .nav-container {
   height: 100%;
-  max-width: 1440px;
+  max-width: calc(1400px + 2 * clamp(1.25rem, 4vw, 3.5rem));
   margin-inline: auto;
-  padding-inline: clamp(1rem, 3vw, 2.5rem);
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  flex: none;
-  gap: 0.7rem;
-}
-
-/* ── Logo mark – small brass square with glow ───────────────────────────── */
-.logo-mark {
-  width: 13px;
-  height: 13px;
-  border: 1.5px solid var(--brass);
-  background: transparent;
-  position: relative;
-  flex-shrink: 0;
-  box-shadow:
-    0 0 6px 1px color-mix(in srgb, var(--brass) 55%, transparent),
-    inset 0 0 4px 0 color-mix(in srgb, var(--brass) 25%, transparent);
-  transition: box-shadow 0.3s var(--ease);
-}
-
-.nav-brand:hover .logo-mark {
-  box-shadow:
-    0 0 10px 2px color-mix(in srgb, var(--brass) 70%, transparent),
-    inset 0 0 6px 0 color-mix(in srgb, var(--brass) 40%, transparent);
 }
 
 /* ── Brand wordmark – two-line cursive signature: "The" / "Southern Edit." ── */
@@ -207,13 +181,48 @@ select:focus-visible {
   background-clip: text;
 }
 
-/* Phones: the signature shrinks to fit the header bar */
+/* Masthead under the fixed nav: big signature aligned with the page grid */
+.masthead {
+  position: relative;
+  z-index: 2;
+  padding: var(--header-h) clamp(1.25rem, 4vw, 3.5rem) 0;
+}
+
+.masthead-inner {
+  max-width: 1400px;
+  height: var(--masthead-h);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Home only: a hairline under the signature; inner pages open with their own ruled kicker */
+.masthead.is-ruled .masthead-inner {
+  border-bottom: 1px solid var(--line);
+}
+
+.masthead-brand {
+  display: inline-flex;
+}
+
+.masthead .brand-title {
+  font-size: calc(var(--masthead-h) * 0.5);
+  line-height: 0.86;
+  padding: 0.12em 0.1em 0.06em 0;
+}
+
+.masthead-brand:hover .brand-title {
+  letter-spacing: 0.012em;
+}
+
+/* With no logo in the bar, the actions keep to the right */
+.nav-actions {
+  margin-left: auto;
+}
+
 @media (max-width: 860px) {
-  .nav-brand {
-    gap: 0.5rem;
-  }
-  .brand-title {
-    font-size: 1.4rem;
+  :root {
+    --masthead-h: 5.5rem;
   }
   .cart-btn {
     white-space: nowrap;
@@ -325,7 +334,7 @@ select:focus-visible {
 
 .intro-section {
   min-height: 100svh;
-  padding: calc(var(--header-h) + 3rem) clamp(1.25rem, 4vw, 4rem) 4rem;
+  padding: 3rem clamp(1.25rem, 4vw, 4rem) 4rem;
   display: grid;
   align-content: center;
   position: relative;
@@ -481,7 +490,7 @@ select:focus-visible {
   align-items: center;
   height: 100svh;
   min-height: 0;
-  padding: calc(var(--header-h) + clamp(0.5rem, 1.5vh, 1.5rem)) clamp(1.25rem, 4vw, 3.5rem) 0;
+  padding: clamp(0.5rem, 1.5vh, 1.5rem) clamp(1.25rem, 4vw, 3.5rem) 0;
   background: var(--bg);
   text-align: center;
   overflow: hidden;
@@ -2588,7 +2597,7 @@ dialog::backdrop {
 
 /* Sub-page headers */
 .subpage-hero {
-  padding-top: calc(var(--header-h) + 2.5rem);
+  padding-top: 2.5rem;
   padding-bottom: 2rem;
   text-align: center;
   max-width: 840px;
@@ -2787,7 +2796,9 @@ dialog::backdrop {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: calc(var(--header-h) + clamp(1rem, 3vh, 2rem)) clamp(1.25rem, 4vw, 3.5rem) 0;
+  /* tuck under the nav + masthead so the cover's wash runs up behind the signature */
+  margin-top: calc(-1 * (var(--header-h) + var(--masthead-h)));
+  padding: calc(var(--header-h) + var(--masthead-h) + clamp(1rem, 3vh, 2rem)) clamp(1.25rem, 4vw, 3.5rem) 0;
   text-align: center;
   background:
     radial-gradient(900px 420px at 15% 10%, rgba(140, 51, 34, 0.06), transparent 60%),
@@ -3815,8 +3826,7 @@ dialog::backdrop {
   margin-bottom: 0;
 }
 
-/* The mission heading sits on a kraft plate: hairline brass frame, chamfered
-   corners and a ghosted script word behind the type */
+/* The mission heading sits on a kraft plate: hairline brass frame, chamfered corners */
 .revival-section .chapter-head {
   position: relative;
   isolation: isolate;
@@ -3859,22 +3869,6 @@ dialog::backdrop {
     0 26px
   );
   box-shadow: 0 24px 60px -32px rgba(28, 25, 20, 0.45);
-}
-
-.revival-section .chapter-head::after {
-  content: "revive";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  font-family: var(--font-script);
-  font-size: clamp(6rem, 20vw, 15rem);
-  line-height: 1;
-  color: color-mix(in srgb, var(--terracotta) 8%, transparent);
-  pointer-events: none;
-  user-select: none;
 }
 
 .revival-steps {
@@ -4409,8 +4403,8 @@ dialog::backdrop {
    salvaged cloth with where it came from and who remade it
    -------------------------------------------------------------------------- */
 .hero-cover.hero-anatomy {
-  height: 100svh;
-  min-height: 36rem;
+  height: calc(100svh - var(--header-h) - var(--masthead-h));
+  min-height: 32rem;
   align-items: stretch;
   text-align: left;
 }
