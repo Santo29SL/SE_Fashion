@@ -371,14 +371,16 @@ function HeroAnatomy() {
         {/* Strings sit above the tags so each one visibly threads into its hole */}
         <svg className="anatomy-strings" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
           {ANATOMY.map((c, i) => {
-            const midX = (c.dot.x + c.tag.x) / 2;
-            const sagY = Math.max(c.dot.y, c.tag.y) + 70;
+            // Leave the hole sideways so the thread only crosses the tag's top band.
+            const dir = Math.sign(c.dot.x - c.tag.x);
+            const c1 = `${c.dot.x + (c.tag.x - c.dot.x) * 0.35},${c.dot.y + 70}`;
+            const c2 = `${c.tag.x + dir * 170},${c.tag.y}`;
             return (
               <path
                 key={c.no}
                 className="anatomy-string"
                 style={{ "--i": i } as CSSProperties}
-                d={`M${c.dot.x},${c.dot.y} Q${midX},${sagY} ${c.tag.x},${c.tag.y}`}
+                d={`M${c.dot.x},${c.dot.y} C${c1} ${c2} ${c.tag.x},${c.tag.y}`}
               />
             );
           })}

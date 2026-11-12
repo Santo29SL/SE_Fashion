@@ -4367,7 +4367,7 @@ dialog::backdrop {
 
 .anatomy-dot {
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   display: grid;
   place-items: center;
   width: 1.45rem;
@@ -4463,6 +4463,7 @@ dialog::backdrop {
     ),
     linear-gradient(170deg, var(--kraft) 0%, var(--kraft-deep) 100%);
   color: var(--kraft-ink);
+  text-align: left;
   clip-path: polygon(22px 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%, 0 22px);
   -webkit-mask: radial-gradient(circle at 50% var(--hole), transparent 5px, #000 5.5px);
   mask: radial-gradient(circle at 50% var(--hole), transparent 5px, #000 5.5px);
@@ -4519,8 +4520,9 @@ dialog::backdrop {
   gap: 0.4rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px dashed rgba(58, 42, 26, 0.35);
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-align: right;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--accent);
@@ -4528,8 +4530,13 @@ dialog::backdrop {
 }
 
 .swing-tag-stamp span {
+  flex: none;
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--kraft-ink);
-  letter-spacing: 0.12em;
 }
 
 .swing-tag-part {
