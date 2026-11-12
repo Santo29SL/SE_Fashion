@@ -140,6 +140,7 @@ select:focus-visible {
 .nav-brand {
   display: flex;
   align-items: center;
+  flex: none;
   gap: 0.7rem;
 }
 
@@ -168,6 +169,7 @@ select:focus-visible {
   font-family: var(--font-script);
   font-size: clamp(1.6rem, 2.3vw, 2.2rem);
   line-height: 1.18;
+  white-space: nowrap;
   letter-spacing: 0.015em;
   text-transform: none;
   color: var(--ink);
