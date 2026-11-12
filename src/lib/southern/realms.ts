@@ -105,22 +105,36 @@ export const realms: Realm[] = [
 
 export const heritagePillars: HeritagePillar[] = [
   {
-    id: 'origin',
+    id: 'salvage',
     index: '01',
-    label: 'Archival origin',
-    badge: 'Deconstruction',
+    label: 'Salvaged material',
+    badge: 'Salvage',
     traditional: {
-      title: 'Ritual past',
-      body: 'Temple rugs and ceremonial wedding silks reserved for sacred halls.'
+      title: 'Cloth left behind',
+      body: 'Heirloom saris folded away for good, loom-ends swept off shed floors, festival cloth worn once and torn into rags.'
     },
     contemporary: {
-      title: 'Everyday form',
-      body: 'Rebuilt as totes, selvedge denim with silk gussets, and modular neckwear.'
+      title: 'Nothing newly spun',
+      body: 'Every piece starts as cloth that already exists — bought back, sorted, washed and re-cut by hand.'
+    }
+  },
+  {
+    id: 'origin',
+    index: '02',
+    label: 'Revived craft',
+    badge: 'Revival',
+    traditional: {
+      title: 'Fading hands',
+      body: 'Crafts kept for temples and weddings, with fewer young weavers taking them up every year.'
+    },
+    contemporary: {
+      title: 'Paid to continue',
+      body: 'Master weavers, embroiderers and metalsmiths commissioned to repair, rework and teach — rebuilt as everyday clothing.'
     }
   },
   {
     id: 'modular',
-    index: '02',
+    index: '03',
     label: 'Modular versatility',
     badge: 'Adaptability',
     traditional: {
@@ -134,7 +148,7 @@ export const heritagePillars: HeritagePillar[] = [
   },
   {
     id: 'value',
-    index: '03',
+    index: '04',
     label: 'Direct artisan value',
     badge: 'Fair trade',
     traditional: {
