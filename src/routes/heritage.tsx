@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, type CSSProperties } from "react";
 
-import heritageCulture from "@/assets/heritage-culture.webp.asset.json";
 import { PageCover, TypePlate } from "@/components/southern/Editorial";
 import { useRevealOnView } from "@/components/southern/useRevealOnView";
 import { heritagePillars } from "@/lib/southern/realms";
@@ -91,7 +90,7 @@ function HeritagePage() {
         <figure className="manifesto-figure reveal-on-view">
           <div className="realm-photo">
             <img
-              src={heritageCulture.url}
+              src="/images/heritage/heritagemain.png"
               alt="Flower seller stringing jasmine beside a carved temple sculpture — culture meeting the contemporary"
               loading="lazy"
             />
