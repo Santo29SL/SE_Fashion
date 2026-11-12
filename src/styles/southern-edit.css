@@ -4450,7 +4450,7 @@ dialog::backdrop {
   z-index: 3;
   left: var(--x);
   top: var(--y);
-  width: clamp(7rem, 16cqi, 9.5rem);
+  width: clamp(7.5rem, 18cqi, 10rem);
   translate: -50% calc(var(--hole) * -1);
   cursor: pointer;
   outline: none;
@@ -4576,7 +4576,7 @@ dialog::backdrop {
 .swing-tag:focus-visible,
 .swing-tag:focus-within {
   z-index: 6;
-  width: clamp(8.5rem, 20cqi, 10rem);
+  width: clamp(9rem, 20cqi, 10.5rem);
 }
 
 .swing-tag:hover .swing-tag-story,

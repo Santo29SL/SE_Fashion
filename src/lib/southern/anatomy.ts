@@ -30,7 +30,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "A kasavu mundu worn once at Onam",
     remade: "Hand-felled by kora weavers, Balaramapuram",
     dot: { x: 618, y: 205 },
-    tag: { x: 1140, y: 30, tilt: 3 },
+    tag: { x: 1130, y: 30, tilt: 3 },
   },
   {
     no: "02",
@@ -40,7 +40,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "A torn Dharmavaram wedding silk",
     remade: "Darned and re-cut in Dharmavaram",
     dot: { x: 560, y: 380 },
-    tag: { x: 1140, y: 215, tilt: -2 },
+    tag: { x: 1130, y: 215, tilt: -2 },
   },
   {
     no: "03",
@@ -50,7 +50,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "Pochampally ikat swept off loom floors",
     remade: "Pieced by the Pochampally cooperative",
     dot: { x: 462, y: 420 },
-    tag: { x: 1140, y: 400, tilt: 2 },
+    tag: { x: 1130, y: 400, tilt: 2 },
   },
   {
     no: "04",
@@ -60,7 +60,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "A frayed Kanchipuram sari pallu",
     remade: "Zari re-couched by a Kanchipuram weaver",
     dot: { x: 770, y: 545 },
-    tag: { x: 1140, y: 585, tilt: -3 },
+    tag: { x: 1130, y: 585, tilt: -3 },
   },
   {
     no: "05",
@@ -70,6 +70,6 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "Ilkal sari seconds that failed the loom check",
     remade: "Washed and tailored in Gadag",
     dot: { x: 712, y: 790 },
-    tag: { x: 1140, y: 770, tilt: 3 },
+    tag: { x: 1130, y: 770, tilt: 3 },
   },
 ];
