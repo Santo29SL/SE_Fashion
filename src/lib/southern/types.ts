@@ -21,9 +21,6 @@ export type SeasonId = "summer" | "fall" | "winter" | "spring" | "international"
 export interface SeasonCollection {
   id: SeasonId;
   name: string;
-  /** Classical Tamil season name (the year has six "perum pozhudhu"). */
-  native: string;
-  nativeLatin: string;
   months: string;
   monthsShort: string;
   tagline: string;
@@ -121,7 +118,6 @@ export interface JournalPost {
   /** Realm the essay belongs to — drives its accent colour. */
   realmId: string;
   /** The craft word in its native script, set large on the typographic plate. */
-  native: string;
   readTime: string;
   pullQuote: string;
   kicker: string;

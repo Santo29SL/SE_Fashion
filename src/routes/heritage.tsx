@@ -80,7 +80,6 @@ function HeritagePage() {
   return (
     <div ref={pageRef}>
       <PageCover
-        act="Act II · The revival"
         meta={`${heritagePillars.length} pillars · ${CLUSTERS.length} clusters`}
         lines={["Lost,", "then found."]}
         tag="Salvaged cloth. Revived hands."
@@ -175,7 +174,7 @@ function HeritagePage() {
 
       <section className="provenance-section" id="provenance">
         <header className="chapter-head reveal-on-view">
-          <p className="section-eyebrow">Act V · Supply chain transparency</p>
+          <p className="section-eyebrow">Supply chain transparency</p>
           <h2 className="section-title">Direct looms, living wages</h2>
           <p className="section-subtitle">
             No multi-tier wholesalers. Museum-grade handloom in daily wear, with generational weavers paid as authors

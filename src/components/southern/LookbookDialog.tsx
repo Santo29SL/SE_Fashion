@@ -71,11 +71,11 @@ export function LookbookDialog() {
         className="lookbook-deck-header"
         style={realm ? ({ "--realm-accent": realm.accentColor } as CSSProperties) : undefined}
       >
-        {realm?.moodboard ? (
-          <img className="lookbook-deck-underlay" src={realm.moodboard} alt="" aria-hidden="true" />
+        {realm?.photo ? (
+          <img className="lookbook-deck-underlay" src={realm.photo} alt="" aria-hidden="true" />
         ) : null}
         <div className="lookbook-deck-meta">
-          <span>{realm ? `${realm.native} · Lookbook` : "Lookbook"}</span>
+          <span>{realm ? `${realm.name} · Lookbook` : "Lookbook"}</span>
           <button type="button" className="lookbook-deck-close" aria-label="Close lookbook" onClick={closeLookbook}>
             ✕
           </button>

@@ -5,8 +5,6 @@ export const seasons: SeasonCollection[] = [
   {
     id: "summer",
     name: "Summer",
-    native: "முதுவேனில்",
-    nativeLatin: "Mudhuvenil",
     months: "April – June",
     monthsShort: "Apr – Jun",
     tagline: "Cloth that breathes.",
@@ -21,8 +19,6 @@ export const seasons: SeasonCollection[] = [
   {
     id: "fall",
     name: "Fall",
-    native: "கூதிர்",
-    nativeLatin: "Koothir",
     months: "September – November",
     monthsShort: "Sep – Nov",
     tagline: "Gold for the festival season.",
@@ -37,8 +33,6 @@ export const seasons: SeasonCollection[] = [
   {
     id: "winter",
     name: "Winter",
-    native: "முன்பனி",
-    nativeLatin: "Munpani",
     months: "December – February",
     monthsShort: "Dec – Feb",
     tagline: "Weight for the hills.",
@@ -53,8 +47,6 @@ export const seasons: SeasonCollection[] = [
   {
     id: "spring",
     name: "Spring",
-    native: "இளவேனில்",
-    nativeLatin: "Ilavenil",
     months: "February – April",
     monthsShort: "Feb – Apr",
     tagline: "First colour of the year.",
@@ -69,8 +61,6 @@ export const seasons: SeasonCollection[] = [
   {
     id: "international",
     name: "International",
-    native: "உலகம்",
-    nativeLatin: "Ulagam · Contemporary",
     months: "All year · Worldwide",
     monthsShort: "Worldwide",
     tagline: "The South, worn anywhere.",

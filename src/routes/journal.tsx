@@ -36,12 +36,11 @@ function JournalPage() {
   return (
     <>
       <PageCover
-        act="Act III · The Journal"
         meta={`${journalPosts.length} essays · ${journalPosts.length} languages`}
         lines={["Stories the cloth", "still tells."]}
         tag="Read the weave before it's gone."
         sub="Essays on the fading crafts of the four realms — who still makes them, what we salvage, and the pieces that keep them alive."
-        ribbon={craftGlossary.map((g) => `${g.term} · ${g.native}`)}
+        ribbon={craftGlossary.map((g) => g.term)}
       />
 
       <section className="journal-section" id="journal" ref={pageRef}>
@@ -59,7 +58,7 @@ function JournalPage() {
               >
                 <TypePlate
                   numeral={no}
-                  word={post.native}
+                  word={post.kicker}
                   caption={post.kicker}
                   accent={realm?.accentColor}
                   image={post.image || undefined}
@@ -108,9 +107,6 @@ function JournalPage() {
           <dl className="glossary-grid">
             {craftGlossary.map((g, i) => (
               <div className="glossary-item reveal-on-view" key={g.term} style={{ "--d": i % 3 } as CSSProperties}>
-                <span className="glossary-native" aria-hidden="true">
-                  {g.native}
-                </span>
                 <dt>{g.term}</dt>
                 <dd>{g.meaning}</dd>
               </div>

@@ -33,7 +33,6 @@ export function Ribbon({ items }: { items: string[] }) {
 }
 
 interface PageCoverProps {
-  act: string;
   meta: string;
   lines: string[];
   tag: string;
@@ -43,11 +42,10 @@ interface PageCoverProps {
 }
 
 /** Magazine-cover opener shared by Shop, Journal and Heritage — the same voice as the Realms hero. */
-export function PageCover({ act, meta, lines, tag, sub, ribbon, children }: PageCoverProps) {
+export function PageCover({ meta, lines, tag, sub, ribbon, children }: PageCoverProps) {
   return (
     <section className="page-cover">
       <div className="page-cover-meta reveal">
-        <span>{act}</span>
         <span>{meta}</span>
       </div>
       <h1 className="page-cover-title">

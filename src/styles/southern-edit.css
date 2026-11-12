@@ -3340,14 +3340,6 @@ dialog::backdrop {
   overflow: hidden;
 }
 
-.glossary-native {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.15rem;
-  line-height: 1.2;
-  color: var(--brass);
-}
-
 .glossary-item dt {
   font-family: var(--font-serif);
   font-size: 1.5rem;
@@ -3799,12 +3791,6 @@ dialog::backdrop {
   color: var(--terracotta);
 }
 
-.revival-step-native {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  color: var(--brass);
-}
-
 .revival-step-verb {
   font-family: var(--font-serif);
   font-size: clamp(2.6rem, 5vw, 4rem);
@@ -4076,18 +4062,6 @@ dialog::backdrop {
   inset: 0;
   background: linear-gradient(to top, rgba(20, 18, 16, 0.55), transparent 45%);
   pointer-events: none;
-}
-
-.season-cover-native {
-  position: absolute;
-  left: clamp(1rem, 2.5vw, 1.75rem);
-  bottom: clamp(0.85rem, 2vw, 1.5rem);
-  z-index: 1;
-  font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 4vw, 3.25rem);
-  line-height: 1;
-  color: var(--paper);
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 
 .season-cover .realm-caption > span:first-child,

@@ -50,21 +50,18 @@ const REVIVAL_STEPS = [
   {
     no: "01",
     verb: "Salvage",
-    native: "மீட்பு",
     title: "We find the cloth the South left behind.",
     body: "Heirloom saris folded away for good, loom-ends swept off shed floors, shepherd blankets past their years, temple hangings retired after festivals.",
   },
   {
     no: "02",
     verb: "Revive",
-    native: "புத்துயிர்",
     title: "The last hands that know the craft rework it.",
     body: "Master weavers, Kasuti and Toda embroiderers, block carvers and bell-metal casters are paid to repair, re-weave and teach — keeping each craft alive another generation.",
   },
   {
     no: "03",
     verb: "Re-wear",
-    native: "மறுபயன்",
     title: "It comes back as clothing you'll keep for decades.",
     body: "Cut into modular pieces for every season of the year — so the craft is worn on the street, not locked behind museum glass.",
   },
@@ -150,7 +147,6 @@ function RealmsPage() {
             <li className="revival-step reveal-on-view" key={step.no} style={{ "--d": i } as CSSProperties}>
               <div className="revival-step-head">
                 <span className="revival-step-no">{step.no}</span>
-                <span className="revival-step-native">{step.native}</span>
               </div>
               <p className="revival-step-verb">{step.verb}</p>
               <h3 className="revival-step-title">{step.title}</h3>
@@ -242,7 +238,7 @@ function RealmsPage() {
                     </Link>
                     <button type="button" className="realm-lookbook-btn" onClick={() => openLookbook(realm.id)}>
                       <span className="realm-lookbook-thumb" aria-hidden="true">
-                        <img src={realm.moodboard} alt="" loading="lazy" />
+                        <img src={realm.photo} alt="" loading="lazy" />
                       </span>
                       <span className="realm-lookbook-text">
                         <strong>Open the lookbook</strong>

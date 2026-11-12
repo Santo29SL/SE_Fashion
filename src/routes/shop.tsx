@@ -52,7 +52,7 @@ const AUDIENCES: { id: ProductAudience | "all"; label: string }[] = [
 ];
 
 const COVER_RIBBON = [
-  ...seasons.map((s) => `${s.name} · ${s.native}`),
+  ...seasons.map((s) => s.name),
   "Salvaged saris",
   "Rescued loom-ends",
   "Retired shepherd wool",
@@ -101,7 +101,6 @@ function ShopPage() {
   return (
     <>
       <PageCover
-        act="Act IV · The Seasons"
         meta={`${products.length} pieces · ${seasons.length} collections`}
         lines={["Five", "Seasons."]}
         tag="Salvaged, revived, worn by the calendar."
@@ -120,7 +119,7 @@ function ShopPage() {
             <span className="season-index-no">00</span>
             <span className="season-index-name">The whole year</span>
             <span className="season-index-native">
-              ஆண்டு <sup>{products.length}</sup>
+              <sup>{products.length}</sup>
             </span>
           </button>
           {seasons.map((s) => (
@@ -137,7 +136,7 @@ function ShopPage() {
               </span>
               <span className="season-index-name">{s.name}</span>
               <span className="season-index-native">
-                {s.native} <sup>{products.filter((p) => p.season === s.id).length}</sup>
+                <sup>{products.filter((p) => p.season === s.id).length}</sup>
               </span>
             </button>
           ))}
@@ -220,7 +219,7 @@ function ShopPage() {
             <button type="button" className="season-next-btn" onClick={() => pickSeason(nextSeason.id)}>
               <span>Next collection</span>
               <strong>
-                {nextSeason.name} <em>{nextSeason.native}</em> →
+                {nextSeason.name} →
               </strong>
             </button>
             <button type="button" className="btn-ghost" onClick={() => pickSeason("all")}>
@@ -276,13 +275,10 @@ function SeasonChapter({
         <figure className="season-cover">
           <div className="season-cover-photo">
             <img src={season.image} alt={season.imageAlt} width={1536} height={1024} loading="lazy" />
-            <span className="season-cover-native" aria-hidden="true">
-              {season.native}
-            </span>
           </div>
           <figcaption className="realm-caption">
             <span>Fig. S{no}</span>
-            <span>{season.nativeLatin}</span>
+            <span>{season.name}</span>
           </figcaption>
         </figure>
 
