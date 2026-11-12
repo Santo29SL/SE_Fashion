@@ -3731,3 +3731,536 @@ dialog::backdrop {
     transition: none;
   }
 }
+
+
+/* ==========================================================================
+   Revival + seasons — the mission (lost craft × salvaged cloth) and the
+   season-collection shop. Same hairline / uppercase-serif voice as Realms.
+   ========================================================================== */
+
+/* ---------- Home: the revival ---------- */
+.revival-section {
+  padding-block: clamp(4rem, 9vw, 7.5rem) clamp(3rem, 6vw, 5rem);
+  background:
+    radial-gradient(900px 420px at 85% 0%, rgba(184, 145, 63, 0.08), transparent 60%),
+    var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+.revival-section .section-title em {
+  font-style: italic;
+  text-transform: none;
+  color: var(--terracotta);
+  letter-spacing: -0.02em;
+}
+
+.revival-steps {
+  width: min(100% - 2 * clamp(1.25rem, 4vw, 3rem), 1400px);
+  margin: 0 auto;
+  list-style: none;
+  display: grid;
+  border-top: 1px solid var(--ink);
+}
+
+@media (min-width: 880px) {
+  .revival-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.revival-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(0rem, 2vw, 2rem) clamp(1.75rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 880px) {
+  .revival-step + .revival-step {
+    border-left: 1px solid var(--line);
+  }
+  .revival-step:first-child {
+    padding-left: 0;
+  }
+}
+
+.revival-step-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.revival-step-no {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--terracotta);
+}
+
+.revival-step-native {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--brass);
+}
+
+.revival-step-verb {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.revival-step-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.3;
+  color: var(--terracotta);
+}
+
+.revival-step-body {
+  color: var(--ink-soft);
+  line-height: 1.65;
+  max-width: 28rem;
+}
+
+.lost-crafts {
+  width: min(100% - 2 * clamp(1.25rem, 4vw, 3rem), 1400px);
+  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+
+.lost-crafts-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.lost-crafts-title .hero-spark {
+  position: static;
+  width: 0.8rem;
+  height: 0.8rem;
+  color: var(--brass);
+  margin: 0;
+}
+
+.lost-crafts-list {
+  width: 100%;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  border-top: 1px solid var(--line);
+}
+
+.lost-crafts-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.85rem 1rem 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.lost-crafts-list strong {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.lost-crafts-list span {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--ink-faint);
+}
+
+.realm-detail-row dd {
+  line-height: 1.5;
+}
+
+/* ---------- Shop: season index ---------- */
+.season-index {
+  width: min(100% - 2 * clamp(1.25rem, 4vw, 3rem), 1440px);
+  margin: 0 auto 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--ink);
+}
+
+@media (min-width: 720px) {
+  .season-index {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .season-index {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.season-index-item {
+  --season-accent: var(--ink);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 1.1rem 1rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  color: var(--ink-soft);
+  overflow: hidden;
+  transition: background 0.35s var(--ease), color 0.35s var(--ease);
+}
+
+.season-index-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--season-accent);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+}
+
+.season-index-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: var(--season-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+
+.season-index-item > * {
+  position: relative;
+}
+
+.season-index-item:hover {
+  background: var(--bg-card);
+  color: var(--ink);
+}
+
+.season-index-item:hover::after,
+.season-index-item.active::after {
+  transform: scaleX(1);
+}
+
+.season-index-item.active {
+  color: var(--ink);
+}
+
+.season-index-item.active::before {
+  opacity: 0.08;
+}
+
+.season-index-no {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--season-accent);
+}
+
+.season-index-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.season-index-native {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--ink-faint);
+}
+
+.season-index-native sup {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  margin-left: 0.2rem;
+  color: var(--ink-soft);
+}
+
+.season-index-item:focus-visible {
+  outline: 2px solid var(--season-accent);
+  outline-offset: -2px;
+}
+
+.season-shop .catalog-toolbar-end {
+  flex-wrap: wrap;
+}
+
+/* ---------- Shop: season chapter ---------- */
+.season-chapter {
+  --season-accent: var(--terracotta);
+  width: min(100% - 2 * clamp(1.25rem, 4vw, 3rem), 1440px);
+  margin: 0 auto;
+  padding-block: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 2vw, 1.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.season-chapter:first-of-type {
+  border-top: 0;
+  padding-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.season-head {
+  display: grid;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: stretch;
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+@media (min-width: 960px) {
+  .season-head {
+    grid-template-columns: 1.35fr 1fr;
+  }
+  .season-chapter.is-flipped .season-cover {
+    order: 2;
+  }
+}
+
+.season-cover {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.season-cover-photo {
+  position: relative;
+  flex: 1;
+  min-height: clamp(260px, 36vw, 520px);
+  overflow: hidden;
+  background: var(--bg-deep);
+}
+
+.season-cover-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 1.8s var(--ease);
+}
+
+.season-head.in-view .season-cover-photo img {
+  transform: scale(1);
+}
+
+.season-cover-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 18, 16, 0.55), transparent 45%);
+  pointer-events: none;
+}
+
+.season-cover-native {
+  position: absolute;
+  left: clamp(1rem, 2.5vw, 1.75rem);
+  bottom: clamp(0.85rem, 2vw, 1.5rem);
+  z-index: 1;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 3.25rem);
+  line-height: 1;
+  color: var(--paper);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+.season-cover .realm-caption > span:first-child,
+.season-copy .realm-meta > span:first-child {
+  color: var(--season-accent);
+}
+
+.season-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.8rem, 1.8vh, 1.2rem);
+}
+
+.season-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+}
+
+.season-copy .realm-tagline {
+  color: var(--season-accent);
+}
+
+.season-copy-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  padding-top: 0.25rem;
+}
+
+.season-count {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.season-only-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.15rem;
+  border: 1px solid var(--ink);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.season-only-btn span {
+  transition: transform 0.3s var(--ease);
+}
+
+.season-only-btn:hover {
+  background: var(--ink);
+  color: var(--light);
+}
+
+.season-only-btn:hover span {
+  transform: translateX(4px);
+}
+
+.season-chapter .products-grid {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.season-empty {
+  width: min(100% - 2 * clamp(1.25rem, 4vw, 3rem), 1440px);
+  margin: 2rem auto;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.season-reset {
+  margin-left: 0.5rem;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  color: var(--terracotta);
+}
+
+.season-next {
+  width: min(100% - 2 * clamp(1.25rem, 4vw, 3rem), 1440px);
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ink);
+}
+
+.season-next-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  text-align: left;
+  color: var(--ink);
+}
+
+.season-next-btn span {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.season-next-btn strong {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.season-next-btn em {
+  font-size: 0.55em;
+  text-transform: none;
+  color: var(--brass);
+}
+
+.season-next-btn:hover strong {
+  color: var(--terracotta);
+}
+
+/* Product "remade from" line — card + quick view */
+.product-salvage,
+.dialog-salvage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 0.7rem;
+  border-left: 2px solid var(--realm-accent, var(--brass));
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.product-salvage span,
+.dialog-salvage span {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+
+.dialog-salvage {
+  margin-block: 0.75rem;
+  font-size: 0.95rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .season-cover-photo img {
+    transform: none;
+    transition: none;
+  }
+}

@@ -107,8 +107,8 @@ function SiteFooter({ variant }: { variant: "home" | "default" }) {
         <div>
           <p className="brand-title footer-brand">The Southern Edit</p>
           <p className="footer-manifesto">
-            Lost Dravidian craft, revived on salvaged cloth. Nothing newly spun for us — only rescued, reworked and worn
-            again.
+            Lost Dravidian craft, revived on salvaged cloth. Every piece begins as cloth that already exists — rescued,
+            reworked and worn again.
           </p>
         </div>
         <div>
