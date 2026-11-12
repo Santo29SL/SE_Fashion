@@ -103,7 +103,7 @@ function RealmsPage() {
             <h1 className="hero-cover-title">
               <span className="hero-cover-line reveal d1">Rooted in the South.</span>
               <span className="hero-cover-line hero-anatomy-accent reveal d2">
-                Worn in the now.
+                Worn in the Now.
                 <Spark />
               </span>
             </h1>
