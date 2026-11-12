@@ -104,9 +104,9 @@ function RealmsPage() {
               Tamil Nadu · Kerala · Karnataka · Andhra &amp; Telangana
             </p>
             <h1 className="hero-cover-title">
-              <span className="hero-cover-line reveal d1">Lost craft.</span>
+              <span className="hero-cover-line reveal d1">Rooted in</span>
               <span className="hero-cover-line hero-anatomy-accent reveal d2">
-                Salvaged. Reborn.
+                the South.
                 <Spark />
               </span>
             </h1>
