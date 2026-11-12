@@ -39,7 +39,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "A torn Dharmavaram wedding silk from a family trunk",
     remade: "Darned, steamed and re-cut into panels in Dharmavaram",
     dot: { x: 560, y: 380 },
-    label: { x: 360, y: 320, side: "left" },
+    label: { x: 360, y: 300, side: "left" },
   },
   {
     no: "03",
@@ -49,7 +49,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "The frayed korvai pallu of a Kanchipuram sari",
     remade: "Zari re-couched by hand by a third-generation Kanchipuram weaver",
     dot: { x: 770, y: 545 },
-    label: { x: 905, y: 560, side: "right" },
+    label: { x: 905, y: 500, side: "right" },
   },
   {
     no: "04",
@@ -59,7 +59,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "Pochampally double-ikat cut-pieces swept off loom floors",
     remade: "Pieced and hand-stitched by the Pochampally cooperative",
     dot: { x: 462, y: 420 },
-    label: { x: 360, y: 545, side: "left" },
+    label: { x: 360, y: 610, side: "left" },
   },
   {
     no: "05",
@@ -68,7 +68,7 @@ export const ANATOMY: AnatomyCallout[] = [
     state: "Karnataka",
     salvaged: "Undyed Ilkal sari seconds that failed the loom check",
     remade: "Washed, pressed and tailored by artisans in Gadag",
-    dot: { x: 540, y: 770 },
-    label: { x: 360, y: 790, side: "left" },
+    dot: { x: 712, y: 790 },
+    label: { x: 905, y: 815, side: "right" },
   },
 ];

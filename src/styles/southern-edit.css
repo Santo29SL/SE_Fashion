@@ -4282,6 +4282,10 @@ dialog::backdrop {
   min-height: 100svh;
 }
 
+.hero-anatomy .hero-cover-underlay {
+  opacity: 0.3;
+}
+
 .hero-anatomy-head {
   display: flex;
   flex-direction: column;
