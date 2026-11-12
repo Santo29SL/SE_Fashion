@@ -4468,7 +4468,7 @@ dialog::backdrop {
 .swing-tag-card {
   position: relative;
   height: 100%;
-  padding: calc(var(--hole) + 16px) 0.95rem 0.95rem;
+  padding: calc(var(--hole) + 11px) 0.8rem 0.75rem;
   background:
     repeating-linear-gradient(
       93deg,
@@ -4554,23 +4554,26 @@ dialog::backdrop {
 }
 
 .swing-tag-part {
-  margin-top: 0.45rem;
+  margin-top: 0.3rem;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(1rem, 1.6cqi, 1.2rem);
+  font-size: clamp(0.95rem, 1.6cqi, 1.1rem);
   line-height: 1.1;
 }
 
+/* Handwritten "was" / "now" sits in a narrow column beside its line to keep tags short */
 .swing-tag-row {
-  margin-top: 0.35rem;
-  font-size: clamp(0.68rem, 1cqi, 0.76rem);
-  line-height: 1.35;
+  display: grid;
+  grid-template-columns: 1.9rem 1fr;
+  align-items: baseline;
+  margin-top: 0.25rem;
+  font-size: clamp(0.66rem, 1cqi, 0.72rem);
+  line-height: 1.3;
 }
 
 .swing-tag-row span {
-  display: block;
   font-family: var(--font-hand);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
   line-height: 1;
   color: var(--accent);
