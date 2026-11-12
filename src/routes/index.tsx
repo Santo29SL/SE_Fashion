@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, type CSSProperties } from "react";
 
-import heroPhoto from "@/assets/hero-loom-rack.webp";
+import revivalPhoto from "@/assets/revival-reworn.jpg";
 import moodboardAsset from "@/assets/moodboard-heritage.webp.asset.json";
 import { Ribbon, Spark } from "@/components/southern/Editorial";
 import { useShop } from "@/components/southern/ShopProvider";
 import { useRevealOnView } from "@/components/southern/useRevealOnView";
 import { getProductsByRealm } from "@/lib/southern/products";
 import { realms } from "@/lib/southern/realms";
+import { ANATOMY, ANATOMY_SIZE } from "@/lib/southern/anatomy";
 
 // Lovable CDN URLs (/__l5e/…) only resolve on Lovable's servers.
 // Fall back to the real file in public/ for local dev and self-hosted builds.
@@ -87,23 +88,28 @@ function RealmsPage() {
 
   return (
     <>
-      <section className="hero-cover" id="intro">
+      <section className="hero-cover hero-anatomy" id="intro">
         <div className="hero-cover-stage">
           <img className="hero-cover-underlay" src={moodboardUrl} alt="" aria-hidden="true" width={1600} height={1309} />
-          <h1 className="hero-cover-title">
-            <span className="hero-cover-line reveal d1">Rooted in</span>
-            <span className="hero-cover-line reveal d2">
-              the South.
-              <Spark />
-            </span>
-          </h1>
+          <div className="hero-anatomy-head">
+            <p className="hero-anatomy-kicker reveal d1">Tamil Nadu · Kerala · Karnataka · Andhra &amp; Telangana</p>
+            <h1 className="hero-cover-title">
+              <span className="hero-cover-line reveal d1">Lost craft.</span>
+              <span className="hero-cover-line hero-anatomy-accent reveal d2">
+                Salvaged. Reborn.
+                <Spark />
+              </span>
+            </h1>
+            <p className="hero-cover-tag reveal d3">One overshirt. Four Dravidian states. Zero metres of new cloth.</p>
+          </div>
         </div>
 
-        <div className="hero-cover-deck reveal d3">
-          <p className="hero-cover-tag">Revived from what was left behind.</p>
+        <HeroAnatomy />
+
+        <div className="hero-cover-deck hero-anatomy-deck reveal d4">
           <p className="hero-cover-sub">
-            Four Dravidian states. Crafts on the edge of being forgotten. We salvage heirloom saris, loom-ends and
-            shepherd wool — and pay the last master artisans to remake them as clothing you'll wear for decades.
+            Every piece is stitched from cloth the South left behind — and remade by the last master hands who still
+            know the craft.
           </p>
           <div className="hero-cover-cta">
             <Link className="btn-primary" to="/shop">
@@ -114,16 +120,6 @@ function RealmsPage() {
             </a>
           </div>
         </div>
-
-        <figure className="hero-cover-photo reveal d4">
-          <img
-            src={heroPhoto}
-            alt="Handloom kasavu, Kanchipuram silk, ikat and Madras check garments hanging on a driftwood rail"
-            width={1920}
-            height={1152}
-            fetchPriority="high"
-          />
-        </figure>
 
         <Ribbon items={CRAFT_RIBBON} />
       </section>
@@ -266,5 +262,99 @@ function RealmsPage() {
         </div>
       </section>
     </>
+  );
+}
+
+const realmAccent = (id: string) => realms.find((r) => r.id === id)?.accentColor ?? "var(--terracotta)";
+
+/** The hero photo with arrows pinned to each salvaged part of the garment. */
+function HeroAnatomy() {
+  const { width: W, height: H } = ANATOMY_SIZE;
+  return (
+    <figure className="anatomy reveal d3">
+      <div className="anatomy-frame">
+        <img
+          className="anatomy-photo"
+          src={revivalPhoto}
+          alt="Model wearing the Revival Overshirt: Dharmavaram silk body, Pochampally ikat sleeves, kasavu collar and pocket, Kanchipuram temple-border hem, with Ilkal cotton trousers"
+          width={W}
+          height={H}
+          fetchPriority="high"
+        />
+
+        <svg className="anatomy-lines" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
+          <defs>
+            <marker id="anatomy-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+            </marker>
+          </defs>
+          {ANATOMY.map((c, i) => {
+            const bend = c.label.side === "left" ? c.label.x + 40 : c.label.x - 40;
+            return (
+              <polyline
+                key={c.no}
+                className="anatomy-line"
+                style={{ "--i": i } as CSSProperties}
+                points={`${c.label.x},${c.label.y} ${bend},${c.label.y} ${c.dot.x},${c.dot.y}`}
+                markerEnd="url(#anatomy-arrow)"
+              />
+            );
+          })}
+        </svg>
+
+        {ANATOMY.map((c, i) => (
+          <span
+            key={c.no}
+            className="anatomy-dot"
+            style={
+              {
+                left: `${(c.dot.x / W) * 100}%`,
+                top: `${(c.dot.y / H) * 100}%`,
+                "--accent": realmAccent(c.realm),
+                "--i": i,
+              } as CSSProperties
+            }
+            aria-hidden="true"
+          >
+            {Number(c.no)}
+          </span>
+        ))}
+
+        <ol className="anatomy-callouts">
+          {ANATOMY.map((c, i) => (
+            <li
+              key={c.no}
+              className={`anatomy-callout is-${c.label.side}`}
+              style={
+                {
+                  "--accent": realmAccent(c.realm),
+                  "--i": i,
+                  "--y": `${(c.label.y / H) * 100}%`,
+                  "--x": c.label.side === "left" ? `${100 - (c.label.x / W) * 100}%` : `${(c.label.x / W) * 100}%`,
+                } as CSSProperties
+              }
+            >
+              <p className="anatomy-callout-meta">
+                <span className="anatomy-callout-no">{Number(c.no)}</span>
+                {c.state}
+              </p>
+              <h2 className="anatomy-callout-part">{c.part}</h2>
+              <p className="anatomy-callout-row">
+                <span>Salvaged</span>
+                {c.salvaged}
+              </p>
+              <p className="anatomy-callout-row">
+                <span>Remade</span>
+                {c.remade}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <figcaption className="anatomy-caption">
+        <span>Fig. 00 — The Revival Overshirt</span>
+        <span>5 salvaged cloths · 4 states · 0 m new fabric</span>
+      </figcaption>
+    </figure>
   );
 }
