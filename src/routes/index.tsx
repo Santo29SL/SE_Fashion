@@ -18,16 +18,16 @@ const moodboardUrl = moodboardAsset.url.startsWith("/__l5e/")
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "The Southern Edit — Modern Dravidian Luxury" },
+      { title: "The Southern Edit — Lost Dravidian Craft, Revived on Salvaged Cloth" },
       {
         name: "description",
         content:
-          "The Southern Edit — a Dravidian heritage marketplace and journal. Modular clothing from Tamil Nadu, Kerala, Karnataka, and Andhra & Telangana.",
+          "The Southern Edit revives the fading crafts of Tamil Nadu, Kerala, Karnataka and Andhra & Telangana — remaking salvaged heirloom saris, loom-ends and shepherd wool into modern clothing.",
       },
-      { property: "og:title", content: "The Southern Edit — Modern Dravidian Luxury" },
+      { property: "og:title", content: "The Southern Edit — Lost Craft, Revived" },
       {
         property: "og:description",
-        content: "Heritage as clothing, not a museum. Four realms. Direct from artisan clusters.",
+        content: "Four Dravidian states. Crafts on the edge of being forgotten. Salvaged cloth, revived by the last hands that know it.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -37,19 +37,56 @@ export const Route = createFileRoute("/")({
 });
 
 const CRAFT_RIBBON = [
-  "Kanchipuram silk",
-  "Kasavu kora",
-  "Mysore crepe",
-  "Pochampally ikat",
-  "Bhavani jamakkalam",
-  "Kalamkari",
-  "Madras checks",
+  "Salvaged Kanchipuram pallus",
+  "Rescued kasavu borders",
+  "Retired Kambli wool",
+  "Pochampally ikat offcuts",
+  "Bhavani loom-ends",
+  "Temple kalamkari",
+  "Toda embroidery",
+];
+
+const REVIVAL_STEPS = [
+  {
+    no: "01",
+    verb: "Salvage",
+    native: "மீட்பு",
+    title: "We find the cloth the South left behind.",
+    body: "Heirloom saris folded away for good, loom-ends swept off shed floors, shepherd blankets past their years, temple hangings retired after festivals.",
+  },
+  {
+    no: "02",
+    verb: "Revive",
+    native: "புத்துயிர்",
+    title: "The last hands that know the craft rework it.",
+    body: "Master weavers, Kasuti and Toda embroiderers, block carvers and bell-metal casters are paid to repair, re-weave and teach — keeping each craft alive another generation.",
+  },
+  {
+    no: "03",
+    verb: "Re-wear",
+    native: "மறுபயன்",
+    title: "It comes back as clothing you'll keep for decades.",
+    body: "Cut into modular pieces for every season of the year — so the craft is worn on the street, not locked behind museum glass.",
+  },
+];
+
+const LOST_CRAFTS = [
+  { craft: "Toda pukhoor embroidery", where: "Nilgiris, Tamil Nadu" },
+  { craft: "Deccani Kambli wool", where: "Chitradurga, Karnataka" },
+  { craft: "Kasuti counted stitch", where: "Dharwad, Karnataka" },
+  { craft: "Chettinad Kandangi", where: "Karaikudi, Tamil Nadu" },
+  { craft: "Kuthampully zari", where: "Thrissur, Kerala" },
+  { craft: "Srikalahasti pen kalamkari", where: "Tirupati, Andhra Pradesh" },
+  { craft: "Narayanpet small checks", where: "Narayanpet, Telangana" },
+  { craft: "Aranmula bell metal", where: "Pathanamthitta, Kerala" },
 ];
 
 function RealmsPage() {
   const { openLookbook } = useShop();
   const stackRef = useRef<HTMLDivElement>(null);
+  const revivalRef = useRef<HTMLElement>(null);
   useRevealOnView(stackRef);
+  useRevealOnView(revivalRef);
 
   return (
     <>
@@ -66,18 +103,18 @@ function RealmsPage() {
         </div>
 
         <div className="hero-cover-deck reveal d3">
-          <p className="hero-cover-tag">Worn in the now.</p>
+          <p className="hero-cover-tag">Revived from what was left behind.</p>
           <p className="hero-cover-sub">
-            A marketplace and journal for living Dravidian craft — Kanchipuram silk, Bhavani jamakkalam, Mysore crepe,
-            Kasavu kora, Pochampally ikat — rebuilt as modular clothing.
+            Four Dravidian states. Crafts on the edge of being forgotten. We salvage heirloom saris, loom-ends and
+            shepherd wool — and pay the last master artisans to remake them as clothing you'll wear for decades.
           </p>
           <div className="hero-cover-cta">
             <Link className="btn-primary" to="/shop">
-              Explore all artifacts in Shop
+              Shop the five seasons
             </Link>
-            <Link className="btn-ghost" to="/journal">
-              Read the journal
-            </Link>
+            <a className="btn-ghost" href="#revival">
+              How the revival works
+            </a>
           </div>
         </div>
 
@@ -92,6 +129,52 @@ function RealmsPage() {
         </figure>
 
         <Ribbon items={CRAFT_RIBBON} />
+      </section>
+
+      <section className="revival-section" id="revival" ref={revivalRef}>
+        <header className="chapter-head reveal-on-view">
+          <p className="section-eyebrow">The revival</p>
+          <h2 className="section-title">
+            Lost craft.
+            <br />
+            <em>Salvaged cloth.</em>
+          </h2>
+          <p className="section-subtitle">
+            The South once dressed itself in a hundred living crafts. Many now survive in a handful of homes. We exist to
+            bring them back — using only cloth that already exists.
+          </p>
+        </header>
+
+        <ol className="revival-steps">
+          {REVIVAL_STEPS.map((step, i) => (
+            <li className="revival-step reveal-on-view" key={step.no} style={{ "--d": i } as CSSProperties}>
+              <div className="revival-step-head">
+                <span className="revival-step-no">{step.no}</span>
+                <span className="revival-step-native">{step.native}</span>
+              </div>
+              <p className="revival-step-verb">{step.verb}</p>
+              <h3 className="revival-step-title">{step.title}</h3>
+              <p className="revival-step-body">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+
+        <div className="lost-crafts reveal-on-view">
+          <p className="lost-crafts-title">
+            <Spark /> Crafts we are bringing back
+          </p>
+          <ul className="lost-crafts-list">
+            {LOST_CRAFTS.map((c) => (
+              <li key={c.craft}>
+                <strong>{c.craft}</strong>
+                <span>{c.where}</span>
+              </li>
+            ))}
+          </ul>
+          <Link to="/heritage" className="btn-ghost">
+            Read the full story
+          </Link>
+        </div>
       </section>
 
       <section className="realms-section" id="realms">
@@ -130,6 +213,14 @@ function RealmsPage() {
                           <span key={c} className="swatch-circle" style={{ background: c }} title={c} />
                         ))}
                       </dd>
+                    </div>
+                    <div className="realm-detail-row">
+                      <dt>Reviving</dt>
+                      <dd>{realm.revivedCraft}</dd>
+                    </div>
+                    <div className="realm-detail-row">
+                      <dt>Salvaged</dt>
+                      <dd>{realm.salvaged}</dd>
                     </div>
                     <div className="realm-detail-row">
                       <dt>Crafts</dt>
