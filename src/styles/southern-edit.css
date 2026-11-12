@@ -196,6 +196,17 @@ select:focus-visible {
   background-clip: text;
 }
 
+/* Phones: the script wordmark keeps clear of the brass mark and the header edge */
+@media (max-width: 860px) {
+  .nav-brand {
+    gap: 0.5rem;
+  }
+  .brand-title {
+    font-size: 1.45rem;
+    padding-left: 0.12em;
+  }
+}
+
 .nav-desktop {
   display: none;
   gap: 1.75rem;
