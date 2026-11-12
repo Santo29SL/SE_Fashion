@@ -4284,3 +4284,17 @@ dialog::backdrop {
     aspect-ratio: 1 / 1;
   }
 }
+
+#collections {
+  scroll-margin-top: var(--header-h);
+}
+
+.season-index-name {
+  font-size: clamp(1.05rem, 1.45vw, 1.45rem);
+  overflow-wrap: anywhere;
+}
+
+.lost-crafts-title .hero-spark {
+  transform: none;
+  animation: none;
+}
