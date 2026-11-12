@@ -96,8 +96,7 @@ function RealmsPage() {
               </span>
             </h1>
             <p className="hero-cover-sub reveal d3">
-              Every piece is stitched from cloth the South left behind — and remade by the last
-              master hands who still know the craft.
+              The South’s forgotten textiles, reimagined by the hands that carry their craft forward.
             </p>
             <div className="hero-cover-cta reveal d4">
               <Link className="btn-primary" to="/shop">
