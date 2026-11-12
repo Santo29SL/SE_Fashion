@@ -114,7 +114,7 @@ export const heritagePillars: HeritagePillar[] = [
       body: 'Heirloom saris folded away for good, loom-ends swept off shed floors, festival cloth worn once and torn into rags.'
     },
     contemporary: {
-      title: 'Rescued, then re-cut',
+      title: 'Cloth rescued and re-cut',
       body: 'Every piece starts as cloth that already exists — bought back, sorted, washed and re-cut by hand.'
     }
   },
@@ -128,7 +128,7 @@ export const heritagePillars: HeritagePillar[] = [
       body: 'Crafts kept for temples and weddings, with fewer young weavers taking them up every year.'
     },
     contemporary: {
-      title: 'Paid to continue',
+      title: 'Commissioned masters',
       body: 'Master weavers, embroiderers and metalsmiths commissioned to repair, rework and teach — rebuilt as everyday clothing.'
     }
   },
