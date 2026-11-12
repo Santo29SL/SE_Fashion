@@ -1,4 +1,4 @@
-import type { RealmId } from "./types";
+import type { Realm } from "./types";
 
 /**
  * The home-hero "anatomy" of the Revival Overshirt: each part of the garment,
@@ -8,7 +8,7 @@ import type { RealmId } from "./types";
 export interface AnatomyCallout {
   no: string;
   part: string;
-  realm: RealmId;
+  realm: Realm["id"];
   state: string;
   salvaged: string;
   remade: string;
