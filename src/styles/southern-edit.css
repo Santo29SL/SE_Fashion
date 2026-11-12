@@ -4609,6 +4609,13 @@ dialog::backdrop {
   color: var(--ink);
 }
 
+/* Short desktop screens: the photo shrinks to fit, so tags keep just the state and part */
+@media (min-width: 861px) and (max-height: 780px) {
+  .swing-tag-row {
+    display: none;
+  }
+}
+
 /* Small screens: numbered dots stay on the photo, tags hang in a row below it */
 @media (max-width: 860px) {
   .hero-cover.hero-anatomy {
