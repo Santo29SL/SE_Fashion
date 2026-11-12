@@ -28,7 +28,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "The Southern Edit — Lost Craft, Revived" },
       {
         property: "og:description",
-        content: "Four Dravidian states. Crafts on the edge of being forgotten. Salvaged cloth, revived by the last hands that know it.",
+        content:
+          "Four Dravidian states. Crafts on the edge of being forgotten. Salvaged cloth, revived by the last hands that know it.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -90,9 +91,18 @@ function RealmsPage() {
     <>
       <section className="hero-cover hero-anatomy" id="intro">
         <div className="hero-cover-stage">
-          <img className="hero-cover-underlay" src={moodboardUrl} alt="" aria-hidden="true" width={1600} height={1309} />
+          <img
+            className="hero-cover-underlay"
+            src={moodboardUrl}
+            alt=""
+            aria-hidden="true"
+            width={1600}
+            height={1309}
+          />
           <div className="hero-anatomy-head">
-            <p className="hero-anatomy-kicker reveal d1">Tamil Nadu · Kerala · Karnataka · Andhra &amp; Telangana</p>
+            <p className="hero-anatomy-kicker reveal d1">
+              Tamil Nadu · Kerala · Karnataka · Andhra &amp; Telangana
+            </p>
             <h1 className="hero-cover-title">
               <span className="hero-cover-line reveal d1">Lost craft.</span>
               <span className="hero-cover-line hero-anatomy-accent reveal d2">
@@ -100,7 +110,9 @@ function RealmsPage() {
                 <Spark />
               </span>
             </h1>
-            <p className="hero-cover-tag reveal d3">One overshirt. Four Dravidian states. Zero metres of new cloth.</p>
+            <p className="hero-cover-tag reveal d3">
+              One overshirt. Four Dravidian states. Zero metres of new cloth.
+            </p>
           </div>
         </div>
 
@@ -108,8 +120,8 @@ function RealmsPage() {
 
         <div className="hero-cover-deck hero-anatomy-deck reveal d4">
           <p className="hero-cover-sub">
-            Every piece is stitched from cloth the South left behind — and remade by the last master hands who still
-            know the craft.
+            Every piece is stitched from cloth the South left behind — and remade by the last master
+            hands who still know the craft.
           </p>
           <div className="hero-cover-cta">
             <Link className="btn-primary" to="/shop">
@@ -133,14 +145,18 @@ function RealmsPage() {
             <em>Salvaged cloth.</em>
           </h2>
           <p className="section-subtitle">
-            The South once dressed itself in a hundred living crafts. Many now survive in a handful of homes. We exist to
-            bring them back — using only cloth that already exists.
+            The South once dressed itself in a hundred living crafts. Many now survive in a handful
+            of homes. We exist to bring them back — using only cloth that already exists.
           </p>
         </header>
 
         <ol className="revival-steps">
           {REVIVAL_STEPS.map((step, i) => (
-            <li className="revival-step reveal-on-view" key={step.no} style={{ "--d": i } as CSSProperties}>
+            <li
+              className="revival-step reveal-on-view"
+              key={step.no}
+              style={{ "--d": i } as CSSProperties}
+            >
               <div className="revival-step-head">
                 <span className="revival-step-no">{step.no}</span>
               </div>
@@ -202,7 +218,12 @@ function RealmsPage() {
                       <dt>Palette</dt>
                       <dd className="palette-swatches">
                         {realm.colors.map((c) => (
-                          <span key={c} className="swatch-circle" style={{ background: c }} title={c} />
+                          <span
+                            key={c}
+                            className="swatch-circle"
+                            style={{ background: c }}
+                            title={c}
+                          />
                         ))}
                       </dd>
                     </div>
@@ -232,7 +253,11 @@ function RealmsPage() {
                     <Link to="/shop" search={{ realm: realm.id }} className="btn-primary">
                       Shop this realm
                     </Link>
-                    <button type="button" className="realm-lookbook-btn" onClick={() => openLookbook(realm.id)}>
+                    <button
+                      type="button"
+                      className="realm-lookbook-btn"
+                      onClick={() => openLookbook(realm.id)}
+                    >
                       <span className="realm-lookbook-thumb" aria-hidden="true">
                         <img src={realm.photo} alt="" loading="lazy" />
                       </span>
@@ -249,7 +274,13 @@ function RealmsPage() {
 
                 <figure className="realm-media">
                   <div className="realm-photo">
-                    <img src={realm.photo} alt={realm.photoAlt} width={1024} height={1280} loading="lazy" />
+                    <img
+                      src={realm.photo}
+                      alt={realm.photoAlt}
+                      width={1024}
+                      height={1280}
+                      loading="lazy"
+                    />
                   </div>
                   <figcaption className="realm-caption">
                     <span>Fig. {chapter}</span>
@@ -265,7 +296,8 @@ function RealmsPage() {
   );
 }
 
-const realmAccent = (id: string) => realms.find((r) => r.id === id)?.accentColor ?? "var(--terracotta)";
+const realmAccent = (id: string) =>
+  realms.find((r) => r.id === id)?.accentColor ?? "var(--terracotta)";
 
 /** The hero photo with arrows pinned to each salvaged part of the garment. */
 function HeroAnatomy() {
@@ -273,52 +305,62 @@ function HeroAnatomy() {
   return (
     <figure className="anatomy reveal d3">
       <div className="anatomy-frame">
-        <img
-          className="anatomy-photo"
-          src={revivalPhoto}
-          alt="Model wearing the Revival Overshirt: Dharmavaram silk body, Pochampally ikat sleeves, kasavu collar and pocket, Kanchipuram temple-border hem, with Ilkal cotton trousers"
-          width={W}
-          height={H}
-          fetchPriority="high"
-        />
+        <div className="anatomy-canvas">
+          <img
+            className="anatomy-photo"
+            src={revivalPhoto}
+            alt="Model wearing the Revival Overshirt: Dharmavaram silk body, Pochampally ikat sleeves, kasavu collar and pocket, Kanchipuram temple-border hem, with Ilkal cotton trousers"
+            width={W}
+            height={H}
+            fetchPriority="high"
+          />
 
-        <svg className="anatomy-lines" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
-          <defs>
-            <marker id="anatomy-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
-            </marker>
-          </defs>
-          {ANATOMY.map((c, i) => {
-            const bend = c.label.side === "left" ? c.label.x + 40 : c.label.x - 40;
-            return (
-              <polyline
-                key={c.no}
-                className="anatomy-line"
-                style={{ "--i": i } as CSSProperties}
-                points={`${c.label.x},${c.label.y} ${bend},${c.label.y} ${c.dot.x},${c.dot.y}`}
-                markerEnd="url(#anatomy-arrow)"
-              />
-            );
-          })}
-        </svg>
+          <svg className="anatomy-lines" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
+            <defs>
+              <marker
+                id="anatomy-arrow"
+                viewBox="0 0 10 10"
+                refX="9"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+              </marker>
+            </defs>
+            {ANATOMY.map((c, i) => {
+              const bend = c.label.side === "left" ? c.label.x + 40 : c.label.x - 40;
+              return (
+                <polyline
+                  key={c.no}
+                  className="anatomy-line"
+                  style={{ "--i": i } as CSSProperties}
+                  points={`${c.label.x},${c.label.y} ${bend},${c.label.y} ${c.dot.x},${c.dot.y}`}
+                  markerEnd="url(#anatomy-arrow)"
+                />
+              );
+            })}
+          </svg>
 
-        {ANATOMY.map((c, i) => (
-          <span
-            key={c.no}
-            className="anatomy-dot"
-            style={
-              {
-                left: `${(c.dot.x / W) * 100}%`,
-                top: `${(c.dot.y / H) * 100}%`,
-                "--accent": realmAccent(c.realm),
-                "--i": i,
-              } as CSSProperties
-            }
-            aria-hidden="true"
-          >
-            {Number(c.no)}
-          </span>
-        ))}
+          {ANATOMY.map((c, i) => (
+            <span
+              key={c.no}
+              className="anatomy-dot"
+              style={
+                {
+                  left: `${(c.dot.x / W) * 100}%`,
+                  top: `${(c.dot.y / H) * 100}%`,
+                  "--accent": realmAccent(c.realm),
+                  "--i": i,
+                } as CSSProperties
+              }
+              aria-hidden="true"
+            >
+              {Number(c.no)}
+            </span>
+          ))}
+        </div>
 
         <ol className="anatomy-callouts">
           {ANATOMY.map((c, i) => (
@@ -330,7 +372,10 @@ function HeroAnatomy() {
                   "--accent": realmAccent(c.realm),
                   "--i": i,
                   "--y": `${(c.label.y / H) * 100}%`,
-                  "--x": c.label.side === "left" ? `${100 - (c.label.x / W) * 100}%` : `${(c.label.x / W) * 100}%`,
+                  "--x":
+                    c.label.side === "left"
+                      ? `${100 - (c.label.x / W) * 100}%`
+                      : `${(c.label.x / W) * 100}%`,
                 } as CSSProperties
               }
             >
