@@ -3,7 +3,8 @@ import type { Realm } from "./types";
 /**
  * The home-hero swing tags on the Revival Overshirt: each part of the garment,
  * where its cloth was salvaged and who remade it. Coordinates are in the
- * hero photo's own pixel space (1280 × 960) so pins and strings stay put.
+ * hero photo's own pixel space (1280 × 960) so pins and strings stay put. Tag x
+ * values below 0 or above 1280 hang the tag in the margin beside the photo.
  */
 export interface AnatomyCallout {
   no: string;
@@ -29,7 +30,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "A kasavu mundu worn once at Onam",
     remade: "Hand-felled by kora weavers, Balaramapuram",
     dot: { x: 618, y: 205 },
-    tag: { x: 1075, y: 60, tilt: 4 },
+    tag: { x: 1490, y: 0, tilt: 3 },
   },
   {
     no: "02",
@@ -39,7 +40,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "A torn Dharmavaram wedding silk",
     remade: "Darned and re-cut in Dharmavaram",
     dot: { x: 560, y: 380 },
-    tag: { x: 205, y: 120, tilt: -5 },
+    tag: { x: -210, y: 120, tilt: -4 },
   },
   {
     no: "03",
@@ -49,7 +50,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "A frayed Kanchipuram sari pallu",
     remade: "Zari re-couched by a Kanchipuram weaver",
     dot: { x: 770, y: 545 },
-    tag: { x: 1075, y: 375, tilt: -3 },
+    tag: { x: 1490, y: 330, tilt: -2 },
   },
   {
     no: "04",
@@ -59,7 +60,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "Pochampally ikat swept off loom floors",
     remade: "Pieced by the Pochampally cooperative",
     dot: { x: 462, y: 420 },
-    tag: { x: 205, y: 470, tilt: 3 },
+    tag: { x: -210, y: 500, tilt: 3 },
   },
   {
     no: "05",
@@ -69,6 +70,6 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "Ilkal sari seconds that failed the loom check",
     remade: "Washed and tailored in Gadag",
     dot: { x: 712, y: 790 },
-    tag: { x: 1075, y: 690, tilt: 5 },
+    tag: { x: 1490, y: 660, tilt: 4 },
   },
 ];
