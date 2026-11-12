@@ -21,14 +21,6 @@ function SiteHeader({ menuOpen, onToggleMenu }: { menuOpen: boolean; onToggleMen
   return (
     <header className="site-header" id="siteHeader">
       <div className="nav-container">
-        <Link to="/" className="nav-brand">
-          <span className="logo-mark" aria-hidden="true" />
-          <span className="brand-title">
-            <span className="brand-line">The</span>
-            <span className="brand-line">Southern Edit.</span>
-          </span>
-        </Link>
-
         <nav className="nav-desktop" aria-label="Main">
           {NAV.map((item) => (
             <Link
@@ -73,6 +65,22 @@ function SiteHeader({ menuOpen, onToggleMenu }: { menuOpen: boolean; onToggleMen
         </div>
       </div>
     </header>
+  );
+}
+
+/* Masthead — the big two-line signature sits under the nav bar and scrolls with the page */
+function Masthead() {
+  return (
+    <div className="masthead">
+      <div className="masthead-inner">
+        <Link to="/" className="masthead-brand" aria-label="The Southern Edit — home">
+          <span className="brand-title">
+            <span className="brand-line">The</span>
+            <span className="brand-line">Southern Edit.</span>
+          </span>
+        </Link>
+      </div>
+    </div>
   );
 }
 
@@ -218,6 +226,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       <div className="scroll-progress" ref={progressRef} aria-hidden="true" />
       <SiteHeader menuOpen={menuOpen} onToggleMenu={() => setMenuOpen((o) => !o)} />
       <MobileDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <Masthead />
       <main id="mainContent">{children}</main>
       <SiteFooter variant={pathname === "/" ? "home" : "default"} />
       <QuickViewDialog />
