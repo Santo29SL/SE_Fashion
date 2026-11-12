@@ -6,6 +6,8 @@ export const products: Product[] = [
   // -------------------------------------------------------------
   {
     id: "jamakkalam-tote",
+    season: "winter",
+    salvagedFrom: "Surplus loom-end yardage from Bhavani jamakkalam cooperatives",
     audience: "unisex",
     name: "Jamakkalam TOTE",
     subtitle: "Heavyweight Bhavani Chevron Handloom × Sculpted Leather",
@@ -57,6 +59,8 @@ export const products: Product[] = [
   },
   {
     id: "madras-check-vest",
+    season: "summer",
+    salvagedFrom: "Deadstock Madras check bolts from shuttered Chennai export mills",
     audience: "men",
     name: "Madras Check SHIRT / VEST",
     subtitle: "Tailored Sleeveless Waistcoat in Handwoven Bleeding Madras",
@@ -107,6 +111,8 @@ export const products: Product[] = [
   },
   {
     id: "athangudi-belt",
+    season: "fall",
+    salvagedFrom: "Tannery leather offcuts; inlay pigment ground from broken Athangudi tiles",
     audience: "unisex",
     name: "Athangudi Tile Inspired BELT",
     subtitle: "Full-Grain Italian Bridle Leather × Handcrafted Floral Tile Inlays",
@@ -156,6 +162,8 @@ export const products: Product[] = [
   },
   {
     id: "kanchivaram-tie",
+    season: "international",
+    salvagedFrom: "Pallus cut from worn heirloom Kanchipuram wedding saris",
     audience: "men",
     name: "Kanchivaram Silk TIE",
     subtitle: "Upcycled Heritage Sari Pallu × Antiqued Paisley (Manga) Motif",
@@ -204,6 +212,8 @@ export const products: Product[] = [
   },
   {
     id: "kanchi-bandana",
+    season: "spring",
+    salvagedFrom: "Unsold Kanchipuram silk borders and weavers' sample lengths",
     audience: "unisex",
     name: "The Kanchi BANDANA",
     subtitle: "55×55cm Pure Silk Square × Four-Way Modular Transformer",
@@ -258,6 +268,8 @@ export const products: Product[] = [
   // -------------------------------------------------------------
   {
     id: "kasavu-halter",
+    season: "summer",
+    salvagedFrom: "Onam kasavu mundus handed back after a single festival wear",
     audience: "women",
     name: "Kasavu HALTER NECK",
     subtitle: "Unbleached Kora Cotton × Liquid Gold Woven Metallic Kasavu",
@@ -306,6 +318,8 @@ export const products: Product[] = [
   },
   {
     id: "balaramapuram-cape",
+    season: "winter",
+    salvagedFrom: "Loom-shed seconds from Balaramapuram handloom societies",
     audience: "unisex",
     name: "Balaramapuram Kora WRAP CAPE",
     subtitle: "Fine-Count Handspun Kora Cotton × Liquid Gold Kasavu Selvedge",
@@ -353,6 +367,8 @@ export const products: Product[] = [
   },
   {
     id: "chendamangalam-stole",
+    season: "summer",
+    salvagedFrom: "Flood-soaked Chendamangalam stock, river-washed and restored",
     audience: "unisex",
     name: "Chendamangalam Temple STOLE",
     subtitle: "Handloom Fine Cotton × Dipped Madder Red Temple Border",
@@ -400,6 +416,8 @@ export const products: Product[] = [
   },
   {
     id: "travancore-lotus-ring",
+    season: "fall",
+    salvagedFrom: "Retired temple lamps and cracked bell metal, melted and recast",
     audience: "men",
     name: "Travancore Lotus SIGNET RING",
     subtitle: "Lost-Wax Cast Antique Brass × Padmanabhaswamy Floral Crest",
@@ -451,6 +469,8 @@ export const products: Product[] = [
   // -------------------------------------------------------------
   {
     id: "mysore-silk-jean",
+    season: "international",
+    salvagedFrom: "Post-wear selvedge denim with Mysore crepe silk sample yardage",
     audience: "unisex",
     name: "Mysore Silk JEAN",
     subtitle: "Raw Washed Olive Denim × Crimson Mysore Silk Gusset",
@@ -500,6 +520,8 @@ export const products: Product[] = [
   },
   {
     id: "chalukyan-belt",
+    season: "winter",
+    salvagedFrom: "Saddlery leather offcuts; buckle cast from reclaimed brass vessels",
     audience: "men",
     name: "Chalukyan Cast Brass BUCKLE BELT",
     subtitle: "Full-Grain Waxed Harness Leather × Hand-Forged Lion Filigree",
@@ -547,6 +569,8 @@ export const products: Product[] = [
   },
   {
     id: "badami-overshirt",
+    season: "fall",
+    salvagedFrom: "Mysore crepe silk seconds with weaving flaws, mineral-washed",
     audience: "unisex",
     name: "Badami Sandstone SILK OVERSHIRT",
     subtitle: "Pure Mysore Crepe Silk × Sandstone Pigment Mineral Wash",
@@ -594,6 +618,8 @@ export const products: Product[] = [
   },
   {
     id: "hampi-scarf",
+    season: "spring",
+    salvagedFrom: "End-of-roll silk twill from Mysore filatures",
     audience: "unisex",
     name: "Hampi Archival SILK SCARF",
     subtitle: "65×65cm Royal Silk Twill × Vijayanagara Stone Chariot Mandala",
@@ -645,6 +671,8 @@ export const products: Product[] = [
   // -------------------------------------------------------------
   {
     id: "pochampally-skirt",
+    season: "spring",
+    salvagedFrom: "Pochampally ikat cut-pieces and deadstock cotton denim",
     audience: "women",
     name: "Pochampally Ikat SKIRT",
     subtitle: "Heavy Off-White Denim A-Line × Double-Ikat Pocket Inserts",
@@ -692,6 +720,8 @@ export const products: Product[] = [
   },
   {
     id: "kalamkari-kimono",
+    season: "international",
+    salvagedFrom: "Retired Srikalahasti temple hangings, re-cut panel by panel",
     audience: "unisex",
     name: "Srikalahasti Kalamkari KIMONO JACKET",
     subtitle: "Freehand Bamboo Pen-Drawn Kalamkari × Tree of Life Motif",
@@ -739,6 +769,8 @@ export const products: Product[] = [
   },
   {
     id: "pedana-overshirt",
+    season: "summer",
+    salvagedFrom: "Mangalagiri cotton seconds, over-printed by Pedana block carvers",
     audience: "unisex",
     name: "Pedana Indigo BLOCK-PRINT OVERSHIRT",
     subtitle: "Hand-Carved Teakwood Block Prints in Fermented Organic Indigo",
@@ -786,6 +818,8 @@ export const products: Product[] = [
   },
   {
     id: "gadwal-sash",
+    season: "fall",
+    salvagedFrom: "Gadwal kuttu borders cut from torn heirloom saris",
     audience: "unisex",
     name: "Gadwal Zari CONTRAST SASH",
     subtitle: "Pure Gadwal Cotton-Silk × Interlocked Temple Kuttu Border",
