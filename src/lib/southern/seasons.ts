@@ -8,6 +8,7 @@ export const seasons: SeasonCollection[] = [
     native: "முதுவேனில்",
     nativeLatin: "Mudhuvenil",
     months: "April – June",
+    monthsShort: "Apr – Jun",
     tagline: "Cloth that breathes.",
     description:
       "Kora, kasavu and featherweight cotton for the hottest months — the cloth the South has always worn against the sun, cut loose and open.",
@@ -23,6 +24,7 @@ export const seasons: SeasonCollection[] = [
     native: "கூதிர்",
     nativeLatin: "Koothir",
     months: "September – November",
+    monthsShort: "Sep – Nov",
     tagline: "Gold for the festival season.",
     description:
       "Navaratri to Deepavali — heavy silk borders, temple zari and bell-metal brass, rescued from heirlooms and set into pieces you'll wear to every celebration.",
@@ -38,6 +40,7 @@ export const seasons: SeasonCollection[] = [
     native: "முன்பனி",
     nativeLatin: "Munpani",
     months: "December – February",
+    monthsShort: "Dec – Feb",
     tagline: "Weight for the hills.",
     description:
       "For Margazhi mornings and Nilgiri mist — shepherd wool, dense pit-loom yardage and layered leather that take the chill off without losing the craft.",
@@ -53,6 +56,7 @@ export const seasons: SeasonCollection[] = [
     native: "இளவேனில்",
     nativeLatin: "Ilavenil",
     months: "February – April",
+    monthsShort: "Feb – Apr",
     tagline: "First colour of the year.",
     description:
       "Mango blossom season — checks, ikat, hand-stitched Kasuti and printed silk squares in the brightest dyes of the year, pieced from saris families had put away.",
@@ -68,6 +72,7 @@ export const seasons: SeasonCollection[] = [
     native: "உலகம்",
     nativeLatin: "Ulagam · Contemporary",
     months: "All year · Worldwide",
+    monthsShort: "Worldwide",
     tagline: "The South, worn anywhere.",
     description:
       "Trench, bomber, denim, tie — global silhouettes cut from Dravidian cloth for cities, offices and airports far from the loom that made them.",

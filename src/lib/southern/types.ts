@@ -25,6 +25,7 @@ export interface SeasonCollection {
   native: string;
   nativeLatin: string;
   months: string;
+  monthsShort: string;
   tagline: string;
   description: string;
   /** What we salvage for this collection. */

@@ -123,7 +123,7 @@ function ShopPage() {
               style={{ "--season-accent": s.accentColor } as CSSProperties}
             >
               <span className="season-index-no">
-                {seasonNumber(s.id)} · {s.months}
+                {seasonNumber(s.id)} · {s.monthsShort}
               </span>
               <span className="season-index-name">{s.name}</span>
               <span className="season-index-native">
@@ -315,7 +315,7 @@ function SeasonChapter({
         </div>
       </header>
 
-      <div className="products-grid" role="list" aria-label={`${season.name} collection`}>
+      <div className="products-grid season-grid" role="list" aria-label={`${season.name} collection`}>
         {items.map((product, i) => (
           <ProductCard key={product.id} product={product} index={i} />
         ))}

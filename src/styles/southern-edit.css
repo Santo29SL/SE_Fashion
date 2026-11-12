@@ -4264,3 +4264,23 @@ dialog::backdrop {
     transition: none;
   }
 }
+
+/* Season grid — editorial 2 large + 3 small on wide screens (6-column track) */
+@media (min-width: 1100px) {
+  .season-chapter .season-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .season-grid > .product-card {
+    grid-column: span 2;
+  }
+  .season-grid:has(> :nth-child(5):last-child) > .product-card:nth-child(-n + 2),
+  .season-grid:has(> :nth-child(2):last-child) > .product-card,
+  .season-grid:has(> :nth-child(4):last-child) > .product-card {
+    grid-column: span 3;
+  }
+  .season-grid:has(> :nth-child(5):last-child) > .product-card:nth-child(-n + 2) .product-media-wrap,
+  .season-grid:has(> :nth-child(2):last-child) > .product-card .product-media-wrap,
+  .season-grid:has(> :nth-child(4):last-child) > .product-card .product-media-wrap {
+    aspect-ratio: 1 / 1;
+  }
+}
