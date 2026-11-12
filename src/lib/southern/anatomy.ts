@@ -40,7 +40,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "A torn Dharmavaram wedding silk",
     remade: "Darned and re-cut in Dharmavaram",
     dot: { x: 560, y: 380 },
-    tag: { x: 1130, y: 215, tilt: -2 },
+    tag: { x: 148, y: 120, tilt: -4 },
   },
   {
     no: "03",
@@ -50,7 +50,7 @@ export const ANATOMY: AnatomyCallout[] = [
     salvaged: "Pochampally ikat swept off loom floors",
     remade: "Pieced by the Pochampally cooperative",
     dot: { x: 462, y: 420 },
-    tag: { x: 1130, y: 400, tilt: 2 },
+    tag: { x: 148, y: 400, tilt: 3 },
   },
   {
     no: "04",

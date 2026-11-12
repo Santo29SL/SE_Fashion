@@ -19,6 +19,7 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Work Sans', system-ui, sans-serif;
   --font-hand: 'Caveat', 'Segoe Print', cursive;
+  --font-script: 'Parisienne', 'Segoe Script', cursive;
   --kraft: #dcc49c;
   --kraft-deep: #cdb185;
   --kraft-ink: #3a2a1a;
@@ -162,12 +163,13 @@ select:focus-visible {
     inset 0 0 6px 0 color-mix(in srgb, var(--brass) 40%, transparent);
 }
 
-/* ── Brand wordmark – polished serif with illuminated shimmer ────────────── */
+/* ── Brand wordmark – cursive signature, brass-lit ───────────────────────── */
 .brand-title {
-  font-family: var(--font-serif);
-  font-size: 1.0rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-family: var(--font-script);
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
+  line-height: 1;
+  letter-spacing: 0.015em;
+  text-transform: none;
   color: var(--ink);
   background: linear-gradient(
     105deg,
@@ -183,7 +185,7 @@ select:focus-visible {
 }
 
 .nav-brand:hover .brand-title {
-  letter-spacing: 0.26em;
+  letter-spacing: 0.03em;
   background: linear-gradient(
     105deg,
     var(--ink) 0%,
