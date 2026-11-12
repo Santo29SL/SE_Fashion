@@ -76,8 +76,18 @@ function ShopPage() {
   const groups = useMemo(() => groupBySeason(list), [list]);
   useRevealOnView(pageRef, [list]);
 
-  const setSearch = (next: ShopSearch) =>
-    navigate({ search: (prev) => ({ ...prev, ...next }), replace: true, resetScroll: false });
+  const setSearch = (next: { season?: SeasonId | undefined; realm?: string | undefined }) =>
+    navigate({
+      search: (prev) => {
+        const merged = { ...prev, ...next };
+        const out: ShopSearch = {};
+        if (merged.season) out.season = merged.season;
+        if (merged.realm) out.realm = merged.realm;
+        return out;
+      },
+      replace: true,
+      resetScroll: false,
+    });
 
   const pickSeason = (id: SeasonId | "all") => {
     setSearch({ season: id === "all" ? undefined : id });
