@@ -167,7 +167,7 @@ select:focus-visible {
 .brand-title {
   font-family: var(--font-script);
   font-size: clamp(1.6rem, 2.3vw, 2.2rem);
-  line-height: 1;
+  line-height: 1.18;
   letter-spacing: 0.015em;
   text-transform: none;
   color: var(--ink);
@@ -186,7 +186,6 @@ select:focus-visible {
 
 .nav-brand:hover .brand-title {
   letter-spacing: 0.03em;
-  background: linear-gradient(
     105deg,
     var(--ink) 0%,
     color-mix(in srgb, var(--brass) 85%, var(--ink)) 50%,
