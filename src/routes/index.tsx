@@ -331,19 +331,19 @@ function HeroAnatomy() {
             </defs>
             {ANATOMY.map((c, i) => {
               const bend = c.label.side === "left" ? c.label.x + 40 : c.label.x - 40;
-            // Stop the arrow just short of the dot so its head stays visible.
-            const dx = c.dot.x - bend;
-            const dy = c.dot.y - c.label.y;
-            const len = Math.hypot(dx, dy) || 1;
-            const tipX = c.dot.x - (dx / len) * 26;
-            const tipY = c.dot.y - (dy / len) * 26;
-            return (
-              <polyline
-                key={c.no}
-                className="anatomy-line"
-                style={{ "--i": i } as CSSProperties}
-                points={`${c.label.x},${c.label.y} ${bend},${c.label.y} ${tipX},${tipY}`}
-                markerEnd="url(#anatomy-arrow)"
+              // Stop the arrow just short of the dot so its head stays visible.
+              const dx = c.dot.x - bend;
+              const dy = c.dot.y - c.label.y;
+              const len = Math.hypot(dx, dy) || 1;
+              const tipX = c.dot.x - (dx / len) * 26;
+              const tipY = c.dot.y - (dy / len) * 26;
+              return (
+                <polyline
+                  key={c.no}
+                  className="anatomy-line"
+                  style={{ "--i": i } as CSSProperties}
+                  points={`${c.label.x},${c.label.y} ${bend},${c.label.y} ${tipX},${tipY}`}
+                  markerEnd="url(#anatomy-arrow)"
                 />
               );
             })}
