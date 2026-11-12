@@ -4294,7 +4294,7 @@ dialog::backdrop {
   flex: 1 1 0;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(17rem, 0.8fr) 1.45fr;
+  grid-template-columns: minmax(16rem, 0.72fr) 1.6fr;
   align-items: center;
   gap: clamp(1.5rem, 4vw, 4rem);
   width: 100%;
@@ -4311,11 +4311,13 @@ dialog::backdrop {
 
 .hero-anatomy .hero-cover-title {
   align-items: flex-start;
-  font-size: clamp(2.4rem, min(4.6vw, 8.5vh), 5.5rem);
+  font-size: clamp(2.2rem, min(4vw, 8vh), 5rem);
 }
 
 .hero-anatomy-accent {
-  margin-top: 0.12em;
+  margin-top: 0.15em;
+  font-size: 0.82em;
+  white-space: nowrap;
   font-style: italic;
   color: var(--terracotta);
   text-transform: none;
@@ -4467,7 +4469,7 @@ dialog::backdrop {
 .swing-tag-card {
   position: relative;
   height: 100%;
-  padding: calc(var(--hole) + 11px) 0.8rem 0.75rem;
+  padding: calc(var(--hole) + 13px) 0.75rem 0.7rem;
   background:
     repeating-linear-gradient(
       93deg,
@@ -4526,34 +4528,30 @@ dialog::backdrop {
   }
 }
 
-.swing-tag-stamp {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.4rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px dashed rgba(58, 42, 26, 0.35);
-  font-size: 0.56rem;
+/* Handwritten number sits beside the eyelet so the tag stays short */
+.swing-tag-no {
+  position: absolute;
+  top: calc(var(--hole) - 0.6rem);
+  left: 0.75rem;
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--kraft-ink);
+}
+
+.swing-tag-state {
+  margin-top: 0.2rem;
+  font-size: 0.54rem;
   letter-spacing: 0.16em;
-  text-align: right;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--accent);
   filter: brightness(0.75);
 }
 
-.swing-tag-stamp span {
-  flex: none;
-  font-family: var(--font-hand);
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--kraft-ink);
-}
-
 .swing-tag-part {
-  margin-top: 0.3rem;
+  margin-top: 0;
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: clamp(0.95rem, 1.6cqi, 1.1rem);

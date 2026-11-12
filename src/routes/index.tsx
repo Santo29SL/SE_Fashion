@@ -328,11 +328,9 @@ function HeroAnatomy() {
               }
             >
               <div className="swing-tag-card">
-                <p className="swing-tag-stamp">
-                  <span>No. {c.no}</span>
-                  {c.state}
-                </p>
+                <p className="swing-tag-no">No. {c.no}</p>
                 <h2 className="swing-tag-part">{c.part}</h2>
+                <p className="swing-tag-state">{c.state}</p>
                 <div className="swing-tag-story">
                 <p className="swing-tag-row">
                   <span>was</span>
