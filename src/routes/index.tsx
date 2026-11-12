@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, type CSSProperties } from "react";
 
 import revivalPhoto from "@/assets/revival-reworn.jpg";
+import moodboard from "@/assets/moodboard-heritage.webp.asset.json";
 import { Ribbon, Spark } from "@/components/southern/Editorial";
 import { useShop } from "@/components/southern/ShopProvider";
 import { useRevealOnView } from "@/components/southern/useRevealOnView";
@@ -114,6 +115,8 @@ function RealmsPage() {
       </section>
 
       <section className="revival-section" id="revival" ref={revivalRef}>
+        <div className="revival-stage">
+          <img className="revival-stage-photo" src={moodboard.url} alt="" aria-hidden="true" loading="lazy" />
         <header className="chapter-head reveal-on-view">
           <p className="section-eyebrow">The revival</p>
           <h2 className="section-title">
@@ -126,6 +129,7 @@ function RealmsPage() {
             of homes. We exist to bring them back — using only cloth that already exists.
           </p>
         </header>
+        </div>
 
         <ol className="revival-steps">
           {REVIVAL_STEPS.map((step, i) => (
